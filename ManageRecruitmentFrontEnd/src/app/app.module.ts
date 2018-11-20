@@ -15,14 +15,17 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AlertService, AuthenticationService, UserService } from './_services';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-import { RegisterComponent } from './register';
+import { RegisterComponent } from './register';;
+import { FormUploadComponent } from './upload/form-upload/form-upload.component'
+import {DataTableModule} from "angular-6-datatable";
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        routing
+        routing,
+        DataTableModule
     ],
     declarations: [
         AppComponent,
@@ -30,6 +33,8 @@ import { RegisterComponent } from './register';
         HomeComponent,
         LoginComponent,
         RegisterComponent
+,
+        FormUploadComponent
     ],
     providers: [
         AuthGuard,

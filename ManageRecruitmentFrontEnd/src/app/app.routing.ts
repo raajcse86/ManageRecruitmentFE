@@ -3,12 +3,15 @@
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
+import { FormUploadComponent } from './upload/form-upload';
 import { AuthGuard } from './_guards';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'upload', component: FormUploadComponent },
+    { path: 'home', component: HomeComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
