@@ -7,6 +7,8 @@ import { UserService } from '../_services';
 
 @Component({templateUrl: 'home.component.html'})
 export class HomeComponent implements OnInit {
+   
+    headElements = ['ID', 'NAME', 'EMAIL', 'STATUS'];
     currentUser: User;
     users: User[] = [];
     employees: EmployeeDetails[] = [];
@@ -17,7 +19,8 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         //this.loadAllUsers();
-        this.loadAllEmployeeDetails();
+       this.loadAllEmployeeDetails();
+      
     }
 
     deleteUser(id: number) {

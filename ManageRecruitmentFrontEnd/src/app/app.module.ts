@@ -1,4 +1,5 @@
-﻿import { NgModule }      from '@angular/core';
+﻿import { NgModule,NO_ERRORS_SCHEMA  }      from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -25,8 +26,10 @@ import {DataTableModule} from "angular-6-datatable";
         ReactiveFormsModule,
         HttpClientModule,
         routing,
-        DataTableModule
+        DataTableModule,
+        MDBBootstrapModule.forRoot()
     ],
+    schemas: [ NO_ERRORS_SCHEMA ],
     declarations: [
         AppComponent,
         AlertComponent,
