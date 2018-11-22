@@ -1,3 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
 @import "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css";
 @import "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css";
+
+.login {
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        min-height: 80vh;
+        padding: 2rem 0;
+        label {
+            font-size: 12px;
+        }
+    }
+}
+.footer {
+    &__copyright {
+        padding: 3rem 1rem;
+    }
+    &__content {
+        opacity: 0.6;
+    }
+}
+
+.btn {
+    &.yellow {
+        color: #666 !important;
+        background: #ffeb3b !important;
+    }
+}
+
+.container {
+    &__wrapper {
+        min-height: 80vh;
+        padding: 2rem 1rem;
+    }
+}
+
+.form {
+    &__wrapper {
+        width: 480px;
+        margin: 0 auto;
+    }
+}

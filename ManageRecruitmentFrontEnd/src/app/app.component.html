@@ -1,12 +1,49 @@
 ﻿<!-- main app container -->
-<div class="jumbotron">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><img src="assets/image/ey-logo-white.png" width="50" alt="EY Recruitment System" title="EY Recruitment System"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Dashboard <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/upload">Upload Employee Info</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home">View All Employees</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+          <li class="nav-item">
+                <span class="navbar-text">
+              Logged in as <strong>somename</strong>, <a href="javascript:void(0)">Logout</a>
+              </span>
+          </li>
+      </ul>
+    </div>
+</nav>
+
+<!--<div class="jumbotron">-->
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 offset-sm-3">
+                <!-- col-sm-6 offset-sm-3 -->
+            <div class="col-sm-12">
                 <alert></alert>
                 <router-outlet></router-outlet>
             </div>
         </div>
     </div>
-</div>
+<!--</div>-->
+
+<footer class="yellow footer__copyright text-center small">
+
+        <!-- Copyright -->
+        <div class="footer__content">© 2018 Copyright:The EY Home Page is proprietary and confidential. For internal use only. All Rights Reserved.</div>
+        <!-- Copyright -->
+      
+      </footer>
 
