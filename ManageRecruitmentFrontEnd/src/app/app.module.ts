@@ -1,7 +1,7 @@
 ﻿import { NgModule,NO_ERRORS_SCHEMA  }      from '@angular/core';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModule, MdbTableService } from 'angular-bootstrap-md';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule }    from '@angular/forms';
+import { FormsModule,ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
@@ -23,6 +23,7 @@ import {DataTableModule} from "angular-6-datatable";
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
         routing,
@@ -35,8 +36,7 @@ import {DataTableModule} from "angular-6-datatable";
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
-,
+        RegisterComponent,
         FormUploadComponent
     ],
     providers: [
@@ -44,6 +44,7 @@ import {DataTableModule} from "angular-6-datatable";
         AlertService,
         AuthenticationService,
         UserService,
+        MdbTableService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 

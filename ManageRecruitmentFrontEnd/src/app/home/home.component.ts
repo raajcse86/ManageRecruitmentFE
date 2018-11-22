@@ -1,4 +1,6 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { MdbTableService } from 'angular-bootstrap-md';
+
+import { Component, OnInit,HostListener } from '@angular/core';
 import { first } from 'rxjs/operators';
 
 import { User } from '../_models';
@@ -12,16 +14,37 @@ export class HomeComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
     employees: EmployeeDetails[] = [];
+    searchText: string = '';
+    previous: string;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService,private tableService:MdbTableService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 
+    @HostListener('input') oninput() {
+        this.searchItems();
+      }
+
     ngOnInit() {
         //this.loadAllUsers();
-       this.loadAllEmployeeDetails();
-      
+        this.loadAllEmployeeDetails();
+              
     }
+
+    searchItems() {
+        const prev = this.tableService.getDataSource();
+    
+        if (!this.searchText) {
+          this.tableService.setDataSource(this.previous);
+          this.employees = this.tableService.getDataSource();
+        }
+    
+        if (this.searchText) {
+          this.employees = this.tableService.searchLocalDataBy(this.searchText);
+          this.tableService.setDataSource(prev);
+        }
+    
+      }
 
     deleteUser(id: number) {
         this.userService.delete(id).pipe(first()).subscribe(() => { 
@@ -37,7 +60,11 @@ export class HomeComponent implements OnInit {
 
     private loadAllEmployeeDetails() {
         this.userService.getEmployees().pipe(first()).subscribe(employeesFromService => { 
-            this.employees = employeesFromService; 
+        this.employees = employeesFromService; 
+        this.tableService.setDataSource(this.employees);
+        this.employees = this.tableService.getDataSource();
+        this.previous = this.tableService.getDataSource();
+
         });
     }
 }
