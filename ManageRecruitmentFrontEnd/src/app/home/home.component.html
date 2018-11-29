@@ -3,81 +3,63 @@
         <h3 class="mb-3 text-capitalize">
             List of candidate & recruitment status
         </h3>
-        <div class="row">
-            <div class="col-md-12 mx-auto">
-              <div class="md-form">
-                <input type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInputDirective>
-                <label for="search">Search</label>
-              </div>
+        
+<div class="content-section implementation ui-fluid">   
+              
+<p-table #dt [columns]="cols" [value]="candidature" [paginator]="true" [rows]="5" dataKey="contactNo" >
+        
+    <ng-template pTemplate="caption">
+            <div style="text-align: left" class="ui-helper-clearfix">
+                    <button (click)="exportAsXLSX()"><i class="fa fa-file-excel-o" style="font-size:15px;color:blue"></i></button>
             </div>
-          </div>
-        
-        <table mdbTable mdbTableScroll scrollY="true" maxHeight="200" scrollX="true">
-            <thead>
-              <tr>
-                <th *ngFor="let head of headElements" scope="col">{{head}} </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr mdbTableCol *ngFor="let el of employees">
-                <th scope="row">{{el.id}}</th>
-                <td>{{el.name}}</td>
-                <td>{{el.email}}</td>
-                <td>{{el.status}}</td>
-                
-              </tr>
-            </tbody>
-          </table>
-        
-        <!--<table class="table table-striped" [mfData]="employees" #mf="mfDataTable" [mfRowsOnPage]="4">
-            <thead>
+        <div style="text-align: right">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
             <tr>
-                <th style="width: 30%">
-                    <mfDefaultSorter by="name">NAME</mfDefaultSorter>
-                </th>
-                <th style="width: 50%">
-                    <mfDefaultSorter by="email">EMAIL</mfDefaultSorter>
-                </th>
-                <th style="width: 20%">
-                    <mfDefaultSorter by="status">STATUS</mfDefaultSorter>
-                </th>
-                
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let user of mf.data">
-                <td>{{user.name}}</td>
-                <td>{{user.email}}</td>
-                <td class="text-right">{{user.status}}</td>
-                
-            </tr>
-            </tbody>
-            <tfoot>
+                    <th style="width: 3em"></th>     
+              <th *ngFor="let col of columns" >{{col.header}} </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+          <tr [pSelectableRow]="rowData">
+                <td>
+                        <a href="#" [pRowToggler]="rowData">
+                            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                        </a>
+                    </td> 
+            <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
             <tr>
-                <td colspan="4">
-                    <mfBootstrapPaginator [rowsOnPageSet]="[2,4,6]"></mfBootstrapPaginator>
+                <td [attr.colspan]="columns.length + 1">
+                    <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+                         <div class="ui-g-12 ui-md-9">
+                            <div class="ui-g">
+                                <div class="ui-g-12">
+                                    <b>Role:</b> {{rowData.roleOfResponsibilities}}
+                                </div>
+                                <div class="ui-g-12">
+                                    <b>Name:</b> {{rowData.candidateName}}
+                                </div>
+                                <div class="ui-g-12">
+                                    <b>ContactNo:</b> {{rowData.contactNo}}
+                                </div>
+                                <div class="ui-g-12">
+                                    <b>EmailId:</b> {{rowData.emailId}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
-            </tfoot>
-          </table>
-        -->
-        
-        
-        <!--<ul>
-            <b>Name</b> &nbsp;&nbsp; <b>Email</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>Status</b>
-            <li *ngFor="let employee of employees">
-                {{employee.name}} &nbsp;
-                {{employee.email}} &nbsp;
-                {{employee.status}} &nbsp;
-               
-            </li>
-        </ul>
-        <ul>
-            <li *ngFor="let user of users">
-                {{user.username}} ({{user.firstName}} {{user.lastName}})
-                - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-            </li>
-        </ul>-->
-        
-        
+        </ng-template>
+</p-table>
+</div>
+ 
 </div>

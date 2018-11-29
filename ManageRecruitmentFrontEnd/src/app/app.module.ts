@@ -1,5 +1,5 @@
 ﻿import { NgModule,NO_ERRORS_SCHEMA  }      from '@angular/core';
-import { MDBBootstrapModule, MdbTableService } from 'angular-bootstrap-md';
+import { MDBBootstrapModule, MdbTableService,MdbTablePaginationComponent } from 'angular-bootstrap-md';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -19,6 +19,11 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';;
 import { FormUploadComponent } from './upload/form-upload/form-upload.component'
 import {DataTableModule} from "angular-6-datatable";
+import {TableModule} from 'primeng/table';
+import {PaginatorModule} from 'primeng/paginator';
+import {TabViewModule} from 'primeng/tabview';
+import {CodeHighlighterModule} from 'primeng/codehighlighter';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
     imports: [
@@ -28,6 +33,11 @@ import {DataTableModule} from "angular-6-datatable";
         HttpClientModule,
         routing,
         DataTableModule,
+        TableModule,
+        TabViewModule,
+        PaginatorModule,
+        CodeHighlighterModule,
+        CheckboxModule,
         MDBBootstrapModule.forRoot()
     ],
     schemas: [ NO_ERRORS_SCHEMA ],
@@ -38,6 +48,7 @@ import {DataTableModule} from "angular-6-datatable";
         LoginComponent,
         RegisterComponent,
         FormUploadComponent
+        
     ],
     providers: [
         AuthGuard,

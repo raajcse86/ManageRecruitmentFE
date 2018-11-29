@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { User } from '../_models';
 import { EmployeeDetails } from '../_models';
+import { CandidatureDetails } from '../_models';
 
 @Injectable()
 export class UserService {
@@ -20,6 +21,9 @@ export class UserService {
 
     getEmployees(){
         return this.http.get<EmployeeDetails[]>(`${this.API_URL}/api/employeeDetails`);
+    }
+    getCandidatures(){
+        return this.http.get<CandidatureDetails[]>(`${this.API_URL}/api/candidatureDetails`);
     }
 
     getAll() {
