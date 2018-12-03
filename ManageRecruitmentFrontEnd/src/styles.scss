@@ -43,3 +43,21 @@
         margin: 0 auto;
     }
 }
+
+.icon-showcase {
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    pointer-events: none;
+    margin: 0;
+    left: 25px;
+    opacity: 0.3;
+    line-height: 31px !important;
+    + .form-control {
+        padding-left: 30px;
+    }
+}
+
+.ui-table-wrapper {
+    overflow-x: auto;
+}

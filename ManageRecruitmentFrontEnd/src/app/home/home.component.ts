@@ -12,22 +12,21 @@ import {ExcelService} from '../_services/excel.service';
 @Component({templateUrl: 'home.component.html'})
 export class HomeComponent implements OnInit {
     
-    headElements = ['ID', 'NAME', 'EMAIL', 'STATUS'];
     cols: any[];
-    headElementscanididate = ['ID','Role', 'CandidateName', 'ContactNo','Email-Id','TotalExp','RelevantExp','NP','CTC','ECTC',
-    'CurrentLoc','ExpLoc','PositionLoc','ModeOfHiring','Source','ProfileSharedDate','FinalStatus','Status',
-    'Description','ActionPending','Client','ProfileStatus','StatusUpdateDate','ExpJoiningDate'];
     currentUser: User;
     users: User[] = [];
     employees: EmployeeDetails[] = [];
-    candidature: CandidatureDetails[] = [];
-    selectedCandidate: CandidatureDetails[];
+    candidatures: CandidatureDetails[] = [];
+    candidature: CandidatureDetails ;
+    selectedCandidature: CandidatureDetails;
+    newCandidature: boolean;
 
     constructor(private userService: UserService,
         private tableService:MdbTableService, 
         private cdRef: ChangeDetectorRef,
         private excelService:ExcelService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        // this.objectKeys = Object.keys;
     }
 
     ngOnInit() {
@@ -59,10 +58,66 @@ export class HomeComponent implements OnInit {
             // { field: 'lastUpdateDate', header: 'StatusUpdDate' },
             // { field: 'joiningDate', header: 'ExpJoiningDate' },
         ];
+
+
               
     }
+
+    onRowSelect(event) {
+        this.newCandidature = false;
+        console.log("> "+event.data);
+        this.candidature = this.cloneCandidature(event.data);
+        console.log("candidature val 1 >> "+this.candidature.candidateName);
+        console.log("candidature val 2 >> "+this.selectedCandidature);
+        
+    }
+
+    cloneCandidature(c: CandidatureDetails): CandidatureDetails {
+        let candidature:CandidatureDetails;
+        for (let prop in c) {
+            candidature[prop] = c[prop];
+        }
+        return candidature;
+    }
+
+    save() {
+        let candidatures = [...this.candidatures];
+        if (this.newCandidature)
+            candidatures.push(this.candidature);
+        else
+            candidatures[this.candidatures.indexOf(this.selectedCandidature)] = this.candidature;
+
+        this.candidatures = candidatures;
+        this.candidature = null;
+        
+    }
+
+    delete() {
+        let index = this.candidatures.indexOf(this.selectedCandidature);
+        this.candidatures = this.candidatures.filter((val, i) => i != index);
+        this.candidature = null;
+        
+    }
+
+
+    private loadAllEmployeeDetails() {
+        this.userService.getEmployees().pipe(first()).subscribe(employeesFromService => { 
+        this.employees = employeesFromService; 
+        
+        
+
+        });
+    }
+    private loadAllCandidatureDetails() {
+        this.userService.getCandidatures().pipe(first()).subscribe(candidatureFromService => { 
+        this.candidatures = candidatureFromService; 
+          
+
+        });
+    }
+
     exportAsXLSX():void {
-        this.excelService.exportAsExcelFile(this.candidature, 'sample');
+        this.excelService.exportAsExcelFile(this.candidatures, 'sample');
      }
      deleteUser(id: number) {
         this.userService.delete(id).pipe(first()).subscribe(() => { 
@@ -76,19 +131,5 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    private loadAllEmployeeDetails() {
-        this.userService.getEmployees().pipe(first()).subscribe(employeesFromService => { 
-        this.employees = employeesFromService; 
-        
-        
-
-        });
-    }
-    private loadAllCandidatureDetails() {
-        this.userService.getCandidatures().pipe(first()).subscribe(candidatureFromService => { 
-        this.candidature = candidatureFromService; 
-        
-
-        });
-    }
+    
 }

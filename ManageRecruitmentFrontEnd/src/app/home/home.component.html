@@ -4,17 +4,27 @@
             List of candidate & recruitment status
         </h3>
         
-<div class="content-section implementation ui-fluid">   
-              
-<p-table #dt [columns]="cols" [value]="candidature" [paginator]="true" [rows]="5" dataKey="contactNo" >
+<div class="content-section implementation ui-fluid">
+
+<p-table #dt [columns]="cols" [value]="candidatures" selectionMode="single" [(selection)]="selectedCandidature" (onRowSelect)="onRowSelect($event)"  [paginator]="true" [rows]="5" dataKey="contactNo" >
         
     <ng-template pTemplate="caption">
-            <div style="text-align: left" class="ui-helper-clearfix">
-                    <button (click)="exportAsXLSX()"><i class="fa fa-file-excel-o" style="font-size:15px;color:blue"></i></button>
+        <div class="row">
+            <div class="col">
+                <!--Code for Search.-->   
+                <div class="text-left" style="position: realtive;">
+                    <i class="fa fa-search icon-showcase"></i>
+                    <input type="text" class="form-control form-control-sm" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                </div>
             </div>
-        <div style="text-align: right">
-            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            <div class="col">
+                <!--Code for Export.-->    
+                <div class="ui-helper-clearfix text-right">
+                    <button class="btn btn-link btn-sm" (click)="exportAsXLSX()">
+                        Export <i class="fa fa-file-excel-o"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
@@ -35,31 +45,396 @@
             </td>
         </tr>
     </ng-template>
-    <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+    <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns" >
             <tr>
                 <td [attr.colspan]="columns.length + 1">
-                    <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
-                         <div class="ui-g-12 ui-md-9">
-                            <div class="ui-g">
-                                <div class="ui-g-12">
-                                    <b>Role:</b> {{rowData.roleOfResponsibilities}}
+                    <div class="ui-g ui-fluid small" style="padding-top:20px; padding-bottom:20px">
+                            <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                        <label><b>Current Loc</b></label>
+                                    </div>
+                                    <div class="ui-g-8">   
+                                        <input pInputText  id="currentLoc"  [(ngModel)]="rowData.currentLocation" />
+                                    </div>
+                            </div> 
+                            <div class="ui-g-4">     
+                                <div class="ui-g-4">
+                                    <b>Prefered Loc</b>
                                 </div>
-                                <div class="ui-g-12">
-                                    <b>Name:</b> {{rowData.candidateName}}
-                                </div>
-                                <div class="ui-g-12">
-                                    <b>ContactNo:</b> {{rowData.contactNo}}
-                                </div>
-                                <div class="ui-g-12">
-                                    <b>EmailId:</b> {{rowData.emailId}}
+                                <div class="ui-g-8"> 
+                                    <input pInputText id="preferedLoc" [(ngModel)]="rowData.preferredLocation" />
                                 </div>
                             </div>
-                        </div>
+                            <div class="ui-g-4">     
+                                <div class="ui-g-4">
+                                    <b>Position Loc</b>
+                                </div>
+                                <div class="ui-g-8"> 
+                                    <input pInputText id="positionLoc" [(ngModel)]="rowData.preferredLocation" />
+                                </div>
+                            </div>   
+
+                            <div class="ui-g-4"> 
+                                <div class="ui-g-4">
+                                    <b>Total Exp</b>
+                                </div> 
+                                <div class="ui-g-8">
+                                    <input pInputText id="totalExp" [(ngModel)]="rowData.totalExperience" />
+                                </div>
+                            </div>
+                            
+                            <div class="ui-g-4">
+                                <div class="ui-g-4">
+                                    <b>Relevant Exp</b> 
+                                </div>
+                                <div class="ui-g-8">  
+                                    <input pInputText id="releventExp" [(ngModel)]="rowData.relevantExperience" />
+                                </div>
+                            </div>
+
+                            <div class="ui-g-4">
+                                <div class="ui-g-4">
+                                    <b>CTC</b> 
+                                </div>
+                                <div class="ui-g-8">  
+                                    <input pInputText id="ctc" [(ngModel)]="rowData.relevantExperience" />
+                                </div>
+                            </div>
+
+                            <div class="ui-g-4">
+                                <div class="ui-g-4">
+                                    <b>ECTC</b> 
+                                </div>
+                                <div class="ui-g-8">  
+                                    <input pInputText id="ectc" [(ngModel)]="rowData.relevantExperience" />
+                                </div>
+                            </div>
+                            
+                            
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                        <b>Notice Period :</b> 
+                                    </div>
+                                    <div class="ui-g-8">
+                                        <input pInputText id="noticePeriod" [(ngModel)]="rowData.noticePeriod" /> 
+                                    </div>
+                                </div>
+                                <div class="ui-g-4">
+                                        <div class="ui-g-4">
+                                                <b>Mode Of Hiring</b>  
+                                        </div>
+                                          <div class="ui-g-8">
+                                                <input pInputText id="modeOfHiring" [(ngModel)]="rowData.modeOfHiring" />
+                                        </div>       
+                                </div>
+                                <div class="ui-g-4">
+                                        <div class="ui-g-4">
+                                                <b>Vendor Name</b>
+                                        </div>
+                                        <div class="ui-g-8">
+                                                <input pInputText id="vendorName" [(ngModel)]="rowData.vendorName" />
+                                        </div>      
+                                 </div>
+
+                                 <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Profile Shared Date</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="profileSharedDate" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Screening Date</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="screeningDate" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Screening Status</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="screeningStatus" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Screening Done By</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="screeningDoneBy" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                 <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>First Round Date</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="firstRoundDate" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                 <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>First Round Status</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="firstRoundStatus" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>First Round Taken By</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="firstRoundTakenBy" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Second Round Date</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="secondRoundDate" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Second Round Status</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="secondRoundStatus" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Second Round Taken By</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="secondRoundTakenBy" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Final Round Date</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="finalRoundDate" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Final Round Status</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="finalRoundStatus" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Final Round Taken By</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="finalRoundTakenBy" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>HR/PN Round Date</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="hrRoundDate" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>HR/PN Round Status</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="hrRoundStatus" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>HR/PN Round Taken By</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="hrRoundTakenBy" [(ngModel)]="rowData.firstRoundStatus" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Offer Roll Out Date</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="offerDate" [(ngModel)]="rowData.lastUpdateDate" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Joining Date</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="joiningDate" [(ngModel)]="rowData.lastUpdateDate" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                    <div class="ui-g-4">
+                                            <b>Joining Status</b>
+                                    </div>
+                                    <div class="ui-g-8">
+                                            <input pInputText id="joiningStatus" [(ngModel)]="rowData.lastUpdateDate" />
+                                    </div>
+                                      
+                                </div>
+
+                                <div class="ui-g-4">
+                                        <div class="ui-g-4">
+                                                <b>Action Pending</b>
+                                        </div>
+                                        <div class="ui-g-8">
+                                                <input pInputText id="action" [(ngModel)]="rowData.action" />
+                                        </div>    
+                                           
+                                </div>
+                                <div class="ui-g-4">
+                                        <div class="ui-g-4">
+                                                <b>Client</b>
+                                        </div>
+                                        <div class="ui-g-8">
+                                                <input pInputText id="client" [(ngModel)]="rowData.client" />
+                                        </div>
+                                         
+                                </div>
+                                <div class="ui-g-4">
+                                        <div class="ui-g-4">
+                                                <b>Profile Status</b>
+                                        </div>
+                                        <div class="ui-g-8">
+                                                <input pInputText id="profile" [(ngModel)]="rowData.profile" />
+                                        </div>
+                                         
+                                </div>
+                                <div class="ui-g-4">
+                                        <div class="ui-g-4">
+                                                <b>Last Updated Date</b>
+                                        </div>
+                                        <div class="ui-g-8">
+                                                <input pInputText id="lastUpdateDate" [(ngModel)]="rowData.lastUpdateDate" />
+                                        </div>
+                                          
+                                </div>
+
+                                <button type="button" pButton icon="fa fa-close" (click)="delete()" >Delete</button>
+                                <button type="button" pButton icon="fa fa-check" (click)="save()" >Save</button>
+
+                                
+                            <!--
+                                <div class="ui-g-12">
+                                        <div class="ui-g-4">
+                                                <b>Interview status :</b>
+                                        </div>
+                                        <div class="ui-g-8">
+                                                <a href="javascript:void(0)" (click)="rowData.isVisible = !rowData.isVisible" class="ml-1">Click here for more details</a>
+                                                <div  [hidden]="!rowData.isVisible">
+                                                    <div class="ui-g-12">
+                                                        <div class="ui-g-4">
+                                                                <b>First Round Status</b>
+                                                        </div>
+                                                        <div class="ui-g-8">
+                                                                <input pInputText id="firstRoundStatus" [(ngModel)]="rowData.firstRoundStatus" />
+                                                        </div>
+                                                          
+                                                    </div>
+
+                                                    <div class="ui-g-12">
+                                                        <div class="ui-g-4">
+                                                                <b>First Round Taken By</b>
+                                                        </div>
+                                                        <div class="ui-g-8">
+                                                                <input pInputText id="firstRoundTakenBy" [(ngModel)]="rowData.firstRoundStatus" />
+                                                        </div>
+                                                          
+                                                    </div>
+
+
+                                                    <div class="ui-g-12">
+                                                        <div class="ui-g-4">
+                                                                <b>Second Round Status</b>
+                                                        </div>
+                                                        <div class="ui-g-8">
+                                                                <input pInputText id="secondRoundStatus" [(ngModel)]="rowData.firstRoundStatus" />
+                                                        </div>
+                                                          
+                                                    </div>
+
+                                                    <div class="ui-g-12">
+                                                        <div class="ui-g-4">
+                                                                <b>Second Round Taken By</b>
+                                                        </div>
+                                                        <div class="ui-g-8">
+                                                                <input pInputText id="secondRoundTakenBy" [(ngModel)]="rowData.firstRoundStatus" />
+                                                        </div>
+                                                          
+                                                    </div>
+
+
+                                                </div>
+                                        </div>
+                                        
+                                </div>
+                            -->     
+                                
+                            
+                        
                     </div>
                 </td>
             </tr>
         </ng-template>
+       
 </p-table>
+
+<!--Code for Dialog display-->
+
+
 </div>
  
 </div>
