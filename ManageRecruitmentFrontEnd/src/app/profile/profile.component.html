@@ -1,0 +1,24 @@
+<div class="container__wrapper">
+  <div class="clearfix mb-3">
+    <a routerLink="/profile"> &lt; Back to all profiles</a>
+  </div>
+  <div class="card card-body mb-4">
+    <div class="row">
+      <div class="col-sm-8">
+          <h5 class="card-title mb-1">{{ profile.candidateName || 'NA' }}</h5>
+          <p class="m-0 text-muted text-uppercase small">{{ profile.roleOfResponsibilities || 'NA' }}, {{ profile.totalExperience || 'NA' }}</p>
+      </div>
+      <div class="col-sm-4 text-right">
+        <a href="javascript:void(0)" class="btn btn-default btn-sm">Edit profile</a>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5 mb-3">
+    <div *ngFor="let key of keys" [ngClass]="{'col-sm-3': excludable_keys_in_display_mode.indexOf(key)===-1}">
+      <div *ngIf="excludable_keys_in_display_mode.indexOf(key)===-1">
+          <strong class="text-capitalize mr-1">{{key}}: </strong> 
+          <span>{{ profile[key] || 'NA' }}</span>
+      </div>
+    </div>
+  </div>
+</div>

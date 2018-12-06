@@ -23,7 +23,8 @@ import {TableModule} from 'primeng/table';
 import {PaginatorModule} from 'primeng/paginator';
 import {TabViewModule} from 'primeng/tabview';
 import {CodeHighlighterModule} from 'primeng/codehighlighter';
-import {CheckboxModule} from 'primeng/checkbox';
+import {CheckboxModule} from 'primeng/checkbox';;
+import { ProfileComponent } from './profile/profile.component'
 
 @NgModule({
     imports: [
@@ -47,7 +48,8 @@ import {CheckboxModule} from 'primeng/checkbox';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        FormUploadComponent
+        FormUploadComponent,
+        ProfileComponent
         
     ],
     providers: [

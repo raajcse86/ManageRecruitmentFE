@@ -2,6 +2,7 @@
 
 import { Component, Input,OnInit,ViewChild, ChangeDetectorRef } from '@angular/core';
 import { first } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { User } from '../_models';
 import { EmployeeDetails } from '../_models';
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
     constructor(private userService: UserService,
         private tableService:MdbTableService, 
         private cdRef: ChangeDetectorRef,
+        private router: Router,
         private excelService:ExcelService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         // this.objectKeys = Object.keys;
@@ -64,11 +66,20 @@ export class HomeComponent implements OnInit {
     }
 
     onRowSelect(event) {
-        this.newCandidature = false;
-        console.log("> "+event.data);
-        this.candidature = this.cloneCandidature(event.data);
-        console.log("candidature val 1 >> "+this.candidature.candidateName);
-        console.log("candidature val 2 >> "+this.selectedCandidature);
+        
+        // this.newCandidature = false;
+        // console.log("> "+event.data);
+        // this.candidature = this.cloneCandidature(event.data);
+        // console.log("candidature val 1 >> "+this.candidature.candidateName);
+        // console.log("candidature val 2 >> "+this.selectedCandidature);
+
+        let slugified_data = JSON.stringify(event.data);
+        let passable_data = "";
+
+        if(slugified_data) {
+            passable_data = btoa(slugified_data);
+            this.router.navigate(['/profile/' +  passable_data]);
+        }
         
     }
 

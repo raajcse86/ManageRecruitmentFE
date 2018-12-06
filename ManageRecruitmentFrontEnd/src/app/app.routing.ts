@@ -5,6 +5,7 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { FormUploadComponent } from './upload/form-upload';
 import { AuthGuard } from './_guards';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -12,6 +13,8 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'upload', component: FormUploadComponent },
     { path: 'home', component: HomeComponent },
+    { path: 'profile', component: HomeComponent },
+    { path: 'profile/:slug', component: ProfileComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
