@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   profile: any;
   keys: string[];
   excludable_keys_in_display_mode: any;
+  is_editable: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +26,10 @@ export class ProfileComponent implements OnInit {
     this.profile = JSON.parse(atob(snapshot));
     this.keys = Object.keys(this.profile);
 
+  }
+
+  toggleEditState() {
+    this.is_editable = !this.is_editable;
   }
 
 }

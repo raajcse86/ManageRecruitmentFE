@@ -9,11 +9,12 @@
           <p class="m-0 text-muted text-uppercase small">{{ profile.roleOfResponsibilities || 'NA' }}, {{ profile.totalExperience || 'NA' }}</p>
       </div>
       <div class="col-sm-4 text-right">
-        <a href="javascript:void(0)" class="btn btn-default btn-sm">Edit profile</a>
+        <a href="javascript:void(0)" class="btn btn-primary btn-sm"  *ngIf="!is_editable" (click)="toggleEditState()">Edit profile</a>
+        <!-- <a href="javascript:void(0)" class="btn btn-danger btn-sm"  *ngIf="is_editable" (click)="toggleEditState()">Cancel</a> -->
       </div>
     </div>
   </div>
-  <div class="row mt-5 mb-3">
+  <div class="row mt-5 mb-3 container__display" *ngIf="!is_editable">
     <div *ngFor="let key of keys" [ngClass]="{'col-sm-3': excludable_keys_in_display_mode.indexOf(key)===-1}">
       <div *ngIf="excludable_keys_in_display_mode.indexOf(key)===-1">
           <strong class="text-capitalize mr-1">{{key}}: </strong> 
@@ -21,4 +22,20 @@
       </div>
     </div>
   </div>
+  <form action="javascript:void(0)" novalidate *ngIf="is_editable">
+
+      <div class="row mt-5 mb-5">
+        <div *ngFor="let key of keys" class="col-sm-3 mb-2">
+          <label [for]="'edit_profile_' + key" class="small text-muted text-uppercase">{{key}}</label>
+          <input type="text" [id]="'edit_profile_' + key" [name]="'edit_profile_' + key" class="form-control" 
+            pInputText  [(ngModel)]="profile[key]" >
+        </div>
+      </div>
+      
+      <div class="text-center">
+          <button type="button" class="btn btn-primary" (click)="toggleEditState()">Save</button>
+          <button type="button" class="btn btn-dark" (click)="toggleEditState()">Delete</button>
+          <button type="button" class="btn btn-outline-dark" (click)="toggleEditState()">Cancel</button>
+        </div>
+  </form>
 </div>
