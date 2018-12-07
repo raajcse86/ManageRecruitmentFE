@@ -92,3 +92,26 @@
         }
     }
 }
+body .ui-widget {
+    font-family: "Roboto", sans-serif !important;
+}
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background: #ffeb3b !important;
+    color: #333 !important;
+}
+body .ui-table .ui-table-tbody > tr > td,
+body .ui-table .ui-table-thead > tr > th,
+body .ui-table .ui-table-caption {
+    border-color: #fff !important;
+}
+body .ui-table .ui-table-thead > tr > th {
+    background: #dddfe9 !important;
+}
+body .ui-table .ui-table-tbody > tr {
+    &:nth-child(even) {
+        background: #f8f9fe !important;
+    }
+    &:hover {
+        background: darken(#f8f9fe, 2%) !important;
+    }
+}
