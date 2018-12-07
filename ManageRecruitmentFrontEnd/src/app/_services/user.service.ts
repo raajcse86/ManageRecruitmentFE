@@ -1,10 +1,12 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
 import { environment } from '../../environments/environment';
 import { User } from '../_models';
 import { EmployeeDetails } from '../_models';
 import { CandidatureDetails } from '../_models';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @Injectable()
 export class UserService {
@@ -25,7 +27,17 @@ export class UserService {
     getCandidatures(){
         return this.http.get<CandidatureDetails[]>(`${this.API_URL}/api/candidatureDetails`);
     }
+    
+    updateCandidature(candidature: CandidatureDetails) {
+        console.log("candidate id >> "+candidature.id);
+        return this.http.put(`${this.API_URL}/api/candidatureDetails/` + candidature.id,candidature);
+        
+    }
 
+    deleteCandidature(id: number) {
+        return this.http.delete(`${this.API_URL}/api/candidatureDetails/` + id);
+    }
+    
     getAll() {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }

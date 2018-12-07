@@ -1,6 +1,7 @@
 ﻿import { NgModule,NO_ERRORS_SCHEMA  }      from '@angular/core';
 import { MDBBootstrapModule, MdbTableService,MdbTablePaginationComponent } from 'angular-bootstrap-md';
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FormsModule,ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -24,9 +25,11 @@ import {PaginatorModule} from 'primeng/paginator';
 import {TabViewModule} from 'primeng/tabview';
 import {CodeHighlighterModule} from 'primeng/codehighlighter';
 import {CheckboxModule} from 'primeng/checkbox';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
     imports: [
+        BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
@@ -38,7 +41,8 @@ import {CheckboxModule} from 'primeng/checkbox';
         PaginatorModule,
         CodeHighlighterModule,
         CheckboxModule,
-        MDBBootstrapModule.forRoot()
+        MDBBootstrapModule.forRoot(),
+        ToastModule
     ],
     schemas: [ NO_ERRORS_SCHEMA ],
     declarations: [
@@ -56,6 +60,7 @@ import {CheckboxModule} from 'primeng/checkbox';
         AuthenticationService,
         UserService,
         MdbTableService,
+        ToastModule,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 

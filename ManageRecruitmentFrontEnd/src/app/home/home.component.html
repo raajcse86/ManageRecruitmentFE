@@ -5,8 +5,7 @@
         </h3>
         
 <div class="content-section implementation ui-fluid">
-
-<p-table #dt [columns]="cols" [value]="candidatures" selectionMode="single" [(selection)]="selectedCandidature" (onRowSelect)="onRowSelect($event)"  [paginator]="true" [rows]="5" dataKey="contactNo" >
+<p-table #dt [columns]="cols" [value]="candidatures"   [paginator]="true" [rows]="5" dataKey="contactNo" >
         
     <ng-template pTemplate="caption">
         <div class="row">
@@ -49,9 +48,45 @@
             <tr>
                 <td [attr.colspan]="columns.length + 1">
                     <div class="ui-g ui-fluid small" style="padding-top:20px; padding-bottom:20px">
+                        <div class="ui-g-4">
                             <div class="ui-g-4">
+                                <b>Role</b>
+                            </div>
+                            <div class="ui-g-8">   
+                                <input pInputText  id="role"  [(ngModel)]="rowData.roleOfResponsibilities" />
+                            </div>
+                         </div>    
+
+                         <div class="ui-g-4">
+                            <div class="ui-g-4">
+                                <b>candidateName</b>
+                            </div>
+                            <div class="ui-g-8">   
+                                <input pInputText  id="candidateName"  [(ngModel)]="rowData.candidateName" />
+                            </div>
+                         </div>
+
+                         <div class="ui-g-4">
+                            <div class="ui-g-4">
+                                <b>contactNo</b>
+                            </div>
+                            <div class="ui-g-8">   
+                                <input pInputText  id="contactNo"  [(ngModel)]="rowData.contactNo" />
+                            </div>
+                         </div>
+
+                         <div class="ui-g-4">
+                            <div class="ui-g-4">
+                                <b>Email</b>
+                            </div>
+                            <div class="ui-g-8">   
+                                <input pInputText  id="email"  [(ngModel)]="rowData.emailId" />
+                            </div>
+                         </div>
+                        
+                        <div class="ui-g-4">
                                     <div class="ui-g-4">
-                                        <label><b>Current Loc</b></label>
+                                        <b>Current Loc</b>
                                     </div>
                                     <div class="ui-g-8">   
                                         <input pInputText  id="currentLoc"  [(ngModel)]="rowData.currentLocation" />
@@ -363,8 +398,8 @@
                                           
                                 </div>
 
-                                <button type="button" pButton icon="fa fa-close" (click)="delete()" >Delete</button>
-                                <button type="button" pButton icon="fa fa-check" (click)="save()" >Save</button>
+                                <button type="button" pButton icon="fa fa-close" (click)="showConfirm('fromdelete',rowData)" >Delete</button>
+                                <button type="button" pButton icon="fa fa-check" (click)="showConfirm('fromsave',rowData)" >Save</button>
 
                                 
                             <!--
@@ -438,3 +473,32 @@
 </div>
  
 </div>
+
+
+<div class="content-section implementation">
+    <p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+    <p-toast [style]="{marginTop: '80px'}" position="top-left" key="tl"></p-toast>
+
+    <p-toast [style]="{marginTop: '80px'}" position="top-center" key="tc"></p-toast>
+
+    <p-toast [style]="{marginTop: '80px'}" styleClass="custom-toast" key="custom" position="bottom-center"></p-toast>
+
+    <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+        <ng-template let-message pTemplate="message">
+            <div style="text-align: center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                <h3>{{message.summary}}</h3>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onConfirm()"  class="ui-button-success">Confirm</button>
+                </div>
+                <div class="ui-g-6">
+                    <button type="button" pButton (click)="onReject()"  class="ui-button-secondary">Reject</button>
+                </div>
+            </div>
+        </ng-template>
+    </p-toast>
+    </div>
