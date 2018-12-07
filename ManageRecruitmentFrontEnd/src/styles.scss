@@ -82,6 +82,20 @@
 }
 
 .btn {
+    &-secondary-custom {
+        background: #ddd !important;
+        &:hover {
+            background: darken(#ddd, 2%) !important;
+        }
+        &, &:hover, &:focus, &:visited {
+            color: #333 !important;
+        }
+    }
+    &-outline-secondary-custom {
+        border: 2px solid #ccc !important;
+        background: #fff !important;
+        color: #666 !important;
+    }
     &-custom {
         background: #ffeb3b;
         &:hover {
@@ -114,4 +128,8 @@ body .ui-table .ui-table-tbody > tr {
     &:hover {
         background: darken(#f8f9fe, 2%) !important;
     }
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-warn {
+    background: #fff !important; 
 }
