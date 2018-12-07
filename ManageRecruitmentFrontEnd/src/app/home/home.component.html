@@ -1,11 +1,11 @@
 ﻿<div class="container__wrapper">
         <!-- <p  align="right"><a [routerLink]="['/login']">Logout</a></p> -->
-        <h3 class="mb-3 text-capitalize">
-            List of candidate & recruitment status
-        </h3>
+        <h5 class="mb-3 text-capitalize">
+            <strong>List of candidate & recruitment status</strong>
+        </h5>
         
 <div class="content-section implementation ui-fluid">
-<p-table #dt [columns]="cols" [value]="candidatures"   [paginator]="true" [rows]="5" dataKey="contactNo" >
+<p-table #dt [columns]="cols" [value]="candidatures" selectionMode="single"  [paginator]="true" [rows]="5" dataKey="contactNo" (onRowSelect)="onRowSelect($event)">
         
     <ng-template pTemplate="caption">
         <div class="row">

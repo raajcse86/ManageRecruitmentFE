@@ -1,0 +1,69 @@
+<div class="container__wrapper">
+  <div class="clearfix mb-3">
+    <a routerLink="/profile"> &lt; Back to all profiles</a>
+  </div>
+  <div class="card card-body mb-2">
+    <div class="row">
+      <div class="col-sm-8">
+          <h5 class="card-title mb-1">{{ profile.candidateName || 'NA' }}</h5>
+          <p class="m-0 text-muted text-uppercase small">{{ profile.roleOfResponsibilities || 'NA' }} | {{ profile.totalExperience || 'NA' }}</p>
+      </div>
+      <div class="col-sm-4 text-right">
+        <a href="javascript:void(0)" class="btn btn-custom btn-sm"  *ngIf="!is_editable" (click)="toggleEditState()">Edit profile</a>
+        <!-- <a href="javascript:void(0)" class="btn btn-danger btn-sm"  *ngIf="is_editable" (click)="toggleEditState()">Cancel</a> -->
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4 mb-3 container__display" *ngIf="!is_editable">
+    <div *ngFor="let key of keys" [ngClass]="{'col-sm-3': excludable_keys_in_display_mode.indexOf(key)===-1}">
+      <div *ngIf="excludable_keys_in_display_mode.indexOf(key)===-1">
+          <strong class="text-capitalize mr-1 text-muted">{{ mapping_keys[key]?mapping_keys[key]:key }}: </strong> 
+          <span>{{ profile[key] || 'NA' }}</span>
+      </div>
+    </div>
+  </div>
+  <form action="javascript:void(0)" novalidate *ngIf="is_editable">
+
+      <div class="row mt-5 mb-5">
+        <div *ngFor="let key of keys" class="col-sm-3 mb-2">
+          <label [for]="'edit_profile_' + key" class="small text-muted text-uppercase">{{ mapping_keys[key]?mapping_keys[key]:key }}</label>
+          <input type="text" [id]="'edit_profile_' + key" [name]="'edit_profile_' + key" class="form-control" 
+            pInputText  [(ngModel)]="profile[key]" >
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <button type="button" class="btn btn-custom" (click)="showConfirm('fromsave',profile)" >Save</button>
+        <button type="button" class="btn btn-secondary-custom" (click)="showConfirm('fromdelete',profile)"  >Delete</button>
+        <button type="button" class="btn btn-outline-secondary-custom" (click)="toggleEditState()">Cancel</button>
+      </div>
+
+        <div class="content-section implementation">
+          <p-toast [style]="{marginTop: '80px'}"></p-toast>
+        
+          <p-toast [style]="{marginTop: '80px'}" position="top-left" key="tl"></p-toast>
+        
+          <p-toast [style]="{marginTop: '80px'}" position="top-center" key="tc"></p-toast>
+        
+          <p-toast [style]="{marginTop: '80px'}" styleClass="custom-toast" key="custom" position="bottom-center"></p-toast>
+        
+          <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+              <ng-template let-message pTemplate="message">
+                  <div class="text-center p-4">
+                      <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                      <h3>{{message.summary}}</h3>
+                      <p>{{message.detail}}</p>
+                  </div>
+                  <div class="ui-g ui-fluid">
+                      <div class="ui-g-6">
+                          <button type="button" pButton (click)="onConfirm()"  class="btn btn-custom">Confirm</button>
+                      </div>
+                      <div class="ui-g-6">
+                          <button type="button" pButton (click)="onReject()"  class="btn btn-secondary-custom">Cancel</button>
+                      </div>
+                  </div>
+              </ng-template>
+          </p-toast>
+          </div> 
+  </form>
+</div>

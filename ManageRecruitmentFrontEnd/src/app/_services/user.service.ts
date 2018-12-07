@@ -34,7 +34,7 @@ export class UserService {
         
     }
 
-    deleteCandidature(id: number) {
+    deleteCandidature(id: string) {
         return this.http.delete(`${this.API_URL}/api/candidatureDetails/` + id);
     }
     

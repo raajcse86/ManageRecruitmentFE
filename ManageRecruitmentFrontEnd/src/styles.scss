@@ -35,6 +35,14 @@
         min-height: 80vh;
         padding: 2rem 1rem;
     }
+    &__display {
+        line-height: 2;
+        font-size: 14px;
+        font-weight: 400;
+        strong {
+            font-weight: 600;
+        }
+    }
 }
 
 .form {
@@ -60,4 +68,68 @@
 
 .ui-table-wrapper {
     overflow-x: auto;
+}
+
+.card {
+    box-shadow: none !important;
+    // border: 1px solid #ddd !important;
+    border-left: 5px solid #ffeb3b !important;
+    border-radius: 0 !important;
+    background: #f9f9f9 !important;
+    &-title {
+        font-weight: 500;
+    }
+}
+
+.btn {
+    &-secondary-custom {
+        background: #ddd !important;
+        &:hover {
+            background: darken(#ddd, 2%) !important;
+        }
+        &, &:hover, &:focus, &:visited {
+            color: #333 !important;
+        }
+    }
+    &-outline-secondary-custom {
+        border: 2px solid #ccc !important;
+        background: #fff !important;
+        color: #666 !important;
+    }
+    &-custom {
+        background: #ffeb3b;
+        &:hover {
+            background: darken(#ffeb3b, 2%);
+        }
+        &, &:hover, &:focus, &:visited {
+            color: #333 !important;
+        }
+    }
+}
+body .ui-widget {
+    font-family: "Roboto", sans-serif !important;
+}
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background: #ffeb3b !important;
+    color: #333 !important;
+}
+body .ui-table .ui-table-tbody > tr > td,
+body .ui-table .ui-table-thead > tr > th,
+body .ui-table .ui-table-caption {
+    border-color: #fff !important;
+}
+body .ui-table .ui-table-thead > tr > th {
+    background: #dddfe9 !important;
+}
+body .ui-table .ui-table-tbody > tr {
+    &:nth-child(even) {
+        background: #f8f9fe !important;
+    }
+    &:hover {
+        background: darken(#f8f9fe, 2%) !important;
+    }
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-warn {
+    background: #fff !important; 
 }
