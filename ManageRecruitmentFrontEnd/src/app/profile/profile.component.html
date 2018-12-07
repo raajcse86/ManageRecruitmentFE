@@ -17,7 +17,7 @@
   <div class="row mt-4 mb-3 container__display" *ngIf="!is_editable">
     <div *ngFor="let key of keys" [ngClass]="{'col-sm-3': excludable_keys_in_display_mode.indexOf(key)===-1}">
       <div *ngIf="excludable_keys_in_display_mode.indexOf(key)===-1">
-          <strong class="text-capitalize mr-1">{{key}}: </strong> 
+          <strong class="text-capitalize mr-1">{{ mapping_keys[key]?mapping_keys[key]:key }}: </strong> 
           <span>{{ profile[key] || 'NA' }}</span>
       </div>
     </div>
@@ -26,7 +26,7 @@
 
       <div class="row mt-5 mb-5">
         <div *ngFor="let key of keys" class="col-sm-3 mb-2">
-          <label [for]="'edit_profile_' + key" class="small text-muted text-uppercase">{{key}}</label>
+          <label [for]="'edit_profile_' + key" class="small text-muted text-uppercase">{{ mapping_keys[key]?mapping_keys[key]:key }}</label>
           <input type="text" [id]="'edit_profile_' + key" [name]="'edit_profile_' + key" class="form-control" 
             pInputText  [(ngModel)]="profile[key]" >
         </div>

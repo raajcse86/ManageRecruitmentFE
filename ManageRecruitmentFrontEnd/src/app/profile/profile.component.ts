@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import Mappings from './profile.mappings';
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +13,7 @@ export class ProfileComponent implements OnInit {
   private sub: any;
   profile: any;
   keys: string[];
+  mapping_keys: string[];
   excludable_keys_in_display_mode: any;
   is_editable: boolean = false;
 
@@ -21,10 +23,12 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     this.excludable_keys_in_display_mode = ['candidateName', 'roleOfResponsibilities', 'totalExperience'];
     let snapshot = this.route.snapshot.paramMap.get('slug');
     this.profile = JSON.parse(atob(snapshot));
     this.keys = Object.keys(this.profile);
+    this.mapping_keys = Mappings;
 
   }
 
