@@ -24,10 +24,12 @@ import {PaginatorModule} from 'primeng/paginator';
 import {TabViewModule} from 'primeng/tabview';
 import {CodeHighlighterModule} from 'primeng/codehighlighter';
 import {CheckboxModule} from 'primeng/checkbox';;
-import { ProfileComponent } from './profile/profile.component'
-
+import { ProfileComponent } from './profile/profile.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'; 
+import {ToastModule} from 'primeng/toast';
 @NgModule({
     imports: [
+        BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
@@ -39,7 +41,8 @@ import { ProfileComponent } from './profile/profile.component'
         PaginatorModule,
         CodeHighlighterModule,
         CheckboxModule,
-        MDBBootstrapModule.forRoot()
+        MDBBootstrapModule.forRoot(),
+        ToastModule
     ],
     schemas: [ NO_ERRORS_SCHEMA ],
     declarations: [
@@ -48,7 +51,8 @@ import { ProfileComponent } from './profile/profile.component'
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        FormUploadComponent,
+        FormUploadComponent
+,
         ProfileComponent
         
     ],

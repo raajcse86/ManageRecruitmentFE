@@ -1,5 +1,4 @@
 ﻿import { MdbTablePaginationComponent,MdbTableService } from 'angular-bootstrap-md';
-
 import { Component, Input,OnInit,ViewChild, ChangeDetectorRef } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,8 +8,9 @@ import { EmployeeDetails } from '../_models';
 import { CandidatureDetails } from '../_models';
 import { UserService } from '../_services';
 import {ExcelService} from '../_services/excel.service';
+import { MessageService } from 'primeng/components/common/messageservice';
 
-@Component({templateUrl: 'home.component.html'})
+@Component({templateUrl: 'home.component.html',providers: [MessageService]})
 export class HomeComponent implements OnInit {
     
     cols: any[];
@@ -20,13 +20,16 @@ export class HomeComponent implements OnInit {
     candidatures: CandidatureDetails[] = [];
     candidature: CandidatureDetails ;
     selectedCandidature: CandidatureDetails;
+    fromButtonValue:string;
     newCandidature: boolean;
+
 
     constructor(private userService: UserService,
         private tableService:MdbTableService, 
         private cdRef: ChangeDetectorRef,
-        private router: Router,
-        private excelService:ExcelService) {
+        private excelService:ExcelService,
+        private messageService:MessageService,
+        private router: Router) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         // this.objectKeys = Object.keys;
     }
@@ -92,25 +95,62 @@ export class HomeComponent implements OnInit {
         return c;
     }
 
-    save() {
-        let candidatures = [...this.candidatures];
-        if (this.newCandidature)
-            candidatures.push(this.candidature);
-        else
-            candidatures[this.candidatures.indexOf(this.selectedCandidature)] = this.candidature;
+    save(rowData:any) {
+        let updatedCandidature = rowData;
+        this.userService.updateCandidature(updatedCandidature)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.messageService.add({severity:'success', summary: 'Success Message', detail:'Data updated successfully.'});
+                    this.router.navigate(['/home']);
+                    console.log("Navigation call");
+                    this.loadAllCandidatureDetails();
+                },
+            error => {
+                this.messageService.add({severity:'error', summary: 'Error Message', detail:'Something went wrong. Operation failed.'});
 
-        this.candidatures = candidatures;
-        this.candidature = null;
-        
+            });
     }
 
-    delete() {
-        let index = this.candidatures.indexOf(this.selectedCandidature);
-        this.candidatures = this.candidatures.filter((val, i) => i != index);
-        this.candidature = null;
-        
+    delete(rowData:any) {
+        let updatedCandidature = rowData;
+        console.log("candidate id delete "+updatedCandidature.id);
+        this.userService.deleteCandidature(updatedCandidature.id)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    this.messageService.add({severity:'success', summary: 'Success Message', detail:'Data Deleted successfully.'});
+                    this.router.navigate(['/home']);
+                },
+            error => {
+                this.messageService.add({severity:'error', summary: 'Error Message', detail:'Something went wrong. Operation failed.'});
+
+            });
+            
+    }
+    
+    showConfirm(frombutton,rowData:any) {
+        this.messageService.clear();
+        this.fromButtonValue = frombutton;
+        this.selectedCandidature = rowData;
+        this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
     }
 
+    onConfirm() {
+        this.messageService.clear('c');
+        if(this.fromButtonValue =='fromsave'){
+            this.save(this.selectedCandidature);
+        }else if(this.fromButtonValue == 'fromdelete'){
+            this.delete(this.selectedCandidature);
+        }
+
+    }
+
+    onReject() {
+        this.messageService.clear('c');
+        this.selectedCandidature = null;
+        this.fromButtonValue = null;
+    }
 
     private loadAllEmployeeDetails() {
         this.userService.getEmployees().pipe(first()).subscribe(employeesFromService => { 
@@ -146,6 +186,8 @@ export class HomeComponent implements OnInit {
             this.users = users; 
         });
     }
+
+    
 
     
 }
