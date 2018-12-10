@@ -26,8 +26,8 @@
 
       <div class="row mt-5 mb-5">
         <div *ngFor="let key of keys" class="col-sm-3 mb-2">
-          <label [for]="'edit_profile_' + key" class="small text-muted text-uppercase">{{ mapping_keys[key]?mapping_keys[key]:key }}</label>
-          <input type="text" [id]="'edit_profile_' + key" [name]="'edit_profile_' + key" class="form-control" 
+          <label [for]="'edit_profile_' + key" class="small text-muted text-uppercase mb-0">{{ mapping_keys[key]?mapping_keys[key]:key }}</label>
+          <input type="text" [id]="'edit_profile_' + key" [name]="'edit_profile_' + key" class="form-control form-control-sm" 
             pInputText  [(ngModel)]="profile[key]" >
         </div>
       </div>
