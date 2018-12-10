@@ -49,6 +49,9 @@
     &__wrapper {
         width: 480px;
         margin: 0 auto;
+        &--mini {
+            width: 280px;
+        }
     }
 }
 
@@ -132,4 +135,10 @@ body .ui-table .ui-table-tbody > tr {
 
 body .ui-toast .ui-toast-message.ui-toast-message-warn {
     background: #fff !important; 
+}
+
+.label {
+    &--small {
+        font-size: 10px !important;
+    }
 }
