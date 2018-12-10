@@ -52,15 +52,14 @@ export class ProfileComponent implements OnInit {
          .pipe(first())
          .subscribe(
              data => {
-                 this.messageService.add({severity:'success', summary: 'Success Message', detail:'Data updated successfully.'});
-                 this.router.navigate(['/home']);
-                 console.log("Navigation call");
-                 
+                      this.messageService.add({severity:'success', summary: 'Success Message', detail:'Data updated successfully.'});
+
              },
          error => {
              this.messageService.add({severity:'error', summary: 'Error Message', detail:'Something went wrong. Operation failed.'});
 
          });
+        // this.router.navigate(['/home']);
 
 }
 
@@ -70,7 +69,7 @@ delete() {
      .subscribe(
          data => {
              this.messageService.add({severity:'success', summary: 'Success Message', detail:'Data Deleted successfully.'});
-             this.router.navigate(['/home']);
+             
          },
      error => {
          this.messageService.add({severity:'error', summary: 'Error Message', detail:'Something went wrong. Operation failed.'});
@@ -92,6 +91,7 @@ onConfirm() {
  this.messageService.clear('c');
  if(this.fromButtonValue =='fromsave'){
      this.save();
+    // this.router.navigate(['/home']);
  }else if(this.fromButtonValue == 'fromdelete'){
      this.delete();
  }
