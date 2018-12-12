@@ -1,23 +1,28 @@
 ﻿<!-- main app container -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="showHead">
+<script src="assets/js/canvasjs.min.js"></script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
     <a class="navbar-brand" href="/"><img src="assets/image/ey-logo-white.png" width="50" alt="EY Recruitment System" title="EY Recruitment System"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto" *ngIf="showHead">
         <li class="nav-item">
-          <a class="nav-link" href="/home">Dashboard <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/dashboard">DASHBOARD <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/upload">Upload Employee Info</a>
+          <a class="nav-link" href="/upload">UPLOAD</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/home">View All Employees</a>
+          <a class="nav-link" href="/home">VIEW ALL CANDIDATES</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/home">BACKUP/RESTORE</a>
         </li>
       </ul>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" *ngIf="showHead">
           <li class="nav-item">
                 <span class="navbar-text">
               Logged in as <strong>Rajasekar</strong>, <a href="/">Logout</a>

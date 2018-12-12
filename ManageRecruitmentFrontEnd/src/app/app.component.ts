@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 
 export class AppComponent { 
     showHead: any;
+   
 
     constructor(
         private router: Router,
@@ -25,4 +26,8 @@ export class AppComponent {
             }
           });
       }
+
+      
+
+      
 }

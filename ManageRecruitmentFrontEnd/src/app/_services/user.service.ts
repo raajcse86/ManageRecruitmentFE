@@ -14,29 +14,29 @@ export class UserService {
 
     constructor(private http: HttpClient) { }
 
-    getEmployeesTemp(){
-        this.http.get(`${this.API_URL}/api/employeeDetails`).subscribe((data: Array<Object>) =>{
-            console.log(data);
-            return data;
-        });
-    }
+    // getEmployeesTemp(){
+    //     this.http.get(`${this.API_URL}/api/employeeDetails`).subscribe((data: Array<Object>) =>{
+    //         console.log(data);
+    //         return data;
+    //     });
+    // }
 
-    getEmployees(){
-        return this.http.get<EmployeeDetails[]>(`${this.API_URL}/api/employeeDetails`);
-    }
-    getCandidatures(){
-        return this.http.get<CandidatureDetails[]>(`${this.API_URL}/api/candidatureDetails`);
-    }
+    // getEmployees(){
+    //     return this.http.get<EmployeeDetails[]>(`${this.API_URL}/api/employeeDetails`);
+    // }
+    // getCandidatures(){
+    //     return this.http.get<CandidatureDetails[]>(`${this.API_URL}/api/candidatureDetails`);
+    // }
     
-    updateCandidature(candidature: CandidatureDetails) {
-        console.log("candidate id >> "+candidature.id);
-        return this.http.put(`${this.API_URL}/api/candidatureDetails/` + candidature.id,candidature);
+    // updateCandidature(candidature: CandidatureDetails) {
+    //     console.log("candidate id >> "+candidature.id);
+    //     return this.http.put(`${this.API_URL}/api/candidatureDetails/` + candidature.id,candidature);
         
-    }
+    // }
 
-    deleteCandidature(id: string) {
-        return this.http.delete(`${this.API_URL}/api/candidatureDetails/` + id);
-    }
+    // deleteCandidature(id: string) {
+    //     return this.http.delete(`${this.API_URL}/api/candidatureDetails/` + id);
+    // }
     
     getAll() {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);

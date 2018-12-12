@@ -1,7 +1,7 @@
 ﻿<div class="container__wrapper">
         <!-- <p  align="right"><a [routerLink]="['/login']">Logout</a></p> -->
         <h5 class="mb-3 text-capitalize">
-            <strong>List of candidate & recruitment status</strong>
+            <strong>LIST OF CANDIDATES & RECRUITMENT STATUS</strong>
         </h5>
         
 <div class="content-section implementation ui-fluid">
@@ -28,17 +28,17 @@
     </ng-template>
     <ng-template pTemplate="header" let-columns>
             <tr>
-                    <!--<th style="width: 3em"></th>-->   
+                    <th style="width: 3em"></th>   
               <th *ngFor="let col of columns" >{{col.header}} </th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
           <tr [pSelectableRow]="rowData">
-                <!--<td>
+                <td>
                         <a href="#" [pRowToggler]="rowData">
                             <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
                         </a>
-                    </td>-->
+                    </td>
             <td *ngFor="let col of columns" >
                 {{rowData[col.field]}}
             </td>
@@ -56,30 +56,3 @@
 </div>
 
 
-<div class="content-section implementation">
-    <p-toast [style]="{marginTop: '80px'}"></p-toast>
-
-    <p-toast [style]="{marginTop: '80px'}" position="top-left" key="tl"></p-toast>
-
-    <p-toast [style]="{marginTop: '80px'}" position="top-center" key="tc"></p-toast>
-
-    <p-toast [style]="{marginTop: '80px'}" styleClass="custom-toast" key="custom" position="bottom-center"></p-toast>
-
-    <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
-        <ng-template let-message pTemplate="message">
-            <div style="text-align: center">
-                <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
-                <h3>{{message.summary}}</h3>
-                <p>{{message.detail}}</p>
-            </div>
-            <div class="ui-g ui-fluid">
-                <div class="ui-g-6">
-                    <button type="button" pButton (click)="onConfirm()"  class="ui-button-success">Confirm</button>
-                </div>
-                <div class="ui-g-6">
-                    <button type="button" pButton (click)="onReject()"  class="ui-button-secondary">Reject</button>
-                </div>
-            </div>
-        </ng-template>
-    </p-toast>
-    </div>
