@@ -1,6 +1,6 @@
 import { ChartData } from './../_models/chartData';
 import { Component, OnInit } from '@angular/core';
-import * as CanvasJS from './canvasjs.min.js';
+
 import { CandidatureDetails } from './../_models/candidatureDetails';
 import { CandidatureDetailsService } from './../_services/candidature-details.service';
 import { MessageService } from 'primeng/components/common/messageservice';
