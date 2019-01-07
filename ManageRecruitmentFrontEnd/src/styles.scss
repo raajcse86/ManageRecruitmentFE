@@ -142,3 +142,9 @@ body .ui-toast .ui-toast-message.ui-toast-message-warn {
         font-size: 10px !important;
     }
 }
+
+.nav-link {
+    &.active-link {
+        font-weight: 700;
+    }
+}

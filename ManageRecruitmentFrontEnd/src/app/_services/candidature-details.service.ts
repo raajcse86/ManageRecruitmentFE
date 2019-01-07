@@ -1,3 +1,4 @@
+import { SummaryDataClient } from './../_models/summaryDataClient';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CandidatureDetails } from '../_models';
@@ -18,6 +19,10 @@ export class CandidatureDetailsService {
     getCandidatureStatusCountByClientName(clientName: string){
       return this.http.get<CandidatureDetails[]>(`${this.API_URL}/api/candidatureDetailsByClientName/`+clientName);
   }
+
+  getSummaryDataClient(){
+    return this.http.get<SummaryDataClient[]>(`${this.API_URL}/api/candidatureDetailsSummaryDataByClient/`);
+}
     
     updateCandidature(candidature: CandidatureDetails) {
         console.log("candidate id >> "+candidature.id);

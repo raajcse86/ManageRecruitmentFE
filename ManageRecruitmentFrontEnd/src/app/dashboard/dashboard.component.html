@@ -1,18 +1,119 @@
 
-<div style="display: block" style=" height: 400px;width: 50%;" *ngIf="pie_chartDatasets.length>0">
-  <canvas   mdbChart style="height: 200px;width: 50%;"
-      [chartType]="pie_chartType"
-      [datasets]="pie_chartDatasets"
-      [labels]="pie_chartLabels"
-      [colors]="pie_chartColors"
-      [options]="pie_chartOptions"
-      [legend]="true"
-      (chartHover)="pie_chartHovered($event)"
-      (chartClick)="pie_chartClicked($event)">
-  </canvas>
+<div class="row my-5">
+  <div class="col-sm-2">
+    <h5 class="text-uppercase">Summary Reports</h5>
+    <u class="list-unstyled">
+        <li>
+            <div class="form-check">
+                <input  type="radio" name="groupOfDefaultRadios" (change)="onRadioSelect($event,'client')" id="clientcheck">
+                <label class="form-check-label" >
+                  Client wise report
+                </label>
+              </div>
+        </li>
+      <li>
+          <div class="form-check">
+              <input  type="radio" name="groupOfDefaultRadios"   (change) ="onRadioSelect($event,'skill')"  >
+              <label class="form-check-label" >
+                Skill wise report
+              </label>
+            </div>
+      </li>
+      <li>
+          <div class="form-check">
+              <input  type="radio" name="groupOfDefaultRadios" (change)="onRadioSelect($event,'location');" id="locationcheck">
+              <label class="form-check-label" >
+                Location wise report
+              </label>
+            </div>
+      </li>
+      
+     
+    </u>
+
+
+  </div>
+  <div class="col-sm-2">
+    <div class="text-center">
+        <button type="button" class="btn btn-custom" (click)="changeChart('line')" >Line</button>
+        <button type="button" class="btn btn-secondary-custom" (click)="changeChart('bar')"  >Bar</button>
+        <button type="button" class="btn btn-custom" (click)="changeChart('radar')">Radar</button>
+    </div>
 </div>
+  <div class="col-sm-8">
+    <div class="row">
+     
+      <!--Displaying chart-->
+      <div class="col-sm-8" *ngIf="showChart">
+          <div *ngIf="pie_chartDatasets.length>0">
+
+            <canvas   mdbChart style="height: 200px;"
+                [chartType]="pie_chartType"
+                [datasets]="pie_chartDatasets"
+                [labels]="pie_chartLabels"
+                [colors]="pie_chartColors"
+                [options]="pie_chartOptions"
+                [legend]="true"
+                (chartHover)="pie_chartHovered($event)"
+                (chartClick)="pie_chartClicked($event)">
+            </canvas>
+          </div>
+        </div>
 
 
+      <!--Displaying summary table-->
+      <div class="col-sm-12" >
+            <p-table  [value]="summaryDataClientArray" *ngIf="showSummaryTable">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                      
+                      <th *ngIf="checkboxselect ==='client'">ClientName</th>
+                      <th *ngIf="checkboxselect==='skill'">Skill</th>
+                      <th *ngIf="checkboxselect==='location'">Location</th>
+                      <th>Joined</th>
+                      <th>OffReleased</th>
+                      <th>OffInProg </th>
+                      <th>IntInProg</th>
+                      <th>ScrInProg</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-summaryData >
+                  <tr>
+                            <td *ngIf="checkboxselect ==='client'">{{summaryData.clientName}}</td>
+                            <td *ngIf="checkboxselect ==='skill'">{{summaryData.skill}}</td>
+                            <td *ngIf="checkboxselect ==='location'">{{summaryData.location}}</td>
 
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(summaryData,'joined')" >{{summaryData.joinedCount}}</a></td>
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(summaryData,'offerReleased')">{{summaryData.offerReleasedCount}}</a></td>
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(summaryData,'offerInProg')">{{summaryData.offerInProgressCount}}</a></td>
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(summaryData,'intInProg')">{{summaryData.interviewInProgressCount}}</a></td>
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(summaryData,'scrInProg')">{{summaryData.screeningInProgressCount}}</a></td>
+                    
+                </tr>
+            </ng-template>  
+            </p-table> 
+      </div>
+      
+<!--Displaying sub table -->
+      <div class="col-sm-8" >
+          <p-table  [value]="candidatureDetailsArray" *ngIf="showSubTable">
+              <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th>CandidateName</th>
+                    <th>Role</th>
+                    <th>EmailId</th>
+                </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-subtableData >
+                <tr>
+                          <td >{{subtableData.candidateName}}</td>
+                          <td>{{subtableData.roleOfResponsibilities}}</td>
+                          <td>{{subtableData.emailId}}</td>
+              </tr>
+          </ng-template>  
+          </p-table> 
+    </div>
+    </div>
 
-
+  </div>
+</div>
