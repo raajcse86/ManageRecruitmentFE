@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
             { field: 'candidateName', header: 'CANDIDATE NAME' },
             { field: 'contactNo', header: 'CONTACT NO' },
             { field: 'emailId', header: 'EMAIL-ID' },
-            { field: 'candidatureStatus', header: 'STATUS' }
+            { field: 'finalStatus', header: 'STATUS' }
             
         ];
 

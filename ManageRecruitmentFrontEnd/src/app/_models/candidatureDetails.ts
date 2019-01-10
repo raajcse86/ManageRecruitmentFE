@@ -8,8 +8,8 @@ export class CandidatureDetails {
 	totalExperience:string;
 	relevantExperience:string;
 	noticePeriod:string;
-	//ctc:string;
-	//ectc:string;
+	ctc:string;
+	ectc:string;
 	currentLocation:string;
 	preferredLocation:string;
 	modeOfHiring:string;
@@ -31,16 +31,16 @@ export class CandidatureDetails {
 	hrOrPnStageStatus:string;
 	hrOrPnStageDate:string
 	candidatureStatus:string;
-	//finalStatus:string;
-	//status:string;
-	//description:string;
+	finalStatus:string;
+	status:string;
+	description:string;
 	offerRollOutDate:string
 	joiningDate:string
 	joiningStatus:string;
 	nhrId:string;
 	comments:string;
 	action:string;
-	//actionPending:string;
+	actionPending:string;
 	client:string;
 	profile:string;
 	lastUpdateDate:string

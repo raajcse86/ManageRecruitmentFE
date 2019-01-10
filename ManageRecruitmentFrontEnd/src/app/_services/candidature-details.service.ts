@@ -2,6 +2,7 @@ import { SummaryDataClient } from './../_models/summaryDataClient';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CandidatureDetails } from '../_models';
+import { chart } from '../_models/chart';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,14 @@ export class CandidatureDetailsService {
 
     getCandidatures(){
         return this.http.get<CandidatureDetails[]>(`${this.API_URL}/api/candidatureDetails`);
+    }
+
+    getCandidaturesChart(Criteria : string){
+        return this.http.get<chart>(`${this.API_URL}/api/candidatureDetailsBy/`+Criteria);
+    }
+
+    getCandidaturesSecondaryChart(Criteria : string,Category : string,Type : string){
+        return this.http.get<CandidatureDetails[]>(`${this.API_URL}/api/candidatureDetailsBy/`+Criteria+"/"+Category+"/and/"+Type);
     }
 
     getCandidatureStatusCountByClientName(clientName: string){

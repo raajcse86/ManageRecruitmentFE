@@ -1,4 +1,4 @@
-export interface ChartData{
-    data:number[],
-    labels:string
+export class ChartData{
+    data:number[];
+    label:string;
 }

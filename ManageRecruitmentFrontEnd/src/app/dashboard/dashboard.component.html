@@ -63,31 +63,30 @@
 
       <!--Displaying summary table-->
       <div class="col-sm-12" >
-            <p-table  [value]="summaryDataClientArray" *ngIf="showSummaryTable">
+            <p-table  [value]="pie_chartDatasets" *ngIf="showSummaryTable">
                 <ng-template pTemplate="header" let-columns>
                     <tr>
                       
                       <th *ngIf="checkboxselect ==='client'">ClientName</th>
                       <th *ngIf="checkboxselect==='skill'">Skill</th>
                       <th *ngIf="checkboxselect==='location'">Location</th>
-                      <th>Joined</th>
-                      <th>OffReleased</th>
-                      <th>OffInProg </th>
                       <th>IntInProg</th>
+                      <th>Joined</th>
+                      <th>OffInProg </th>
+                      <th>ONHold</th>
+                      <th>Rejected</th>
                       <th>ScrInProg</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-summaryData >
+            <ng-template pTemplate="body" let-pie_chartDatasets >
                   <tr>
-                            <td *ngIf="checkboxselect ==='client'">{{summaryData.clientName}}</td>
-                            <td *ngIf="checkboxselect ==='skill'">{{summaryData.skill}}</td>
-                            <td *ngIf="checkboxselect ==='location'">{{summaryData.location}}</td>
-
-                            <td><a href="javascript:void(0)" (click)="displaySubTable(summaryData,'joined')" >{{summaryData.joinedCount}}</a></td>
-                            <td><a href="javascript:void(0)" (click)="displaySubTable(summaryData,'offerReleased')">{{summaryData.offerReleasedCount}}</a></td>
-                            <td><a href="javascript:void(0)" (click)="displaySubTable(summaryData,'offerInProg')">{{summaryData.offerInProgressCount}}</a></td>
-                            <td><a href="javascript:void(0)" (click)="displaySubTable(summaryData,'intInProg')">{{summaryData.interviewInProgressCount}}</a></td>
-                            <td><a href="javascript:void(0)" (click)="displaySubTable(summaryData,'scrInProg')">{{summaryData.screeningInProgressCount}}</a></td>
+                            <td>{{pie_chartDatasets.label}}</td>
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(pie_chartDatasets.label,'IntInProg')" >{{pie_chartDatasets.data[0]}}</a></td>
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(pie_chartDatasets.label,'Joined')">{{pie_chartDatasets.data[1]}}</a></td>
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(pie_chartDatasets.label,'OffInProg')">{{pie_chartDatasets.data[2]}}</a></td>
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(pie_chartDatasets.label,'ONHold')">{{pie_chartDatasets.data[3]}}</a></td>
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(pie_chartDatasets.label,'Rejected')">{{pie_chartDatasets.data[4]}}</a></td>
+                            <td><a href="javascript:void(0)" (click)="displaySubTable(pie_chartDatasets.label,'ScrInProg')">{{pie_chartDatasets.data[5]}}</a></td>
                     
                 </tr>
             </ng-template>  
