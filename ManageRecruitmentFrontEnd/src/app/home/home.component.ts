@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
             { field: 'candidateName', header: 'CANDIDATE NAME' },
             { field: 'contactNo', header: 'CONTACT NO' },
             { field: 'emailId', header: 'EMAIL-ID' },
-            { field: 'finalStatus', header: 'STATUS' }
+            { field: 'status', header: 'STATUS' }
             
         ];
 
@@ -55,6 +55,7 @@ export class HomeComponent implements OnInit {
 
     onRowSelect(event) {
         let slugified_data = JSON.stringify(event.data);
+        console.log("Sandeep "+event.data);
         let passable_data = "";
         if(slugified_data) {
             passable_data = btoa(slugified_data);

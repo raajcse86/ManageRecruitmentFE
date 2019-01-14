@@ -1,7 +1,7 @@
-
-<div class="row my-5">
-  <div class="col-sm-2">
-    <h5 class="text-uppercase">Summary Reports</h5>
+<br>
+<div class="row">
+    <div class="col-sm-2">
+    <h6><b>Select Type Of Reports</b></h6> 
     <u class="list-unstyled">
         <li>
             <div class="form-check">
@@ -32,13 +32,14 @@
     </u>
 
 
-  </div>
+  <br> <h6><b> Select Type Of Graph</b></h6>
   <div class="col-sm-2">
     <div class="text-center">
-        <button type="button" class="btn btn-custom" (click)="changeChart('line')" >Line</button>
-        <button type="button" class="btn btn-secondary-custom" (click)="changeChart('bar')"  >Bar</button>
-        <button type="button" class="btn btn-custom" (click)="changeChart('radar')">Radar</button>
+        <button type="button" [ngClass]="{'btn': true, 'btn-custom':graphtypeactive, 'btn-secondary-custom':graphtypedeactive }" (click)="changeChart('line')" >Line</button>
+        <button type="button" [ngClass]="{'btn': true, 'btn-custom':graphtypebaractive, 'btn-secondary-custom':graphtypebardeactive }" (click)="changeChart('bar')" >Bar</button>
+        <button type="button" [ngClass]="{'btn': true, 'btn-custom':graphtyperadaractive, 'btn-secondary-custom':graphtyperadardeactive }" (click)="changeChart('radar')">Radar</button>
     </div>
+</div>
 </div>
   <div class="col-sm-8">
     <div class="row">
@@ -94,8 +95,8 @@
       </div>
       
 <!--Displaying sub table -->
-      <div class="col-sm-8" >
-          <p-table  [value]="candidatureDetailsArray" *ngIf="showSubTable">
+      <!-- <div class="col-sm-8" >
+          <p-table  #dt [value]="candidatureDetailsArray"  selectionMode="single" *ngIf="showSubTable" >
               <ng-template pTemplate="header" let-columns>
                   <tr>
                     <th>CandidateName</th>
@@ -103,15 +104,50 @@
                     <th>EmailId</th>
                 </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-subtableData >
-                <tr>
+          <ng-template pTemplate="body" let-subtableData let-expanded="expanded" let-columns="columns">
+                <tr [pSelectableRow]="subtableData">
+                    <td>
+                        <a href="#" [pRowToggler]="subtableData">
+                            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                        </a>
+                    </td>
                           <td >{{subtableData.candidateName}}</td>
                           <td>{{subtableData.roleOfResponsibilities}}</td>
                           <td>{{subtableData.emailId}}</td>
               </tr>
           </ng-template>  
           </p-table> 
-    </div>
+    </div> -->
+
+    <div class="col-sm-8">
+        <p-table #dt [columns]="cols" *ngIf="showSubTable" [value]="candidatureDetailsArray" selectionMode="single"  [paginator]="true" [rows]="3" dataKey="contactNo" (onRowSelect)="onRowSelect($event)">
+
+            <ng-template pTemplate="header" let-columns>
+                    <tr>
+                            <th style="width: 3em"></th>   
+                      <th *ngFor="let col of columns" >{{col.header}} </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+                  <tr [pSelectableRow]="rowData">
+                        <td>
+                                <a href="#" [pRowToggler]="rowData">
+                                    <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+                                </a>
+                            </td>
+                    <td *ngFor="let col of columns" >
+                        {{rowData[col.field]}}
+                    </td>
+                </tr>
+            </ng-template>
+           
+               
+        </p-table>
+        
+        <!--Code for Dialog display-->
+        
+        
+        </div>
     </div>
 
   </div>

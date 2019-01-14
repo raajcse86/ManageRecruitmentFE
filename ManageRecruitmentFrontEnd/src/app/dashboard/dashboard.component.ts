@@ -7,6 +7,7 @@ import { CandidatureDetailsService } from './../_services/candidature-details.se
 import { MessageService } from 'primeng/components/common/messageservice';
 import { first } from 'rxjs/operators';
 import { chart } from '../_models/chart';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 
@@ -19,16 +20,23 @@ import { chart } from '../_models/chart';
 export class DashboardComponent implements OnInit {
 
   constructor(private candidatureDetailsService : CandidatureDetailsService,
-    private messageService:MessageService){
+    private messageService:MessageService,private router: Router){
      
   }
   
   public value:string="";
   chartRawData: chart;
+  cols: any[];
   summaryDataClientArray: SummaryDataClient[] = [];
   summaryDataTestArray:SummaryDataClient[] = [];
   summaryDataTestArray2:SummaryDataClient[] = [];
   candidatureDetailsArray:CandidatureDetails[]=[];
+  graphtypeactive:boolean=false;
+graphtypedeactive:boolean=true;
+graphtypebaractive:boolean=false;
+graphtypebardeactive:boolean=true;
+graphtyperadaractive:boolean=false;
+graphtyperadardeactive:boolean=true; 
   showSubTable:boolean;
   showSummaryTable:boolean;
   showChart:boolean;
@@ -68,16 +76,40 @@ export class DashboardComponent implements OnInit {
   ngOnInit(){
     this.showSummaryTable=false;
     this.showSubTable=false;
+    this.cols = [
+      // { field: 'contactNo', header: 'ID' },
+       { field: 'roleOfResponsibilities', header: 'ROLE' },
+       { field: 'candidateName', header: 'CANDIDATE NAME' },
+       { field: 'contactNo', header: 'CONTACT NO' }
+   ];
     
     
   }
 
   changeChart(buttonClicked:string){
     if(buttonClicked ==='line'){
+      this.graphtypeactive=true;
+this.graphtypedeactive=false;
+this.graphtypebardeactive=true;
+this.graphtypebaractive=false;
+this.graphtyperadaractive=false;
+this.graphtyperadardeactive=true; 
       this.pie_chartType="line";
     }else if(buttonClicked === 'bar'){
+      this.graphtypeactive=false;
+this.graphtypedeactive=true;
+this.graphtypebardeactive=false;
+this.graphtypebaractive=true;
+this.graphtyperadaractive=false;
+this.graphtyperadardeactive=true; 
       this.pie_chartType="bar";
     }else if(buttonClicked === 'radar'){
+      this.graphtyperadaractive=true;
+this.graphtyperadardeactive=false;
+this.graphtypeactive=false;
+this.graphtypebaractive=false;
+this.graphtypebardeactive=true;
+this.graphtypedeactive=true; 
       this.pie_chartType="radar";
     }
     this.displayChart(this.checkboxselect);
@@ -141,6 +173,16 @@ export class DashboardComponent implements OnInit {
         }
     });
     return map;
+}
+
+onRowSelect(event) {
+  let slugified_data = JSON.stringify(event.data);
+  let passable_data = "";
+  if(slugified_data) {
+      passable_data = btoa(slugified_data);
+      this.router.navigate(['/profile/' +  passable_data]);
+  }
+  
 }
 
 
