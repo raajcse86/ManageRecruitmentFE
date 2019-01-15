@@ -21,7 +21,7 @@
       <div class="input-group mb-3">
         <div class="custom-file">
           <input type="file" class="custom-file-input" id="inputGroupFile02" (change)="selectFile($event)">
-          <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose candidates excel</label>
+          <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{{currentSelectedFile}}</label>
         </div>
         <div class="input-group-append">
           <span class="input-group-text" id="inputGroupFileAddon02"  [disabled]="!selectedFiles" (click)="upload()">Upload</span>
