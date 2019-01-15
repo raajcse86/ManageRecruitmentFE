@@ -19,37 +19,34 @@ export class FormUploadComponent implements OnInit {
     
    }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   selectFile(event) {
     this.selectedFiles = event.target.files;
-    if(event.target.files.length>0){
-      const fileObject = event.target.files[0];
-      this.currentSelectedFile = fileObject.name;
-     
+    if(this.selectedFiles.length>0){
+      this.currentSelectedFile  = event.target.files[0].name;
     }
   }
 
   upload() {
-    this.progress.percentage = 0;
     this.currentFileUpload = this.selectedFiles.item(0);
-    this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-        this.progress.percentage = Math.round(100 * event.loaded / event.total);
-        console.log('File is getting loaded');
-        console.log(this.progress.percentage);
+    this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(res => {
+     /* console.log("In subscribe method");
+      console.table(res); */
+      if (res.type === HttpEventType.UploadProgress) {
+        this.progress.percentage = Math.round(100 * res.loaded / res.total);
+       /* console.log('************ after cal loaded %  *************');
+        console.log(this.progress.percentage);  */
        } else if (event instanceof HttpResponse) {
-         console.log('File is completely uploaded!');
+        // console.log('File is completely uploaded!');
          this.router.navigate(['/home']);
        }
     },error =>{
       console.log('Error in the Upload File.');
+      //console.log(error);
       this.router.navigate(['/home']);
     });
     this.selectedFiles = undefined;
- 
-    
   }
 
 }
