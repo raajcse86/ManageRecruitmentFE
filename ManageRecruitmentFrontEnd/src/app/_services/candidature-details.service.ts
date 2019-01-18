@@ -39,6 +39,22 @@ export class CandidatureDetailsService {
         
     }
 
+    saveCandidature(CandidatureDetails) {
+        console.log('some Test');
+        console.log('candidature :: '+CandidatureDetails);
+       // let addcan=JSON.stringify(CandidatureDetails);
+        console.log("API URL is :: "+this.API_URL);
+        let addURL=this.API_URL+"/api/candidatureDetails";
+        console.log(addURL);
+       this.http.post(addURL,CandidatureDetails)
+       /*.subscribe(
+           data=>{
+               console.log("POST req is successful :: ",data);
+           }
+       );*/;
+        
+        }
+
     deleteCandidature(id: string) {
         return this.http.delete(`${this.API_URL}/api/candidatureDetails/` + id);
     }
