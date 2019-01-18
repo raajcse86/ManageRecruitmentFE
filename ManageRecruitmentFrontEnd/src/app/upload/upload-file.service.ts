@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +13,13 @@ export class UploadFileService {
 
   pushFileToStorage(file: File): Observable<any> {
     const formdata: FormData = new FormData();
-     formdata.append('file', file);
-      return this.http.post(this.baseUrl,formdata);
-   
+    formdata.append('file', file);
+    return this.http.post(this.baseUrl,formdata,{
+       reportProgress:true,
+      observe:'events'
+    })
   }
 
-  
- 
   getFiles(): Observable<any> {
     return this.http.get('/getallfiles');
   }
