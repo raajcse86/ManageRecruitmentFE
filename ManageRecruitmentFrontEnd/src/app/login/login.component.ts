@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
         this.loading = true;
 
 
-        this.router.navigate(['/upload']);
+        this.router.navigate(['/summary']);
 
         // this.authenticationService.login(this.f.username.value, this.f.password.value)
         //     .pipe(first())

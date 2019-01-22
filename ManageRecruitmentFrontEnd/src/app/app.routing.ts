@@ -7,7 +7,7 @@ import { FormUploadComponent } from './upload/form-upload';
 import { AuthGuard } from './_guards';
 import { ProfileComponent } from './profile/profile.component';
 import{ DashboardComponent} from './dashboard/dashboard.component';
-
+import {SummaryComponent} from './summary/summary.component';
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
@@ -17,6 +17,7 @@ const appRoutes: Routes = [
     { path: 'profile', component: HomeComponent },
     { path: 'profile/:slug', component: ProfileComponent },
     { path: 'dashboard', component: DashboardComponent },
+    { path: 'summary', component: SummaryComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

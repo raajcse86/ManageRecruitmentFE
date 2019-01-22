@@ -136,11 +136,18 @@ export class HomeComponent implements OnInit {
     }
 
     DisplayOnConsole():void{
+        
+        //console.log(this.CandidatureDetails);
         console.log("Candidate Details Start");
-        console.log(this.CandidatureDetails);
-        console.log("Candidate Details End");
-       
-        this.candidatureDetailsService.saveCandidature(this.CandidatureDetails);
+
+       let addCandidate:String=JSON.parse(JSON.stringify(this.CandidatureDetails.value));
+       console.log(addCandidate);
+       console.log("Candidate Details End");
+        this.candidatureDetailsService.saveCandidature(addCandidate).subscribe(res => {
+             console.log("In subscribe method");
+             console.table(res); 
+        }
+        )
     }
      
 

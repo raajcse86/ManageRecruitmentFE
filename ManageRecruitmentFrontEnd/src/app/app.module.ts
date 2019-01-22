@@ -26,7 +26,8 @@ import { ProfileComponent } from './profile/profile.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'; 
 import {ToastModule} from 'primeng/toast';;
 import { DashboardComponent } from './dashboard/dashboard.component'
-import {ChartsModule,WavesModule} from 'angular-bootstrap-md';
+import {ChartsModule,WavesModule} from 'angular-bootstrap-md';;
+import { SummaryComponent } from './summary/summary.component'
 
 @NgModule({
     imports: [
@@ -56,7 +57,8 @@ import {ChartsModule,WavesModule} from 'angular-bootstrap-md';
         FormUploadComponent,
         ProfileComponent,
         DashboardComponent
-        
+,
+        SummaryComponent        
         
     ],
     providers: [
