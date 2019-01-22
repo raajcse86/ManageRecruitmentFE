@@ -15,6 +15,7 @@ export class FormUploadComponent implements OnInit {
   currentFileUpload: File;
   currentSelectedFile: string ="Choose candidates excel";
   progress: { percentage: number } = { percentage: 0 };
+  
   constructor(private uploadService: UploadFileService,private router: Router,) {
     
    }

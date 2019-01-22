@@ -1,10 +1,13 @@
 ﻿<div class="container__wrapper">
         <!-- <p  align="right"><a [routerLink]="['/login']">Logout</a></p> -->
         <h5 class="mb-3 text-capitalize">
-            <strong>LIST OF CANDIDATES & RECRUITMENT STATUS</strong>
+            <strong *ngIf="add_candidate">LIST OF CANDIDATES & RECRUITMENT STATUS</strong>
+            <strong *ngIf="!add_candidate">ADD NEW CANDIDATE</strong>
         </h5>
+
+        <a href="javascript:void(0)" class="btn btn-custom btn-sm" *ngIf="add_candidate" (click)="toggleAddState()">Add Candidate</a>
         
-<div class="content-section implementation ui-fluid">
+<div class="content-section implementation ui-fluid" *ngIf="add_candidate">
 <p-table #dt [columns]="cols" [value]="candidatures" selectionMode="single"  [paginator]="true" [rows]="15" dataKey="contactNo" (onRowSelect)="onRowSelect($event)">
         
     <ng-template pTemplate="caption">
@@ -52,6 +55,199 @@
 
 
 </div>
+
+<form [formGroup]="CandidatureDetails" (ngSubmit)="DisplayOnConsole()"  *ngIf="!add_candidate">
+
+    <div class="row mt-4 mb-4">
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">ID</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="id" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">ROLE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="roleOfResponsibilities" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">CANDIDATE NAME</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="candidateName" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">PHONE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="contactNo" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">E-mail ID</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="emailId" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">TOTAL EXP</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="totalExperience" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">RELEVANT EXP</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="relevantExperience" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">NOTICE PERIOD</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="noticePeriod" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">CTC</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="ctc" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">EXPECTED CTC</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="ectc" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">CURRENT LOCATION</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="currentLocation" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">PREFERRED LOCATION</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="preferredLocation" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">POSITION LOCATION</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="positionLocation" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">MODE OF HIRING</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="modeOfHiring" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">SOURCE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="vendorName" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">PROFILE SHARED DATE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="profileSharedDate" >
+      </div>
+
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">SCREENING STATUS</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="screeningStatus" >
+      </div>
+
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">SCREENING DATE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="screeningDate" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">SCREENING DONE BY</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="screeningDoneBy" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">1ST ROUND StATUS</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="firstRoundStatus" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">1ST ROUND DATE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="firstRoundDate" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">1ST ROUND TAKEN BY</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="firstRoundTakenBy" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">2ND ROUND StATUS</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="secondRoundStatus" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">2ND ROUND DATE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="secondRoundDate" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">2ND ROUND TAKEN BY</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="secondRoundTakenBy" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">FINAL ROUND StATUS</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="finalRoundStatus" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">FINAL ROUND DATE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="finalRoundDate" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">FINAL ROUND TAKEN BY</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="finalRoundTakenBy" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">HR/PN STAGE ROUND</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="hrOrPnStageRound" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">HR/PN STAGE DATE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="hrOrPnStageDate" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">FINAL STATUS</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="finalStatus" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">STATUS</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="status" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">DESCRIPTION</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="description" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">ACTION PENDING</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="actionPending" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">CLIENT</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="client" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">PROFILE STATUS</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="profile" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">STATUS UPDATED DATE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="joiningStatus" >
+      </div>
+      <div  class="col-sm-3 mb-2">
+        <label class="small text-muted text-uppercase mb-0 label--small">EXPECTED JOINING DATE</label>
+        <input type="text"  class="form-control form-control-sm" formControlName="joiningDate" >
+      </div>
+    </div>
+    
+    <div class="text-center">
+      <button type="submit" class="btn btn-custom"  >Save</button>
+      <button type="button" class="btn btn-outline-secondary-custom" (click)="toggleAddState()">Cancel</button>
+    </div>
+
+      <div class="content-section implementation">
+        <p-toast [style]="{marginTop: '80px'}"></p-toast>
+      
+        <p-toast [style]="{marginTop: '80px'}" position="top-left" key="tl"></p-toast>
+      
+        <p-toast [style]="{marginTop: '80px'}" position="top-center" key="tc"></p-toast>
+      
+        <p-toast [style]="{marginTop: '80px'}" styleClass="custom-toast" key="custom" position="bottom-center"></p-toast>
+      
+        <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+            <ng-template let-message pTemplate="message">
+                <div class="text-center p-4">
+                    <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                    <h3>{{message.summary}}</h3>
+                    <p>{{message.detail}}</p>
+                </div>
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-6">
+                        <button type="button" pButton (click)="onConfirm()"  class="btn btn-custom">Confirm</button>
+                    </div>
+                    <div class="ui-g-6">
+                        <button type="button" pButton (click)="onReject()"  class="btn btn-secondary-custom">Cancel</button>
+                    </div>
+                </div>
+            </ng-template>
+        </p-toast>
+        </div> 
+</form>
  
 </div>
 
