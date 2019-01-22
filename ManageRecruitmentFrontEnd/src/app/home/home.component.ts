@@ -3,6 +3,7 @@ import { MdbTablePaginationComponent,MdbTableService } from 'angular-bootstrap-m
 import { Component, Input,OnInit,ViewChild, ChangeDetectorRef } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import {FormGroup,FormControl} from '@angular/forms';
 
 import { User } from '../_models';
 import { EmployeeDetails } from '../_models';
@@ -24,6 +25,8 @@ export class HomeComponent implements OnInit {
     selectedCandidature: CandidatureDetails;
     fromButtonValue:string;
     newCandidature: boolean;
+    add_candidate:boolean=true;
+    CandidatureDetails:FormGroup;
 
 
     constructor(
@@ -35,6 +38,53 @@ export class HomeComponent implements OnInit {
         private router: Router) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         // this.objectKeys = Object.keys;
+        this.CandidatureDetails=new FormGroup({
+            id:new FormControl(),
+            roleOfResponsibilities:new FormControl(),
+            positionLocation:new FormControl(),
+            candidateName:new FormControl(),
+            contactNo:new FormControl(),
+            emailId:new FormControl(),
+            totalExperience:new FormControl(),
+            relevantExperience:new FormControl(),
+            noticePeriod:new FormControl(),
+            ctc:new FormControl(),
+            ectc:new FormControl(),
+            currentLocation:new FormControl(),
+            preferredLocation:new FormControl(),
+            modeOfHiring:new FormControl(),
+            vendorName:new FormControl(),
+            profileSharedDate:new FormControl(),
+            screeningStatus:new FormControl(),
+            screeningDate:new FormControl(),
+            screeningDoneBy:new FormControl(),
+            firstRoundStatus:new FormControl(),
+            firstRoundDate:new FormControl(),
+            firstRoundTakenBy:new FormControl(),
+            secondRoundStatus:new FormControl(),
+            secondRoundDate:new FormControl(),
+            secondRoundTakenBy:new FormControl(),
+            finalRoundStatus:new FormControl(),
+            finalRoundDate:new FormControl(),
+            finalRoundTakenBy:new FormControl(),
+            hrOrPnStageRound:new FormControl(),
+            hrOrPnStageStatus:new FormControl(),
+            hrOrPnStageDate:new FormControl(),
+            candidatureStatus:new FormControl(),
+            finalStatus:new FormControl(),
+            status:new FormControl(),
+            description:new FormControl(),
+            offerRollOutDate:new FormControl(),
+            joiningDate:new FormControl(),
+            joiningStatus:new FormControl(),
+            nhrId:new FormControl(),
+            comments:new FormControl(),
+            action:new FormControl(),
+            actionPending:new FormControl(),
+            client:new FormControl(),
+            profile:new FormControl(),
+            lastUpdateDate:new FormControl()
+        })
     }
 
     ngOnInit() {
@@ -47,10 +97,7 @@ export class HomeComponent implements OnInit {
             { field: 'emailId', header: 'EMAIL-ID' },
             { field: 'status', header: 'STATUS' }
             
-        ];
-
-
-              
+        ];         
     }
 
     onRowSelect(event) {
@@ -80,6 +127,25 @@ export class HomeComponent implements OnInit {
     exportAsXLSX():void {
         this.excelService.exportAsExcelFile(this.candidatures, 'sample');
      }
+
+     toggleAddState(){
+        this.add_candidate=!this.add_candidate;
+    }
+
+    DisplayOnConsole():void{
+        
+        //console.log(this.CandidatureDetails);
+        console.log("Candidate Details Start");
+
+       let addCandidate:String=JSON.parse(JSON.stringify(this.CandidatureDetails.value));
+       console.log(addCandidate);
+       console.log("Candidate Details End");
+        this.candidatureDetailsService.saveCandidature(addCandidate).subscribe(res => {
+             console.log("In subscribe method");
+             console.table(res); 
+        }
+        )
+    }
      
 
     

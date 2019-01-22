@@ -12,7 +12,10 @@
           <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">{{currentSelectedFile}}</label>
         </div>
         <div class="input-group-append">
-          <span class="input-group-text" id="inputGroupFileAddon02"  [disabled]="!selectedFiles" (click)="upload()">Upload</span>
+          <button *ngIf="selectedFiles; else fileNotSelected" class="input-group-text" id="inputGroupFileAddon02"  [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+          <ng-template #fileNotSelected >
+          <button class="input-group-text" id="inputGroupFileAddon03"  [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+        </ng-template>
         </div>
       </div>
   </div>
