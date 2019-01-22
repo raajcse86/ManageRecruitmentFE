@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
     }
 
     exportAsXLSX():void {
-        this.excelService.exportAsExcelFile(this.candidatures, 'sample');
+        this.excelService.exportAsExcelFile(this.candidatures, 'Supply');
      }
 
      toggleAddState(){

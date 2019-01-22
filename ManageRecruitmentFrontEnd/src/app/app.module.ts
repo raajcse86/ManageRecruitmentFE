@@ -26,9 +26,13 @@ import { ProfileComponent } from './profile/profile.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'; 
 import {ToastModule} from 'primeng/toast';;
 import { DashboardComponent } from './dashboard/dashboard.component'
-import {ChartsModule,WavesModule} from 'angular-bootstrap-md';;
-import { SummaryComponent } from './summary/summary.component'
-
+import {WavesModule} from 'angular-bootstrap-md';
+import {ChartsModule} from 'ng2-charts'
+import { OrgChartModule } from 'ng2-org-chart'
+import {OrganizationChartModule} from 'primeng/organizationchart';
+import { SummaryComponent } from './summary/summary.component';
+import { ReportsComponent } from './reports/reports.component';
+import {HttpInterceptorJwtAuthService} from 'src/app/_services/http/http-interceptor-jwt-auth.service';
 @NgModule({
     imports: [
         BrowserAnimationsModule,
@@ -45,7 +49,9 @@ import { SummaryComponent } from './summary/summary.component'
         CheckboxModule,
         MDBBootstrapModule.forRoot(),
         ToastModule,
-        ChartsModule
+        ChartsModule,
+        OrgChartModule,
+        OrganizationChartModule
     ],
     schemas: [ NO_ERRORS_SCHEMA ],
     declarations: [
@@ -58,7 +64,8 @@ import { SummaryComponent } from './summary/summary.component'
         ProfileComponent,
         DashboardComponent
 ,
-        SummaryComponent        
+        SummaryComponent ,
+        ReportsComponent       
         
     ],
     providers: [
@@ -69,6 +76,7 @@ import { SummaryComponent } from './summary/summary.component'
         CandidatureDetailsService,
         MdbTableService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorJwtAuthService, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
         // provider used to create fake backend

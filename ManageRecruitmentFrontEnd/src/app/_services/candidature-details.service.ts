@@ -22,6 +22,11 @@ export class CandidatureDetailsService {
         return this.http.get<chart>(`${this.API_URL}/api/candidatureDetailsBy/`+Criteria);
     }
 
+    getCandidaturesReports(Criteria : string){
+        return this.http.get<any>(`${this.API_URL}/api/candidatureDetailsBy/reports/`+Criteria);
+    }
+
+
     getCandidaturesSecondaryChart(Criteria : string,Category : string,Type : string){
         return this.http.get<CandidatureDetails[]>(`${this.API_URL}/api/candidatureDetailsBy/`+Criteria+"/"+Category+"/and/"+Type);
     }
