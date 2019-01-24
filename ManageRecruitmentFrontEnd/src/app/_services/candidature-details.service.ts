@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { CandidatureDetails } from '../_models';
 import { chart } from '../_models/chart';
 import { Observable } from 'rxjs';
+import {Summary} from '../_models/summary'
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +22,6 @@ export class CandidatureDetailsService {
     getCandidaturesChart(Criteria : string){
         return this.http.get<chart>(`${this.API_URL}/api/candidatureDetailsBy/`+Criteria);
     }
-
-    getCandidaturesReports(Criteria : string){
-        return this.http.get<any>(`${this.API_URL}/api/candidatureDetailsBy/reports/`+Criteria);
-    }
-
 
     getCandidaturesSecondaryChart(Criteria : string,Category : string,Type : string){
         return this.http.get<CandidatureDetails[]>(`${this.API_URL}/api/candidatureDetailsBy/`+Criteria+"/"+Category+"/and/"+Type);
@@ -56,5 +52,10 @@ export class CandidatureDetailsService {
 
     deleteCandidature(id: string) {
         return this.http.delete(`${this.API_URL}/api/candidatureDetails/` + id);
+    }
+
+
+    getClientSummary(){
+        return this.http.get<[Summary]>(`${this.API_URL}/clientDetails/getSummaryData`);
     }
 }
