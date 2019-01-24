@@ -8,3 +8,18 @@
     margin-right: auto;
     margin-left: auto;
   }
+
+  .In-Place {
+   background-color: #1CA979 !important;
+   color: #ffffff !important;
+}
+
+.Yet-to-start {
+   background-color: white !important;
+   color: #ffffff !important;
+}
+
+.In-Progress {
+   background-color:yellow !important;
+   color: #ffffff !important;
+}
