@@ -17,6 +17,10 @@
 .footer {
     &__copyright {
         padding: 1rem 1rem;
+        position: fixed;
+        left: 0;
+        bottom: 20px;
+        width: 100%;
     }
     &__content {
         opacity: 0.6;
