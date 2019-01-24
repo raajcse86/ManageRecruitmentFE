@@ -8,6 +8,7 @@ import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 
 export class AppComponent { 
     showHead: any;
+    username: string;
    
 
     constructor(
@@ -22,6 +23,7 @@ export class AppComponent {
               } else {
                 // console.log("NU")
                 this.showHead = true;
+                this.username= sessionStorage.getItem('authenticaterUser');
               }
             }
           });

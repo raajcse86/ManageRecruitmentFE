@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
-          <p-table #dt [columns]="cols" [value]="summarylist"  [paginator]="true" [rows]="4" (onRowSelect)="onRowSelect($event)">
+      <div class="col-lg-12">
+          <p-table #dt [value]="summarylist"  [paginator]="true" [rows]="4">
         
               <ng-template pTemplate="caption">
                   <div class="row">
