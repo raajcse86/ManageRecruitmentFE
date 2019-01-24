@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthenticationService {
-    API_URL  =  'http://localhost:9000';
+    API_URL  =  'https://recruitmentportalapp.cfapps.io';
 
     constructor(private http: HttpClient) { }
 

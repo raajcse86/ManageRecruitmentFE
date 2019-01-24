@@ -89,7 +89,7 @@ export class ReportsComponent implements OnInit {
       {name: 'Location', code: 'location'}
   ];
   }
-
+  yaxisscale =0;
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
@@ -107,9 +107,19 @@ export class ReportsComponent implements OnInit {
     },
     legend: {
       display: true
-    }
+    },
+    scales: {
+    yAxes: [{
+         ticks: {
+            max: 0
+        }
+        
+
+    }]
+}
   };
   public barChartLabels = [];
+  public barChartyAxisID = [];
   public barChartType = 'bar';
   public barChartLegend = true;
   public barChartData = [
@@ -131,9 +141,10 @@ export class ReportsComponent implements OnInit {
  
         });
 
-    this.candidatureDetailsService.getCandidaturesChart('client').subscribe(candidatureFromService => { 
+    this.candidatureDetailsService.getCandidaturesReportsBarGraph('client').subscribe(candidatureFromService => { 
     this.barChartData=candidatureFromService.chartDatasets;
     this.barChartLabels=candidatureFromService.chartLabels;
+    this.barChartOptions.scales.yAxes[0].ticks.max=candidatureFromService.yaxisScale;
        
     });
 

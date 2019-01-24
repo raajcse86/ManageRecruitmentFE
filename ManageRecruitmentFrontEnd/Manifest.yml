@@ -1,0 +1,4 @@
+applications:
+  - name: RecruitmentPortalWEB
+buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+memory: 800M

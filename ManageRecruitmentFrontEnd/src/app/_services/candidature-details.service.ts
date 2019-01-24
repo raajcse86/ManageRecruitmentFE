@@ -11,7 +11,7 @@ import {Summary} from '../_models/summary'
 })
 export class CandidatureDetailsService {
 
-  API_URL  =  'http://localhost:9000';
+  API_URL  =  'https://recruitmentportalapp.cfapps.io';
 
     constructor(private http: HttpClient) { }
 
@@ -25,6 +25,10 @@ export class CandidatureDetailsService {
 
     getCandidaturesSecondaryChart(Criteria : string,Category : string,Type : string){
         return this.http.get<CandidatureDetails[]>(`${this.API_URL}/api/candidatureDetailsBy/`+Criteria+"/"+Category+"/and/"+Type);
+    }
+
+    getCandidaturesReportsBarGraph(Criteria : string){
+        return this.http.get<any>(`${this.API_URL}/api/candidatureDetailsBy/reports/bargraph/`+Criteria);
     }
 
     getCandidatureStatusCountByClientName(clientName: string){

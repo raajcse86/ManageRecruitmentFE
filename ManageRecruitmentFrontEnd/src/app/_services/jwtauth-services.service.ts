@@ -11,7 +11,7 @@ export const AUTHENTICATED_USER = 'authenticaterUser'
 })
 export class JWTAuthServicesService {
 
-  API_URL  =  'http://localhost:9000';
+  API_URL  =  'https://recruitmentportalapp.cfapps.io';
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class JWTAuthServicesService {
     return this.http.post<any>(
       `${this.API_URL}/authenticate`,{
         username,
-        password
+        password,
       }).pipe(
         map(
           data => {

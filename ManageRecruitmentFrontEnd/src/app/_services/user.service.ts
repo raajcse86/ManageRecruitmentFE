@@ -10,7 +10,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
 
 @Injectable()
 export class UserService {
-    API_URL  =  'http://localhost:9000';
+    API_URL  =  'https://recruitmentportalapp.cfapps.io';
 
     constructor(private http: HttpClient) { }
 
