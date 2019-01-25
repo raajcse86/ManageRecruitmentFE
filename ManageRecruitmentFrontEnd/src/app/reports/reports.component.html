@@ -8,7 +8,7 @@
 <div class="row" style="margin-top: 3%">
 <div style="display: block;border-style: double; border-width: 7px;;margin-left: 2%"  class="col-lg-6" *ngIf="barChartData.length>0">
   <!-- <p-dropdown #dd [options]="cities2" [(ngModel)]="selectedCity2" optionLabel="select proper option" (onChange)="callChart(dd)"></p-dropdown> -->
-  
+  <div style="margin-top: 2%">
   <canvas baseChart
           [datasets]="barChartData"
           [labels]="barChartLabels"
@@ -16,6 +16,7 @@
           [legend]="barChartLegend"
           [chartType]="barChartType">
   </canvas>
+</div>
 </div>
 <!-- <div class="col-lg-5" style="margin-left: 10%">
   <p-table [columns]="cols" [value]="candidatureArray">
@@ -44,7 +45,7 @@
   </div> -->
   <div style="display: block;border-style: double; border-width: 7px;margin-left: 2%" class="col-lg-5"  > 
     <div style="margin-top:5%">
-    <p-organizationChart [value]="data" selectionMode="single" [(selection)]="selectedNode" (onNodeSelect)="onNodeSelect($event)"
+    <p-organizationChart [value]="data" selectionMode="single" (onNodeSelect)="onNodeSelect($event)"
     styleClass="company">
     <ng-template let-node pTemplate="person">
         <div class="node-header ui-corner-top">{{node.label}}</div>
