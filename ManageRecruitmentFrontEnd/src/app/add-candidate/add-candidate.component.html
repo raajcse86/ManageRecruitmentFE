@@ -1,0 +1,34 @@
+<!-- main app container -->
+<div class="jumbotron">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-8 offset-md-2">
+              <h3>Add Candidate Profile</h3>
+              <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                  <div class="form-group">
+                      <label for="Name">Name of the Candidate</label>
+                      <input type="text" class="form-control" name="Name" [(ngModel)]="model.candidateName" #Name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Name.invalid }" required />
+                      <div *ngIf="f.submitted && Name.invalid" class="invalid-feedback">
+                          <div *ngIf="Name.errors.required">Name is required</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control" name="email" [(ngModel)]="model.emailId" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+                      <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                          <div *ngIf="email.errors.required">Email is required</div>
+                          <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="contactNo">Contact Number of the Candidate</label>
+                      <input type="text" class="form-control" name="contactNo" [(ngModel)]="model.contactNo" #contactNo="ngModel" />
+                  </div>
+                  <div class="form-group">
+                      <button class="btn btn-primary">Register</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

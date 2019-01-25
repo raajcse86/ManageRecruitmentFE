@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UploadFileService {
-  private baseUrl= "http://localhost:9000/api/file/upload";
+  private baseUrl= "https://recruitmentportalapp.cfapps.io/api/file/upload";
   constructor(private http: HttpClient) { }
 
   pushFileToStorage(file: File): Observable<any> {

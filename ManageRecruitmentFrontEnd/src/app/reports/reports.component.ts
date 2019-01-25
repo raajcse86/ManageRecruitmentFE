@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewEncapsulation } from '@angular/core';
+import { Component, OnInit,ViewEncapsulation,ChangeDetectorRef } from '@angular/core';
 import 'chartjs-plugin-datalabels';
 import {SelectItem} from 'primeng/api';
 import {IEmployee} from 'node_modules/ng2-org-chart/src/employee';
@@ -18,59 +18,63 @@ interface City {
   selector: 'app-reports',
   templateUrl: './reports.component.html',
   styles: [`
-        .company.ui-organizationchart .ui-organizationchart-node-content.ui-person {
-            padding: 0;
-            border: 0 none;
-            font-weight: bold;
-        }
+  .company.ui-organizationchart .ui-organizationchart-node-content.ui-person {
+    padding: 0;
+    border: 0 none;
+    height: 50%;
+}
 
-        .node-header,.node-content {
-            padding: .5em .7em;
-        }
+.node-header,.node-content {
+    padding: .4em .4em;
+}
 
-        .node-header {
-            background-color: #495ebb;
-            color: #ffffff;
-        }
+.node-header {
+    background-color: #7E7E7E;
+    color: #ffffff;
+    font-size:8pt;
+}
 
-        .node-content {
-            text-align: center;
-            border: 1px solid #495ebb;
-        }
+.node-content {
+    background-color: #FAE716;
+    text-align: center;
+    border: 1px solid #495ebb;
+    font-size:8pt;
+}
 
-        .node-content img {
-            border-radius: 50%;
-        }
+.node-content img {
+    border-radius: 50%;
+}
 
-        .department-cfo {
-            background-color: #7247bc;
-            color: #ffffff;
-        }
+.ui-organizationchart-node-content.department-cfo {
+    background-color: #7E7E7E;
+    color: #ffffff;
+}
 
-        .department-coo {
-            background-color: #a534b6;
-            color: #ffffff;
-        }
+.ui-organizationchart-node-content.department-coo {
+    background-color: #7E7E7E;
+    color: #ffffff;
+}
 
-        .department-cto {
-            background-color: #e9286f;
-            color: #ffffff;
-        }
+.ui-organizationchart-node-content.department-cto {
+    background-color: #7E7E7E;
+    color: #ffffff;
+}
 
-        .ui-person .ui-node-toggler {
-            color: #495ebb !important;
-        }
+.ui-person .ui-node-toggler {
+    color: #495ebb !important;
+}
 
-        .department-cto .ui-node-toggler {
-            color: #8a0a39 !important;
-        }
+.department-cto .ui-node-toggler {
+    color: #8a0a39 !important;
+}
     `],
-  encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None,
   providers: [MessageService]
 })
 export class ReportsComponent implements OnInit {
 
     data: TreeNode[];
+    checked2: boolean = false;;
     cols: any[];
   cities1: SelectItem[];
     
@@ -81,7 +85,7 @@ export class ReportsComponent implements OnInit {
     selectedCity2: City;
 
   constructor(private candidatureDetailsService : CandidatureDetailsService,
-    private messageService:MessageService,private router: Router) { 
+    private messageService:MessageService,private router: Router,private ref: ChangeDetectorRef) { 
 
   //An array of cities
   this.cities2 = [
@@ -118,6 +122,23 @@ export class ReportsComponent implements OnInit {
     }]
 }
   };
+  public backgroundColor= [
+  {
+       backgroundColor: '#FAE716'
+     },
+     {
+       backgroundColor: '#79D2C5'
+     },
+     {
+       backgroundColor: '#7E7E7E'
+     },
+     {
+        backgroundColor: '#C1B2C3'
+      },
+      {
+        backgroundColor: '#3B5572'
+      }
+   ];
   public barChartLabels = [];
   public barChartyAxisID = [];
   public barChartType = 'bar';
@@ -128,6 +149,39 @@ export class ReportsComponent implements OnInit {
     // {data: [18, 28, 30, 29, 56, 17, 19], label: 'Series C'},
     // {data: [19, 29, 39, 0, 58, 19, 21], label: 'Series D'}
   ];
+
+  handleChange(e) {
+    this.barChartData.length=0;
+    this.barChartLabels.length=0;
+    if(e.checked)
+    {
+        this.candidatureDetailsService.getCandidaturesReports('location').subscribe(candidatureFromService => { 
+            this.data=candidatureFromService;
+       
+              });
+      
+          this.candidatureDetailsService.getCandidaturesReportsBarGraph('location').subscribe(candidatureFromService => { 
+          this.barChartData=candidatureFromService.chartDatasets;
+          this.barChartLabels=candidatureFromService.chartLabels;
+          this.barChartOptions.scales.yAxes[0].ticks.max=candidatureFromService.yaxisScale;
+             
+          });  
+    }
+    else
+    {
+        this.candidatureDetailsService.getCandidaturesReports('client').subscribe(candidatureFromService => { 
+            this.data=candidatureFromService;
+       
+              });
+      
+          this.candidatureDetailsService.getCandidaturesReportsBarGraph('client').subscribe(candidatureFromService => { 
+          this.barChartData=candidatureFromService.chartDatasets;
+          this.barChartLabels=candidatureFromService.chartLabels;
+          this.barChartOptions.scales.yAxes[0].ticks.max=candidatureFromService.yaxisScale;
+             
+          });  
+    }
+}
 
   ngOnInit() {
     this.cols = [

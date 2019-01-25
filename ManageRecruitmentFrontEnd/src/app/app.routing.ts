@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import{ DashboardComponent} from './dashboard/dashboard.component';
 import { ReportsComponent } from './reports/reports.component';
 import {SummaryComponent} from './summary/summary.component';
+import {AddCandidateComponent} from './add-candidate/add-candidate.component';
 const appRoutes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'summary', component: SummaryComponent },
     { path: 'reports', component: ReportsComponent },
+    { path: 'addCandidate', component: AddCandidateComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

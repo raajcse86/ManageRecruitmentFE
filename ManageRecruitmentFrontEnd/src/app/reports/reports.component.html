@@ -5,48 +5,28 @@
   }
 </style>
 
+<p-toggleButton [(ngModel)]="checked2" onLabel="Click to view by Client" offLabel="Click to view by Location" onIcon="pi pi-check" (onChange)="handleChange($event)" offIcon="pi pi-check" [style]="{'width':'300px'}"></p-toggleButton>
+<!-- <p-dropdown #dd [options]="cities2" [style]="{'width':'300px'}"  [(ngModel)]="selectedCity2" optionLabel="name" (onChange)="handleChange(dd)" ></p-dropdown> -->
 <div class="row" style="margin-top: 3%">
-<div style="display: block;border-style: double; border-width: 7px;;margin-left: 2%"  class="col-lg-6" *ngIf="barChartData.length>0">
+<p-progressSpinner class="ui-progress-spinner" strokeWidth="8" *ngIf="barChartData.length<1"></p-progressSpinner>
+
+<div style="display: block;border-style: double; border-width: 7px;;margin-left: 2%"  class="col-lg-5" *ngIf="barChartData.length>0">
   <!-- <p-dropdown #dd [options]="cities2" [(ngModel)]="selectedCity2" optionLabel="select proper option" (onChange)="callChart(dd)"></p-dropdown> -->
+  
   <div style="margin-top: 2%">
   <canvas baseChart
           [datasets]="barChartData"
           [labels]="barChartLabels"
           [options]="barChartOptions"
           [legend]="barChartLegend"
+          [colors]="backgroundColor"
           [chartType]="barChartType">
   </canvas>
 </div>
 </div>
-<!-- <div class="col-lg-5" style="margin-left: 10%">
-  <p-table [columns]="cols" [value]="candidatureArray">
-
-      <ng-template pTemplate="header" let-columns>
-              <tr>
-                      <th style="width: 3em"></th>   
-                <th *ngFor="let col of columns" >{{col.header}} </th>
-          </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
-            <tr [pSelectableRow]="rowData">
-                  <td>
-                          <a href="#" [pRowToggler]="rowData">
-                              <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
-                          </a>
-                      </td>
-              <td *ngFor="let col of columns" >
-                  {{rowData[col.field]}}
-              </td>
-          </tr>
-      </ng-template>
-     
-         
-  </p-table>
-  </div> -->
-  <div style="display: block;border-style: double; border-width: 7px;margin-left: 2%" class="col-lg-5"  > 
-    <div style="margin-top:5%">
-    <p-organizationChart [value]="data" selectionMode="single" (onNodeSelect)="onNodeSelect($event)"
-    styleClass="company">
+  <div style="display: block;border-style: double; border-width: 7px;margin-left: 2%;width: 70%" class="col-lg-6"  *ngIf="barChartData.length>0"> 
+    <div style="margin-top:2%;max-width: 100%;">
+    <p-organizationChart [value]="data" selectionMode="single" (onNodeSelect)="onNodeSelect($event)" styleClass="company">
     <ng-template let-node pTemplate="person">
         <div class="node-header ui-corner-top">{{node.label}}</div>
         <div class="node-content">
