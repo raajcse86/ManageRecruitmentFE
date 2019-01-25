@@ -36,17 +36,18 @@
                          <td [ngClass]="getColourCode(summarylist.contractMechanism)">{{summarylist.contractMechanism}}</td>
                                <td>{{summarylist.target}} </td> 
                         <td>{{summarylist.interviewInProgress}}</td>
-                        <td>{{summarylist.joined}}</td>
-                        <td>{{summarylist.offerInProgress}}</td>
+                        <td style="background-color:green ">{{summarylist.joined}}</td>
+                        <td style="background-color:#ffbf00 ">{{summarylist.offerInProgress}}</td>
                         <td>{{summarylist.screeningInProgress}}</td>
-                        <td>{{summarylist.offerReleased}}</td>
+                        <td style="background-color:#ffbf00 ">{{summarylist.offerReleased}}</td>
                   </tr>
               </ng-template>
              
                  
           </p-table>
 
-
+        </div>
+    </div>
 
       <!-- Candidate summary  changes  -->
       <div class="row">

@@ -72,13 +72,14 @@ this.candidatureDetailsService.getClientSummary().subscribe(
       ];
 
     this.locations=[
+        { label:'All', value:null},
         { label:'Bangalore', value:'Bangalore'},
         { label:'Pune', value:'Pune'},
         { label:'Nioda', value:'Noida'},
         { label:'Gurgaon', value:'Gurgaon'},     
      ];
   this.status=[
-        //{ label:'All', value:null},
+        { label:'All', value:null},
         //{ label:'Yet to screen', value:'Yet to screen'},
         { label:'Offer In Progress', value:'Offer In Progress'},
         { label:'Offer Released', value:'Offer Released'},
@@ -133,8 +134,8 @@ private loadAllCandidatureDetails() {
     else if (field==='InProgress')
     colourCode= "OfferInProgress";
     
-    // else if (field==='Dropout')
-    // colourCode= "Dropout";
+    else if (field==='YetToStart')
+     colourCode= "Yet-to-start";
 
   
     else
