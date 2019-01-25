@@ -32,12 +32,12 @@ import { OrgChartModule } from 'ng2-org-chart'
 import {OrganizationChartModule} from 'primeng/organizationchart';
 import { SummaryComponent } from './summary/summary.component';
 import { ReportsComponent } from './reports/reports.component';
-import {HttpInterceptorJwtAuthService} from 'src/app/_services/http/http-interceptor-jwt-auth.service';;
-import { AddCandidateComponent } from './add-candidate/add-candidate.component'
-import {InputMaskModule} from 'primeng/inputmask';
+import {MultiSelectModule}  from 'primeng/multiselect';
+import {HttpInterceptorJwtAuthService} from 'src/app/_services/http/http-interceptor-jwt-auth.service';
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {DropdownModule} from 'primeng/dropdown';
+
 @NgModule({
     imports: [
         BrowserAnimationsModule,
@@ -54,10 +54,13 @@ import {DropdownModule} from 'primeng/dropdown';
         CheckboxModule,
         MDBBootstrapModule.forRoot(),
         ToastModule,
+        MultiSelectModule,
         ChartsModule,
         OrgChartModule,
         OrganizationChartModule,
-        InputMaskModule
+        ToggleButtonModule,
+        ProgressSpinnerModule,
+        DropdownModule
     ],
     schemas: [ NO_ERRORS_SCHEMA ],
     declarations: [

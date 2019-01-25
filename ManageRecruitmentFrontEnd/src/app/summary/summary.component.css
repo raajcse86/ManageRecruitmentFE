@@ -10,16 +10,67 @@
   }
 
   .In-Place {
-   background-color: #1CA979 !important;
+   background-color:#08d657 !important;
    color: #ffffff !important;
 }
 
 .Yet-to-start {
-   background-color: white !important;
+   background-color:#DC143C !important;
    color: #ffffff !important;
 }
 
 .In-Progress {
-   background-color:yellow !important;
+   background-color:#ffbf00 !important;
    color: #ffffff !important;
 }
+
+.yts{
+   background-color: green !important;
+   color:black;
+   font-family: Arial, Helvetica, sans-serif
+   
+   }   
+
+   /* .default{
+     background-color:#ffbf00 !important;
+     color: white;
+     
+     }   */
+
+     .tbs{
+       background-color:white !important;
+       color: green !important;
+       font-family: Arial, Helvetica, sans-serif
+       
+       }  
+
+       .joined{
+         background-color: green !important;
+         color:white !important;
+         font-family: Arial, Helvetica, sans-serif
+         
+         } 
+
+
+         .OfferInProgress{
+           background-color:#ffbf00!important;
+           color: white  !important;
+    
+           font-family: Arial, Helvetica, sans-serif
+           
+         }
+
+         .OfferRelaesed{
+           background-color:#ffbf00 !important;
+           color:white !important;
+           font-family: Arial, Helvetica, sans-serif
+         }
+#emailId{
+ width: 200px;
+}
+
+         /* .dropout{
+          background-color:grey!important;
+          color: white !important;
+          font-family: Arial, Helvetica, sans-serif
+        } */
