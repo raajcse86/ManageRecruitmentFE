@@ -33,7 +33,7 @@
                         <td>{{summarylist.leadName}}</td>
                          <td>{{summarylist.location}}</td>
                        <td>{{summarylist.skill}}</td>
-                         <td [ngClass]='contractMechColor'>{{summarylist.contractMechanism}}</td>
+                         <td [ngClass]="getColourCode(summarylist.contractMechanism)">{{summarylist.contractMechanism}}</td>
                                <td>{{summarylist.target}} </td> 
                         <td>{{summarylist.interviewInProgress}}</td>
                         <td>{{summarylist.joined}}</td>
@@ -46,4 +46,80 @@
                  
           </p-table>
 
+
+
+      <!-- Candidate summary  changes  -->
+      <div class="row">
+        <div class="col-12">
+
+       <!--  Candidate summary changes ends here for table -->
+         <p-table #dt [columns]="cols" [value]="candidateSummary" [paginator]="true" [rows]="5">
+             <ng-template pTemplate="caption">
+                     <div class="col">
+                             <p>CANDIDATE SUMMARY</p>
+                     </div>
+                 <!--  <div style="text-align: right">     
+                     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                     <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                 </div>--> 
+             </ng-template>
+             <ng-template pTemplate="header" let-columns>
+                <!-- <tr>
+                     <ng-container *ngFor="let col of columns">
+                     <th *ngIf="col==='Email id'; else otherColumns" id="emailId">
+                        
+                         {{col.header}}      
+                        
+                     </th>
+                     <ng-template #otherColumns>
+
+
+                     </ng-template>
+                    </ng-container>
+                 </tr> -->
+
+
+                 <tr>
+                        <th col width="120" text-align="center">Candidate Name</th>
+                        <th col width="120" text-align="center">Client Name</th>
+                        <th col width="120"text-align="center">Skills</th>
+                        <th col width="120"text-align="center">Status</th>
+                        <th col width="180"text-align="center">Email Id </th>
+                        <th col width="120"text-align="center">Location</th> 
+                        <th col width="120"text-align="center">Expected to Join</th>
+                        <th col width="120"text-align="center">Final Tech Selection</th>
+                       
+                        
+                  </tr>
+
+
+                 <tr style="height:2px;margin: 2px">
+                     <th *ngFor="let col of columns" [ngSwitch]="col.field" >
+                 
+                         <p-multiSelect *ngSwitchCase="'clientName'" [options]="clients" [style]="{'width':'100%'}"  defaultLabel="All" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
+                         <p-dropdown *ngSwitchCase="'status'" [options]="status" defaultLabel="All"[style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                         <p-dropdown *ngSwitchCase="'location'" [options]="locations" defaultLabel="All" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                         <input *ngSwitchCase="'expectedToJoin'" pInputText type="text" size="15" placeholder="Search joining date" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                             
+                     </th>
+                 </tr>
+                 </ng-template>
+
+                 <ng-template pTemplate="body" let-candidateSummary>
+                     <tr [pSelectableRow]="candidateSummary">
+                             <td>{{candidateSummary.candidateName}}</td>
+                             <td>{{candidateSummary.clientName}}</td>
+                             <td>{{candidateSummary.skills}}</td>
+                             <td [ngClass]="getColourCode(candidateSummary.status)">{{candidateSummary.status}}</td>
+                             <td id="emailId">{{candidateSummary.emailId}}</td>
+                             <td>{{candidateSummary.location}}</td>
+                             <td>{{candidateSummary.expectedToJoin}}</td>
+                             <td>{{candidateSummary.finalTechSelection}}</td>
+                     </tr>
+                 </ng-template>
+             </p-table>
+ 
+       </div>
+ 
+    </div>
   </div>

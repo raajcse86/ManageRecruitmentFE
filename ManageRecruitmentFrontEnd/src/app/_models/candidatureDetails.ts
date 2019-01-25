@@ -38,5 +38,6 @@ export class CandidatureDetails {
 	profileStatus : string;
 	statusUpdatedDate : string;
 	expectedJoiningDate : string;
+	finalTechSelectionDate: string;
        
 }

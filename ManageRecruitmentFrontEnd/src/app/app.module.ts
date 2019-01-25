@@ -32,6 +32,7 @@ import { OrgChartModule } from 'ng2-org-chart'
 import {OrganizationChartModule} from 'primeng/organizationchart';
 import { SummaryComponent } from './summary/summary.component';
 import { ReportsComponent } from './reports/reports.component';
+import {MultiSelectModule}  from 'primeng/multiselect';
 import {HttpInterceptorJwtAuthService} from 'src/app/_services/http/http-interceptor-jwt-auth.service';
 @NgModule({
     imports: [
@@ -49,6 +50,7 @@ import {HttpInterceptorJwtAuthService} from 'src/app/_services/http/http-interce
         CheckboxModule,
         MDBBootstrapModule.forRoot(),
         ToastModule,
+        MultiSelectModule,
         ChartsModule,
         OrgChartModule,
         OrganizationChartModule
