@@ -30,16 +30,6 @@
       
      
     </u>
-
-
-  <br> <h6><b> Select Type Of Graph</b></h6>
-  <div class="col-sm-2">
-    <div class="text-center">
-        <button type="button" [ngClass]="{'btn': true, 'btn-custom':graphtypeactive, 'btn-secondary-custom':graphtypedeactive }" (click)="changeChart('line')" >Line</button>
-        <button type="button" [ngClass]="{'btn': true, 'btn-custom':graphtypebaractive, 'btn-secondary-custom':graphtypebardeactive }" (click)="changeChart('bar')" >Bar</button>
-        <button type="button" [ngClass]="{'btn': true, 'btn-custom':graphtyperadaractive, 'btn-secondary-custom':graphtyperadardeactive }" (click)="changeChart('radar')">Radar</button>
-    </div>
-</div>
 </div>
   <div class="col-sm-8">
     <div class="row">
@@ -48,16 +38,14 @@
       <div class="col-sm-8" *ngIf="showChart">
           <div *ngIf="pie_chartDatasets.length>0">
 
-            <canvas   mdbChart style="height: 200px;"
-                [chartType]="pie_chartType"
-                [datasets]="pie_chartDatasets"
-                [labels]="pie_chartLabels"
-                [colors]="pie_chartColors"
-                [options]="pie_chartOptions"
-                [legend]="true"
-                (chartHover)="pie_chartHovered($event)"
-                (chartClick)="pie_chartClicked($event)">
-            </canvas>
+            <canvas baseChart
+            [datasets]="pie_chartDatasets"
+            [labels]="pie_chartLabels"
+            [options]="pie_chartOptions"
+            [legend]="barChartLegend"
+            [colors]="backgroundColor"
+            [chartType]="pie_chartType">
+    </canvas>
           </div>
         </div>
 

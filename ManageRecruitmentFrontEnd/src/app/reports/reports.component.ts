@@ -38,7 +38,10 @@ interface City {
     background-color: #FAE716;
     text-align: center;
     border: 1px solid #495ebb;
-    font-size:8pt;
+    font: {
+      weight:'bold',
+      size:8
+    }
 }
 
 .node-content img {
@@ -153,34 +156,17 @@ export class ReportsComponent implements OnInit {
   handleChange(e) {
     this.barChartData.length=0;
     this.barChartLabels.length=0;
-    if(e.checked)
-    {
-        this.candidatureDetailsService.getCandidaturesReports('location').subscribe(candidatureFromService => { 
+        this.candidatureDetailsService.getCandidaturesReports(e.value.code).subscribe(candidatureFromService => { 
             this.data=candidatureFromService;
        
               });
       
-          this.candidatureDetailsService.getCandidaturesReportsBarGraph('location').subscribe(candidatureFromService => { 
+          this.candidatureDetailsService.getCandidaturesReportsBarGraph(e.value.code).subscribe(candidatureFromService => { 
           this.barChartData=candidatureFromService.chartDatasets;
           this.barChartLabels=candidatureFromService.chartLabels;
           this.barChartOptions.scales.yAxes[0].ticks.max=candidatureFromService.yaxisScale;
              
-          });  
-    }
-    else
-    {
-        this.candidatureDetailsService.getCandidaturesReports('client').subscribe(candidatureFromService => { 
-            this.data=candidatureFromService;
-       
-              });
-      
-          this.candidatureDetailsService.getCandidaturesReportsBarGraph('client').subscribe(candidatureFromService => { 
-          this.barChartData=candidatureFromService.chartDatasets;
-          this.barChartLabels=candidatureFromService.chartLabels;
-          this.barChartOptions.scales.yAxes[0].ticks.max=candidatureFromService.yaxisScale;
-             
-          });  
-    }
+          }); 
 }
 
   ngOnInit() {
@@ -201,81 +187,6 @@ export class ReportsComponent implements OnInit {
     this.barChartOptions.scales.yAxes[0].ticks.max=candidatureFromService.yaxisScale;
        
     });
-
-    //  this.data =  [{
-    //     label: 'Total Number of Applicants',
-    //     type: 'person',
-    //     styleClass: 'ui-person',
-    //     expanded: true,
-    //     data: {name:'100'},
-    //     children: [
-    //         {
-    //             label: 'Interview In Progress',
-    //             type: 'person',
-    //             styleClass: 'ui-person',
-    //             expanded: true,
-    //             data: {name:'25'},
-    //             children:[{
-    //                 label: 'Dell',
-    //                 type: 'person',
-    //                 styleClass: 'ui-person',
-    //                 expanded: true,
-    //                 data: {name:'5'}, 
-    //                 children:null
-    //             },
-    //             {
-    //                 label: 'EMC',
-    //                 type: 'person',
-    //                 styleClass: 'ui-person',
-    //                 expanded: true,
-    //                 data: {name:'20'}
-    //             }],
-    //         },
-    //         {
-    //             label: 'Joined',
-    //             type: 'person',
-    //             styleClass: 'ui-person',
-    //             expanded: true,
-    //             data: {name:'Mike E.'},
-    //             children:[{
-    //                 label: 'Operations',
-    //                 styleClass: 'department-coo'
-    //             }]
-    //         },
-    //         {
-    //             label: 'CTO',
-    //             type: 'person',
-    //             styleClass: 'ui-person',
-    //             expanded: true,
-    //             data: {name:'Jesse Pinkman'},
-    //             children:[{
-    //                 label: 'Development',
-    //                 styleClass: 'department-cto',
-    //                 expanded: true,
-    //                 children:[{
-    //                     label: 'Analysis',
-    //                     styleClass: 'department-cto'
-    //                 },
-    //                 {
-    //                     label: 'Front End',
-    //                     styleClass: 'department-cto'
-    //                 },
-    //                 {
-    //                     label: 'Back End',
-    //                     styleClass: 'department-cto'
-    //                 }]
-    //             },
-    //             {
-    //                 label: 'QA',
-    //                 styleClass: 'department-cto'
-    //             },
-    //             {
-    //                 label: 'R&D',
-    //                 styleClass: 'department-cto'
-    //             }]
-    //         }
-    //     ]
-    // }];
 
   }
 
