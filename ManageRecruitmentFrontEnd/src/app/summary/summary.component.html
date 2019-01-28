@@ -54,7 +54,7 @@
         <div class="col-12">
 
        <!--  Candidate summary changes ends here for table -->
-         <p-table #dt [columns]="cols" [value]="candidateSummary" [paginator]="true" [rows]="5">
+         <p-table #dt [columns]="cols" [value]="candidateSummary" [paginator]="true" [rows]="4">
              <ng-template pTemplate="caption">
                      <div class="col">
                              <p>CANDIDATE SUMMARY</p>
@@ -80,27 +80,26 @@
                  </tr> -->
 
 
-                 <tr>
+                 <tr style="text-align:center">
                         <th col width="120" text-align="center">Candidate Name</th>
                         <th col width="120" text-align="center">Client Name</th>
-                        <th col width="120"text-align="center">Skills</th>
-                        <th col width="120"text-align="center">Status</th>
-                        <th col width="180"text-align="center">Email Id </th>
-                        <th col width="120"text-align="center">Location</th> 
-                        <th col width="120"text-align="center">Expected to Join</th>
+                        <th col width="120" text-align="center">Skills</th>
+                        <th col width="120" text-align="center">Status</th>
+                        <th col width="190" text-align="center">Email Id </th>
+                        <th col width="120" text-align="center">Location</th> 
+                        <th col width="120"  text-align="center">Expected to Join</th>
                         <th col width="120"text-align="center">Final Tech Selection</th>
-                       
-                        
+                             
                   </tr>
 
 
                  <tr style="height:2px;margin: 2px">
-                     <th *ngFor="let col of columns" [ngSwitch]="col.field" >
+                     <th *ngFor="let col of columns" [ngSwitch]="col.field" [ngClass]="'filter-header'">
                  
                          <p-multiSelect *ngSwitchCase="'clientName'" [options]="clients" [style]="{'width':'100%'}"  defaultLabel="All" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
                          <p-dropdown *ngSwitchCase="'status'" [options]="status" defaultLabel="All"[style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
                          <p-dropdown *ngSwitchCase="'location'" [options]="locations" defaultLabel="All" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
-                         <input *ngSwitchCase="'expectedToJoin'" pInputText type="text" size="15" placeholder="Search joining date" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                         <input *ngSwitchCase="'expectedToJoin'" pInputText type="text" size="10" placeholder="Search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                              
                      </th>
                  </tr>
@@ -111,8 +110,8 @@
                              <td>{{candidateSummary.candidateName}}</td>
                              <td>{{candidateSummary.clientName}}</td>
                              <td>{{candidateSummary.skills}}</td>
-                             <td [ngClass]="getColourCode(candidateSummary.status)">{{candidateSummary.status}}</td>
-                             <td id="emailId">{{candidateSummary.emailId}}</td>
+                             <td [ngClass]="getColorCodeByDate(candidateSummary.status, candidateSummary)">{{candidateSummary.status}}</td>
+                             <td style="word-wrap: break-word;" >{{candidateSummary.emailId}}</td>
                              <td>{{candidateSummary.location}}</td>
                              <td>{{candidateSummary.expectedToJoin}}</td>
                              <td>{{candidateSummary.finalTechSelection}}</td>

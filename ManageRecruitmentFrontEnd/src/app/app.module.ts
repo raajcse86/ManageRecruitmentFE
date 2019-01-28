@@ -37,7 +37,7 @@ import {HttpInterceptorJwtAuthService} from 'src/app/_services/http/http-interce
 import {ToggleButtonModule} from 'primeng/togglebutton';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {DropdownModule} from 'primeng/dropdown';
-
+import {AddCandidateComponent} from './add-candidate/add-candidate.component'
 @NgModule({
     imports: [
         BrowserAnimationsModule,
