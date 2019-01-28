@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
      
   }
   
-  public value:string="";
+  public value:string="Client";
   chartRawData: chart;
   cols: any[];
   summaryDataClientArray: SummaryDataClient[] = [];
