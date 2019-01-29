@@ -7,13 +7,13 @@
 
 <!-- <p-toggleButton [(ngModel)]="checked2" onLabel="Click to view by Client" offLabel="Click to view by Location" onIcon="pi pi-check" (onChange)="handleChange($event)" offIcon="pi pi-check" [style]="{'width':'300px'}"></p-toggleButton> -->
 <p-dropdown #dd [options]="cities2" [style]="{'width':'300px'}"  [(ngModel)]="selectedCity2" optionLabel="name" (onChange)="handleChange(dd)" ></p-dropdown>
-<div class="row" style="margin-top: 3%;height: 100%">
-<p-progressSpinner class="ui-progress-spinner" strokeWidth="8" *ngIf="barChartData.length<1"></p-progressSpinner>
+<div class="row" style="margin-top: 3%;height: 80%;">
+<p-progressSpinner class="ui-progress-spinner" strokeWidth="5" *ngIf="barChartData.length<1"></p-progressSpinner>
 
 <div style="display: block;border-style: double; border-width: 7px;;margin-left: 2%"  class="col-lg-4" *ngIf="barChartData.length>0">
   <!-- <p-dropdown #dd [options]="cities2" [(ngModel)]="selectedCity2" optionLabel="select proper option" (onChange)="callChart(dd)"></p-dropdown> -->
   
-  <div style="margin-top: 1%;height: 80%;">
+  <div style="margin-top:10%;max-width: 100%;height: 80%;">
   <canvas baseChart
           [datasets]="barChartData"
           [labels]="barChartLabels"
@@ -22,7 +22,7 @@
           [colors]="backgroundColor"
           [chartType]="barChartType">
   </canvas>
-</div>
+</div>  
 </div>
   <div style="display: block;border-style: double; border-width: 7px;margin-left: 3%;width: 100%" class="col-lg-7"  *ngIf="barChartData.length>0"> 
     <div style="margin-top:2%;max-width: 100%;">
@@ -39,7 +39,4 @@
 </p-organizationChart>
 </div>
   </div>
-<br/>
 </div>
-<br/>
-<br/>

@@ -37,7 +37,7 @@ interface City {
 .node-content {
     background-color: #FAE716;
     text-align: center;
-    border: 1px solid #495ebb;
+    border: 1px solid #7E7E7E;
     font: {
       weight:'bold',
       size:8
@@ -64,11 +64,11 @@ interface City {
 }
 
 .ui-person .ui-node-toggler {
-    color: #495ebb !important;
+    color: #7E7E7E !important;
 }
 
 .department-cto .ui-node-toggler {
-    color: #8a0a39 !important;
+    color: #7E7E7E !important;
 }
     `],
     encapsulation: ViewEncapsulation.None,
@@ -100,8 +100,20 @@ export class ReportsComponent implements OnInit {
   public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+          left: 0,
+          right: 0,
+          top: 5,
+          bottom: 0
+      }
+  },
     plugins: {
       datalabels: {
+        display: function(context) {
+          return context.dataset.data[context.dataIndex] !== 0; // or >= 1 or ...
+       },
         color: '#000000',
         font: {
           weight:'bold',
@@ -109,11 +121,16 @@ export class ReportsComponent implements OnInit {
         },
         align:'end',
         anchor:'end', 
+        padding: {top: 1},
         formatter: Math.round
       }
     },
     legend: {
-      display: true
+      display: true,
+      position: 'bottom',
+      labels: {
+        boxWidth: 10
+    }
     },
     scales: {
     yAxes: [{

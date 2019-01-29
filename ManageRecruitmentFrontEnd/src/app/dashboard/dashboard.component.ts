@@ -41,12 +41,41 @@ export class DashboardComponent implements OnInit {
   public pie_chartColors: Array<any> = [];
  
 
-  public pie_chartOptions: any = {
+  public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true,
-    legend: {
-      display: true
+    maintainAspectRatio: false,
+    plugins: {
+      datalabels: {
+        display: function(context) {
+          return context.dataset.data[context.dataIndex] !== 0; // or >= 1 or ...
+       },
+        color: '#000000',
+        font: {
+          weight:'bold',
+          size:12
+        },
+        align:'end',
+        anchor:'end', 
+        formatter: Math.round
+      }
     },
+    legend: {
+      display: true,
+      labels: {
+        boxWidth: 15
+    }
+    },
+    scales: {
+    yAxes: [{
+         ticks: {
+            max: 0,
+            stepSize:1
+        }
+        
+
+    }]
+}
   };
 
   public backgroundColor= [
@@ -94,18 +123,22 @@ export class DashboardComponent implements OnInit {
 
 
  displaySubTable(rowPassed:any,colSelected:any){
-  this.showSubTable= true ;
+  
   this.candidatureDetailsService.getCandidaturesSecondaryChart(this.value,rowPassed,colSelected).pipe(first()).subscribe(candidatureFromService => { 
   this.candidatureDetailsArray = candidatureFromService; 
+  this.showSubTable= true ;
   });
  }
 
     loadAllChartDetails(criteria : string) {
+      this.pie_chartLabels.length=0;
+      this.pie_chartDatasets.length=0;
+
       
-       this.candidatureDetailsService.getCandidaturesChart(criteria).pipe(first()).subscribe(candidatureFromService => { 
-       this.chartRawData = candidatureFromService; 
-       this.pie_chartLabels=this.chartRawData.chartLabels;
-       this.pie_chartDatasets=this.chartRawData.chartDatasets;
+       this.candidatureDetailsService.getCandidaturesChart(criteria).subscribe(candidatureFromService => { 
+       this.pie_chartLabels=candidatureFromService.chartLabels;
+       this.pie_chartDatasets=candidatureFromService.chartDatasets;
+       this.barChartOptions.scales.yAxes[0].ticks.max=parseInt(candidatureFromService.yaxisScale);
        });
 }
 

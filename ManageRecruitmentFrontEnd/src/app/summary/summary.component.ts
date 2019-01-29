@@ -25,6 +25,8 @@ export class SummaryComponent implements OnInit {
   candidatures: CandidatureDetails[] = [];
   candidateSummary: CandidateSummary[] = [];
   cols: any[];
+  firstTableCols: any[];
+  frozenTableCols: any[];
   clients: SelectItem[];
   locations: SelectItem[];
   status: SelectItem[];
@@ -55,6 +57,24 @@ export class SummaryComponent implements OnInit {
       });
     //Candidature summary changes :: 
     this.loadAllCandidatureDetails();
+    this.frozenTableCols=
+    [
+      { field: 'clientName', header: 'Client Name' }
+    ]; 
+    this.firstTableCols=
+    [
+      { field: 'leadName', header: 'Lead Name' },
+      { field: 'location', header: 'Location' },
+      { field: 'skill', header: 'Skill' },
+      { field: 'contractMechanism', header: 'Contract Mechanism' },
+      { field: 'target', header: 'Target' },
+      { field: 'interviewInProgress', header: 'Interview InProgress' },
+      { field: 'joined', header: 'Joined' },
+      { field: 'offerInProgress', header: 'Offer InProgress' },
+      { field: 'screeningInProgress', header: 'Screening InProgress' },
+      { field: 'offerReleased', header: 'Offer Released' }
+    ];
+
     this.cols = [
       { field: 'candidateName', header: 'Candidate Name' },
       { field: 'clientName', header: 'Client Name' },
@@ -114,8 +134,8 @@ export class SummaryComponent implements OnInit {
   }
 
 
-  public getColourCode(field: any): string {
-    console.log(" colour code for "+field)
+  public getColourCode(field: any,header:any): string {
+    console.log(" colour code for "+header)
     let colourCode: string = "default";
     switch (field) {
       case 'Joined':
@@ -134,6 +154,17 @@ export class SummaryComponent implements OnInit {
         colourCode = "Yet-to-start";
         break;
     }
+    switch (header) {
+      case 'Joined':
+        colourCode = "joined";
+        break;
+      case 'Offer Released':
+        colourCode = "OfferRelaesed";
+        break;
+      case 'Offer InProgress':
+        colourCode = "OfferInProgress";
+        break;
+    }
     // console.log(" id returned :: "+colourCode);
 
     return colourCode;
@@ -149,7 +180,7 @@ export class SummaryComponent implements OnInit {
         break;
 
       default:
-        colourCode =this.getColourCode(field);
+        colourCode =this.getColourCode(field,'');
     }
     console.log(" id returned :: "+colourCode);
 

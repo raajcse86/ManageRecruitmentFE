@@ -1,11 +1,11 @@
 <br>
 <div class="row">
-    <div class="col-sm-2">
+    <div class="col-lg-2">
     <h6><b>Select Type Of Reports</b></h6> 
     <u class="list-unstyled">
         <li>
             <div class="form-check">
-                <input  type="radio" name="groupOfDefaultRadios" (change)="onRadioSelect($event,'client')" id="clientcheck">
+                <input  type="radio" checked="checked" name="groupOfDefaultRadios" (change)="onRadioSelect($event,'client')" id="clientcheck">
                 <label class="form-check-label" >
                   Client wise report
                 </label>
@@ -31,17 +31,17 @@
      
     </u>
 </div>
-  <div class="col-sm-8">
+  <div class="col-lg-9">
     <div class="row">
-     
+        <p-progressSpinner class="ui-progress-spinner" strokeWidth="5" *ngIf="pie_chartDatasets.length<1"></p-progressSpinner>
       <!--Displaying chart-->
-      <div class="col-sm-8" *ngIf="showChart">
-          <div *ngIf="pie_chartDatasets.length>0">
+      <div class="col-lg-12" *ngIf="showChart">
+          <div style="display: block;border-style: double; border-width: 7px;" *ngIf="pie_chartDatasets.length>0">
 
             <canvas baseChart
             [datasets]="pie_chartDatasets"
             [labels]="pie_chartLabels"
-            [options]="pie_chartOptions"
+            [options]="barChartOptions"
             [legend]="barChartLegend"
             [colors]="backgroundColor"
             [chartType]="pie_chartType">
@@ -51,7 +51,7 @@
 
 
       <!--Displaying summary table-->
-      <div class="col-sm-12" >
+      <div class="col-lg-12" style="margin-top: 2%" *ngIf="pie_chartDatasets.length>0" >
             <p-table  [value]="pie_chartDatasets" *ngIf="showSummaryTable">
                 <ng-template pTemplate="header" let-columns>
                     <tr>

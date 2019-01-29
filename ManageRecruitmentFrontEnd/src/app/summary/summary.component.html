@@ -1,35 +1,28 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
-          <p-table #dt [value]="summarylist"  [paginator]="true" [rows]="4">
+          <p-table [columns]="firstTableCols" [value]="summarylist" [frozenColumns]="frozenTableCols" [scrollable]="true" scrollHeight="145px" frozenWidth="200px" [rows]="4">
         
-              <ng-template pTemplate="caption">
-                  <div class="row">
-                      <div class="col" style=height:20px>
+            <ng-template pTemplate="caption">
+                      <div class="col">
                           <p>STATUS</p>
                       </div>
-                      
-                  </div>
               </ng-template>
+              <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <col *ngFor="let col of columns" style="width:200px">
+              </colgroup>
+            </ng-template>
               <ng-template pTemplate="header" let-columns>
                       <tr>
-                        <th col width="120">ClientName</th>
-                        <th col width="120">Lead</th>
-                        <th col width="200">Location</th>
-                        <th col width="200">Skill</th>
-                        <th col width="120">Contract Mechanism </th>
-                        <th col width="90">Target</th> 
-                        <th col width="90">Interview InProgress</th>
-                        <th col width="90">Joined</th>
-                        <th col width="90">Offer InProgress</th> 
-                        <th col width="90">Screening InProgress</th>
-                        <th col width="90">Offer Released</th> 
+                        <th *ngFor="let col of columns">
+                            {{col.header}}
+                          </th>
                         
                   </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-summarylist>
-                    <tr [pSelectableRow]="rowData">
-                        <td>{{summarylist.clientName}}</td>
+              <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+                    <!-- <tr>
                         <td>{{summarylist.leadName}}</td>
                          <td>{{summarylist.location}}</td>
                        <td>{{summarylist.skill}}</td>
@@ -40,6 +33,11 @@
                         <td style="background-color:#ffbf00 ">{{summarylist.offerInProgress}}</td>
                         <td>{{summarylist.screeningInProgress}}</td>
                         <td style="background-color:#ffbf00 ">{{summarylist.offerReleased}}</td>
+                  </tr> -->
+                  <tr>
+                    <td *ngFor="let col of columns" [ngClass]="getColourCode(rowData[col.field],col.header)" >
+                      {{rowData[col.field]}}
+                    </td>
                   </tr>
               </ng-template>
              
