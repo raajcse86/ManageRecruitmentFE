@@ -15,7 +15,7 @@
 }
 
 .Yet-to-start {
-   background-color:#DC143C !important;
+   background-color:#f44336 !important;
    color: #ffffff !important;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .yts{
-   background-color: green !important;
+   background-color: #00c851 !important;
    color:black;
    font-family: Arial, Helvetica, sans-serif
    
@@ -45,7 +45,7 @@
        }  
 
        .joined{
-         background-color: green !important;
+         background-color:#00c851 !important;
          color:white !important;
          font-family: Arial, Helvetica, sans-serif
          

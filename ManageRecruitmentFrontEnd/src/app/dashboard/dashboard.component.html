@@ -1,28 +1,29 @@
-<br>
+ <div class="container-fluid my-5">
+
 <div class="row">
     <div class="col-lg-2">
-    <h6><b>Select Type Of Reports</b></h6> 
+    <h6 class="mb-3"><b>Select Type Of Reports</b></h6> 
     <u class="list-unstyled">
-        <li>
+        <li class="mb-1">
             <div class="form-check">
-                <input  type="radio" checked="checked" name="groupOfDefaultRadios" (change)="onRadioSelect($event,'client')" id="clientcheck">
-                <label class="form-check-label" >
+                <input  type="radio" class="mr-2" checked="checked" name="groupOfDefaultRadios" (change)="onRadioSelect($event,'client')" id="clientcheck">
+                <label class="form-check-label" for="clientcheck">
                   Client wise report
                 </label>
               </div>
         </li>
-      <li>
+      <li class="mb-1">
           <div class="form-check">
-              <input  type="radio" name="groupOfDefaultRadios"   (change) ="onRadioSelect($event,'skill')"  >
-              <label class="form-check-label" >
+              <input  type="radio" class="mr-2" name="groupOfDefaultRadios"   (change) ="onRadioSelect($event,'skill')" id="skillcheck" >
+              <label class="form-check-label" for="skillcheck">
                 Skill wise report
               </label>
             </div>
       </li>
-      <li>
+      <li class="mb-1">
           <div class="form-check">
-              <input  type="radio" name="groupOfDefaultRadios" (change)="onRadioSelect($event,'location');" id="locationcheck">
-              <label class="form-check-label" >
+              <input  type="radio" class="mr-2" name="groupOfDefaultRadios" (change)="onRadioSelect($event,'location');" id="locationcheck">
+              <label class="form-check-label" for="locationcheck">
                 Location wise report
               </label>
             </div>
@@ -32,11 +33,13 @@
     </u>
 </div>
   <div class="col-lg-9">
+      <div class="text-center my-3" *ngIf="pie_chartDatasets.length<1">
+            <p-progressSpinner strokeWidth="1"></p-progressSpinner>
+      </div>
     <div class="row">
-        <p-progressSpinner class="ui-progress-spinner" strokeWidth="5" *ngIf="pie_chartDatasets.length<1"></p-progressSpinner>
       <!--Displaying chart-->
       <div class="col-lg-12" *ngIf="showChart">
-          <div style="display: block;border-style: double; border-width: 7px;" *ngIf="pie_chartDatasets.length>0">
+          <div class="chart__wrapper" *ngIf="pie_chartDatasets.length>0">
 
             <canvas baseChart
             [datasets]="pie_chartDatasets"
@@ -139,4 +142,5 @@
     </div>
 
   </div>
+</div>
 </div>

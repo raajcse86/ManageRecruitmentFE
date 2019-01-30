@@ -1,11 +1,10 @@
-﻿<div class="container__wrapper">
+﻿<div class="container__wrapper my-5">
         <!-- <p  align="right"><a [routerLink]="['/login']">Logout</a></p> -->
         <h5 class="mb-3 text-capitalize">
-            <strong *ngIf="add_candidate">LIST OF CANDIDATES & RECRUITMENT STATUS</strong>
-            <strong *ngIf="!add_candidate">ADD NEW CANDIDATE</strong>
+            <strong *ngIf="add_candidate">List of candidates & recruitment status</strong>
+            <strong *ngIf="!add_candidate">Add new candidate</strong>
         </h5>
 
-        <a href="javascript:void(0)" class="btn btn-custom btn-sm" *ngIf="add_candidate" (click)="toggleAddState()">Add Candidate</a>
         
 <div class="content-section implementation ui-fluid" *ngIf="add_candidate">
 <p-table #dt [columns]="cols" [value]="candidatures" selectionMode="single"  [paginator]="true" [rows]="5" dataKey="contactNo" (onRowSelect)="onRowSelect($event)">
@@ -25,6 +24,7 @@
                     <button class="btn btn-link btn-sm" (click)="exportAsXLSX()">
                         Export <i class="fa fa-file-excel-o"></i>
                     </button>
+                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" *ngIf="add_candidate" (click)="toggleAddState()">Add Candidate</a>
                 </div>
             </div>
         </div>
