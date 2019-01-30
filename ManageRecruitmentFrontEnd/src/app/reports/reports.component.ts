@@ -70,6 +70,15 @@ interface City {
 .department-cto .ui-node-toggler {
     color: #7E7E7E !important;
 }
+.chart__wrapper {
+  display: block;
+  border: 1px solid #c8c8c8;
+  padding: 30px 10px;
+}
+
+p-progressSpinner {
+  opacity: 0.3;
+}
     `],
     encapsulation: ViewEncapsulation.None,
   providers: [MessageService]
