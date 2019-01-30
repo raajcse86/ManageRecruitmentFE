@@ -113,6 +113,9 @@ html {
             color: #333 !important;
         }
     }
+    &--depressed {
+        box-shadow: none !important;
+    }
 }
 body .ui-widget {
     font-family: "Roboto", sans-serif !important;
