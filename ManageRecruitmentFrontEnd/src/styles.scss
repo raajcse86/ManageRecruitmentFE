@@ -38,7 +38,8 @@ html {
 .container {
     &__wrapper {
         min-height: 80vh;
-        padding: 2rem 1rem;
+        // padding: 2rem 1rem;
+        padding: 0 1rem;
     }
     &__display {
         line-height: 2;
@@ -152,7 +153,18 @@ body .ui-toast .ui-toast-message.ui-toast-message-warn {
 }
 
 .nav-link {
+    font-size: 14px;
     &.active-link {
-        font-weight: 700;
+        font-weight: 500;
+    }
+}
+
+.navbar.navbar-dark .navbar-nav .nav-item .nav-link {
+    color: #dddfe9 !important;
+    &:hover {
+        color: darken(#dddfe9, 3%) !important;
+    }
+    &.active-link {
+        color: #fff !important;
     }
 }
