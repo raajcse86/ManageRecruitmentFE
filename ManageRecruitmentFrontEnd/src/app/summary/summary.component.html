@@ -43,7 +43,7 @@
     </div>
 
       <!-- Candidate summary  changes  -->
-      <div class="row my-4" *ngIf="selectedRole.name==='Candidate'">
+      <div class="row my-4" *ngIf="selectedRole.name ==='Candidate'">
         <div class="col-12">
        <!--  Candidate summary changes ends here for table -->
          <p-table #dt [columns]="cols" [value]="candidateSummary" [paginator]="true" [rows]="4">

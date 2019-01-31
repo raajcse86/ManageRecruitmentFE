@@ -31,7 +31,7 @@ export class SummaryComponent implements OnInit {
   locations: SelectItem[];
   status: SelectItem[];
   role : any[];
-  selectedRole: string;
+  selectedRole: any;
 
   constructor(private candidatureDetailsService: CandidatureDetailsService) {
   }
