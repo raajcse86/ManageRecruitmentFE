@@ -63,7 +63,7 @@ export class SummaryComponent implements OnInit {
       { field: 'clientName', header: 'Client Name' }
     ]; 
     this.firstTableCols=
-    [
+    [  { field: 'clientName', header: 'Client Name' },
       { field: 'leadName', header: 'Lead Name' },
       { field: 'location', header: 'Location' },
       { field: 'skill', header: 'Skill' },
