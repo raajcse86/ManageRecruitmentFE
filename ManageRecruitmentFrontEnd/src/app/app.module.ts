@@ -4,7 +4,6 @@ import { MDBBootstrapModule, MdbTableService,MdbTablePaginationComponent } from 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule }    from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// used to create fake backend
 import { AppComponent }  from './app.component';
 import { routing }        from './app.routing';
 import { AlertComponent } from './_directives';
@@ -91,7 +90,7 @@ import { NotificationComponent } from './notification/notification.component'
         NotificationService,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorJwtAuthService, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]
 })
