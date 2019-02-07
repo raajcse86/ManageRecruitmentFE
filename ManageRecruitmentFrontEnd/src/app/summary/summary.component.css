@@ -15,18 +15,21 @@
 }
 
 .Yet-to-start {
-   background-color:#f44336 !important;
-   color: #ffffff !important;
+   /* background-color:#f44336 !important; */
+   color: #f44336 !important;
+   font-weight: 500;
 }
 
 .In-Progress {
-   background-color:#ffbf00 !important;
-   color: #ffffff !important;
+   /* background-color:#ffbf00 !important; */
+   color: #ffbf00 !important;
+   font-weight: 500;
 }
 
 .yts{
-   background-color: #00c851 !important;
-   color:black;
+   /* background-color: #00c851 !important; */
+   color:#00c851;
+   font-weight: 500;
    font-family: Arial, Helvetica, sans-serif
    
    }   
@@ -38,30 +41,34 @@
      }   */
 
      .tbs{
-       background-color:white !important;
+       /* background-color:white !important; */
        color: green !important;
+       font-weight: 500;
        font-family: Arial, Helvetica, sans-serif
        
        }  
 
        .joined{
-         background-color:#00c851 !important;
-         color:white !important;
+         /* background-color:#00c851 !important; */
+         color:#00c851 !important;
+         font-weight: 500;
          font-family: Arial, Helvetica, sans-serif
          
          } 
 
 
          .OfferInProgress{
-           background-color:#ffbf00!important;
-           color: white  !important;
+           /* background-color:#ffbf00!important; */
+           color: #ffbf00 !important;
+           font-weight: 500;
            font-family: Arial, Helvetica, sans-serif
            
          }
 
          .OfferRelaesed{
-           background-color:#ffbf00 !important;
-           color:white !important;
+           /* background-color:#ffbf00 !important; */
+           color:#ffbf00 !important;
+           font-weight: 500;
            font-family: Arial, Helvetica, sans-serif
          }
 #emailId{
@@ -70,12 +77,15 @@
 
 .filter-header {
   padding: 0em 0.571em 0em 0.857em !important;
-  padding: 0em !important;
   padding-right: 0em;
+  height: 15%;
+  font-size: 17px;
+  width:100%;
 }
 .filter-label{
     height: 15%;
     font-size: 10px;
-    width:10%;
+    width:100%;
+    color: red !important;
 
 }

@@ -9,8 +9,8 @@ import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
 export class AppComponent { 
     showHead: any;
     username: string;
-   
-
+    options = ["Approvals", "Logout"];
+    optionSelected: any;
     constructor(
         private router: Router,
         public aroute: ActivatedRoute
@@ -29,7 +29,9 @@ export class AppComponent {
           });
       }
 
-      
+      onOptionSelected(event){
+        console.log(event); //option value will be sent as event
+       }    
 
       
 }

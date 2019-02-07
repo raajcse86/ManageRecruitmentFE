@@ -30,7 +30,8 @@ export class SummaryComponent implements OnInit {
   clients: SelectItem[];
   locations: SelectItem[];
   status: SelectItem[];
-
+  role : any[];
+  selectedRole: any;
 
   constructor(private candidatureDetailsService: CandidatureDetailsService) {
   }
@@ -62,11 +63,11 @@ export class SummaryComponent implements OnInit {
       { field: 'clientName', header: 'Client Name' }
     ]; 
     this.firstTableCols=
-    [
+    [  { field: 'clientName', header: 'Client Name' },
       { field: 'leadName', header: 'Lead Name' },
       { field: 'location', header: 'Location' },
       { field: 'skill', header: 'Skill' },
-      { field: 'contractMechanism', header: 'Contract Mechanism' },
+      { field: 'contractMechanism', header: 'Status' },
       { field: 'target', header: 'Target' },
       { field: 'interviewInProgress', header: 'Interview InProgress' },
       { field: 'joined', header: 'Joined' },
@@ -106,6 +107,10 @@ export class SummaryComponent implements OnInit {
       { label: 'Joined', value: 'Joined' }
       // ,{ label:'Dropout', value:'Dropout'},
     ];
+
+    this.role= [{name: 'Client', code: 'Client Status'},
+    {name: 'Candidate', code: 'Candidate Status'}];
+    this.selectedRole =this.role[0];
 
   }
 

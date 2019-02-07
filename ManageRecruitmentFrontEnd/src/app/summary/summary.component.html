@@ -1,16 +1,26 @@
 <div class="container-fluid">
-    <div class="row my-4">
-      <div class="col-lg-12">
-          <p-table [columns]="firstTableCols" [value]="summarylist" [frozenColumns]="frozenTableCols" [scrollable]="true" scrollHeight="145px" frozenWidth="200px" [rows]="4">
-        
+        <div class="col-sm-12">
+        <div class="col-sm-12 text-right">
+                <p-dropdown class="text-left" #dd [options]="role" [style]="{'width':'300px'}" [(ngModel)]="selectedRole" optionLabel="name"
+              ></p-dropdown>
+            </div>
+           
+        </div>
+    <div class="row my-4" *ngIf="selectedRole.name==='Client'">
+      <div class="col-lg-12" >
+          
+            <p-table [columns]="firstTableCols" [value]="summarylist" [frozenColumns]="frozenTableCols" [scrollable]="true" scrollHeight="195px" frozenWidth="200px" [rows]="7">
+
+
             <ng-template pTemplate="caption">
                       <div class="col">
-                          <p>STATUS</p>
+                          <p>CLIENT SUMMARY</p>
                       </div>
               </ng-template>
               <ng-template pTemplate="colgroup" let-columns>
               <colgroup>
                 <col *ngFor="let col of columns" style="width:200px">
+            
               </colgroup>
             </ng-template>
               <ng-template pTemplate="header" let-columns>
@@ -22,18 +32,6 @@
                   </tr>
               </ng-template>
               <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
-                    <!-- <tr>
-                        <td>{{summarylist.leadName}}</td>
-                         <td>{{summarylist.location}}</td>
-                       <td>{{summarylist.skill}}</td>
-                         <td [ngClass]="getColourCode(summarylist.contractMechanism)">{{summarylist.contractMechanism}}</td>
-                               <td>{{summarylist.target}} </td> 
-                        <td>{{summarylist.interviewInProgress}}</td>
-                        <td style="background-color:green ">{{summarylist.joined}}</td>
-                        <td style="background-color:#ffbf00 ">{{summarylist.offerInProgress}}</td>
-                        <td>{{summarylist.screeningInProgress}}</td>
-                        <td style="background-color:#ffbf00 ">{{summarylist.offerReleased}}</td>
-                  </tr> -->
                   <tr>
                     <td *ngFor="let col of columns" [ngClass]="getColourCode(rowData[col.field],col.header)" >
                       {{rowData[col.field]}}
@@ -48,45 +46,27 @@
     </div>
 
       <!-- Candidate summary  changes  -->
-      <div class="row my-4">
+      <div class="row my-4" *ngIf="selectedRole.name ==='Candidate'">
         <div class="col-12">
-
        <!--  Candidate summary changes ends here for table -->
          <p-table #dt [columns]="cols" [value]="candidateSummary" [paginator]="true" [rows]="4">
              <ng-template pTemplate="caption">
                      <div class="col">
                              <p>CANDIDATE SUMMARY</p>
                      </div>
-                 <!--  <div style="text-align: right">     
-                     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                     <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-                 </div>--> 
+                
              </ng-template>
              <ng-template pTemplate="header" let-columns>
-                <!-- <tr>
-                     <ng-container *ngFor="let col of columns">
-                     <th *ngIf="col==='Email id'; else otherColumns" id="emailId">
-                        
-                         {{col.header}}      
-                        
-                     </th>
-                     <ng-template #otherColumns>
-
-
-                     </ng-template>
-                    </ng-container>
-                 </tr> -->
-
-
+        
                  <tr style="text-align:center">
                         <th col width="120" text-align="center">Candidate Name</th>
                         <th col width="120" text-align="center">Client Name</th>
                         <th col width="120" text-align="center">Skills</th>
                         <th col width="120" text-align="center">Status</th>
-                        <th col width="190" text-align="center">Email Id </th>
+                        <th col width="210" text-align="center">Email Id </th>
                         <th col width="120" text-align="center">Location</th> 
                         <th col width="120"  text-align="center">Expected to Join</th>
-                        <th col width="120"text-align="center">Final Tech Selection</th>
+                        <th col width="100"text-align="center">Final Tech Selection</th>
                              
                   </tr>
 
@@ -97,7 +77,7 @@
                          <p-multiSelect *ngSwitchCase="'clientName'" [options]="clients" [style]="{'width':'100%'}"  defaultLabel="All" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
                          <p-dropdown *ngSwitchCase="'status'" [options]="status" defaultLabel="All"[style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
                          <p-dropdown *ngSwitchCase="'location'" [options]="locations" defaultLabel="All" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
-                         <input *ngSwitchCase="'expectedToJoin'" pInputText type="text" size="10" placeholder="Search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                         <input *ngSwitchCase="'expectedToJoin'" pInputText type="text" size="12" placeholder=" Search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                              
                      </th>
                  </tr>
@@ -106,13 +86,13 @@
                  <ng-template pTemplate="body" let-candidateSummary>
                      <tr [pSelectableRow]="candidateSummary">
                              <td>{{candidateSummary.candidateName}}</td>
-                             <td>{{candidateSummary.clientName}}</td>
-                             <td>{{candidateSummary.skills}}</td>
-                             <td [ngClass]="getColorCodeByDate(candidateSummary.status, candidateSummary)">{{candidateSummary.status}}</td>
-                             <td style="word-wrap: break-word;" >{{candidateSummary.emailId}}</td>
-                             <td>{{candidateSummary.location}}</td>
-                             <td>{{candidateSummary.expectedToJoin}}</td>
-                             <td>{{candidateSummary.finalTechSelection}}</td>
+                             <td>{{candidateSummary.clientName || 'NA'}}</td>
+                             <td>{{candidateSummary.skills || 'NA'}}</td>
+                             <td [ngClass]="getColorCodeByDate(candidateSummary.status, candidateSummary)">{{candidateSummary.status || 'NA'}}</td>
+                             <td style="word-wrap: break-word;" >{{candidateSummary.emailId  || 'NA'}}</td>
+                             <td>{{candidateSummary.location || 'NA'}}</td>
+                             <td>{{candidateSummary.expectedToJoin || 'NA'}}</td>
+                             <td>{{candidateSummary.finalTechSelection || 'NA'}}</td>
                      </tr>
                  </ng-template>
              </p-table>

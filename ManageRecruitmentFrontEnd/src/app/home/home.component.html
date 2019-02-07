@@ -43,7 +43,7 @@
                         </a>
                     </td>
             <td *ngFor="let col of columns" >
-                {{rowData[col.field]}}
+                {{rowData[col.field] || 'NA'}}
             </td>
         </tr>
     </ng-template>
