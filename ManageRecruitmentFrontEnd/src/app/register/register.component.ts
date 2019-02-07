@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AlertService, UserService } from '../_services';
+export const PASSWORD_PATTERN='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$';
+export const PASS_PATTERN_MESSAGE ='at least one uppercase letter, one lowercase letter and one number';
 
 @Component({templateUrl: 'register.component.html'})
 export class RegisterComponent implements OnInit {
@@ -19,11 +21,12 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            emailId: ['', Validators.required, Validators.email],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            firstName: ['',[Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+            lastName: ['', [Validators.required,Validators.pattern('[a-zA-Z ]*')]],
+            username: ['', [Validators.required,Validators.maxLength(10)]],
+            emailId: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('[`${PASSWORD_PATTERN}`]')]]
+
         });
     }
 
