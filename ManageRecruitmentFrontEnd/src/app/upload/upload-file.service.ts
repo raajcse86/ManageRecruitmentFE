@@ -9,7 +9,7 @@ import { ExceptionModel } from '../_models';
   providedIn: 'root'
 })
 export class UploadFileService {
-  private baseUrl= "http://localhost:9000/api/file/upload";
+  private baseUrl= "https://recruitmentportalapp.cfapps.io";
   constructor(private http: HttpClient) { }
 
   pushFileToStorage(file: File): Observable<any> {
