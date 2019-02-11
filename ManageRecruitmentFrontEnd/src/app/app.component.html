@@ -7,7 +7,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
+  {{role}}
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto" *ngIf="showHead">
           <li class="nav-item">
@@ -27,14 +27,20 @@
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link" routerLink="/addCandidate" routerLinkActive="active-link">add Candidate</a>
-          </li> -->
+          </li> -->        
       </ul>
       <ul class="navbar-nav" *ngIf="showHead">
-          <li class="nav-item">
-                <span class="navbar-text">
-              Logged in as <strong>{{username}}</strong>, <a href="/">Logout</a>
-              </span>
-          </li>
+
+            <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <strong>{{username | titlecase}}</strong>
+                    </a>
+                  
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a *ngIf="role=='ROLE_USER'"class="dropdown-item" routerLink="/notification">Approval</a>
+                      <a class="dropdown-item" routerLink="/" routerLinkActive="active-link">Logout</a>
+                    </div>
+                  </li>
       </ul>
     </div>
 </nav>

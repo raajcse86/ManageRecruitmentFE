@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ExceptionModel } from '../_models';
 
 
 
@@ -8,16 +9,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UploadFileService {
-  private baseUrl= "https://recruitmentportalapp.cfapps.io/api/file/upload";
+  private baseUrl= "https://recruitmentportalapp.cfapps.io";
   constructor(private http: HttpClient) { }
 
   pushFileToStorage(file: File): Observable<any> {
     const formdata: FormData = new FormData();
     formdata.append('file', file);
-    return this.http.post(this.baseUrl,formdata,{
-       reportProgress:true,
-      observe:'events'
-    })
+    const req = new HttpRequest('POST',this.baseUrl, formdata, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+ 
+    return this.http.request(req);
+
   }
 
   getFiles(): Observable<any> {

@@ -5,14 +5,16 @@ import {map} from 'rxjs/operators';
 
 export const TOKEN = 'token'
 export const AUTHENTICATED_USER = 'authenticaterUser'
+export const USER_ROLE="role";
 
 @Injectable({
   providedIn: 'root'
 })
 export class JWTAuthServicesService {
 
-  API_URL  =  'https://recruitmentportalapp.cfapps.io';
+  //API_URL  =  'https://recruitmentportalapp.cfapps.io';
 
+   API_URL  =  'http://localhost:9000'
   constructor(private http: HttpClient) { }
 
   executeJWTAuthenticationService(username, password) {
@@ -24,6 +26,11 @@ export class JWTAuthServicesService {
       }).pipe(
         map(
           data => {
+            let token =data.token;
+            let jwtData = token.split('.')[1] 
+            let decodedJsonToken=window.atob(jwtData);
+            let decodedToken = JSON.parse(decodedJsonToken);
+            sessionStorage.setItem(USER_ROLE , decodedToken.role);
             sessionStorage.setItem(AUTHENTICATED_USER, username);
             sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
             return data;

@@ -168,3 +168,20 @@ body .ui-toast .ui-toast-message.ui-toast-message-warn {
         color: #fff !important;
     }
 }
+
+.dropdown.show .dropdown-menu {
+    opacity: 5 !important;
+    width: 0.5%;
+    margin-block-end: 20px;
+    margin-right: 20%;
+}
+
+#navbarDropdown{
+    font-size: 110%;
+}
+
+.registeration-form {
+    margin-top: 0em !important;
+    margin-right: 75em !important;
+    margin-left: 30em !important;
+} 
