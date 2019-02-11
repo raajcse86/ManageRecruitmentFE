@@ -3,8 +3,7 @@ import { MdbTablePaginationComponent,MdbTableService } from 'angular-bootstrap-m
 import { Component, Input,OnInit,ViewChild, ChangeDetectorRef } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
-import {FormGroup,FormControl} from '@angular/forms';
-
+import {FormGroup,FormBuilder,FormControl,AbstractControl,Validators} from '@angular/forms';
 import { User } from '../_models';
 import { EmployeeDetails } from '../_models';
 import { CandidatureDetails } from '../_models';
@@ -13,7 +12,12 @@ import { UserService } from '../_services';
 import {ExcelService} from '../_services/excel.service';
 import { MessageService } from 'primeng/components/common/messageservice';
 
-@Component({templateUrl: 'home.component.html',providers: [MessageService]})
+@Component({
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls:['./home.component.css'],
+    providers: [MessageService]
+})
 export class HomeComponent implements OnInit {
     
     cols: any[];
@@ -27,9 +31,11 @@ export class HomeComponent implements OnInit {
     newCandidature: boolean;
     add_candidate:boolean=true;
     CandidatureDetails:FormGroup;
+    
 
 
     constructor(
+        private fb:FormBuilder,
         private candidatureDetailsService: CandidatureDetailsService,
         private tableService:MdbTableService, 
         private cdRef: ChangeDetectorRef,
@@ -38,56 +44,61 @@ export class HomeComponent implements OnInit {
         private router: Router) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         // this.objectKeys = Object.keys;
-        this.CandidatureDetails=new FormGroup({
-            id:new FormControl(),
-            roleOfResponsibilities:new FormControl(),
-            positionLocation:new FormControl(),
-            candidateName:new FormControl(),
-            contactNo:new FormControl(),
-            emailId:new FormControl(),
-            totalExperience:new FormControl(),
-            relevantExperience:new FormControl(),
-            noticePeriod:new FormControl(),
-            ctc:new FormControl(),
-            ectc:new FormControl(),
-            currentLocation:new FormControl(),
-            preferredLocation:new FormControl(),
-            modeOfHiring:new FormControl(),
-            vendorName:new FormControl(),
-            profileSharedDate:new FormControl(),
-            screeningStatus:new FormControl(),
-            screeningDate:new FormControl(),
-            screeningDoneBy:new FormControl(),
-            firstRoundStatus:new FormControl(),
-            firstRoundDate:new FormControl(),
-            firstRoundTakenBy:new FormControl(),
-            secondRoundStatus:new FormControl(),
-            secondRoundDate:new FormControl(),
-            secondRoundTakenBy:new FormControl(),
-            finalRoundStatus:new FormControl(),
-            finalRoundDate:new FormControl(),
-            finalRoundTakenBy:new FormControl(),
-            hrOrPnStageRound:new FormControl(),
-            hrOrPnStageStatus:new FormControl(),
-            hrOrPnStageDate:new FormControl(),
-            candidatureStatus:new FormControl(),
-            finalStatus:new FormControl(),
-            status:new FormControl(),
-            description:new FormControl(),
-            offerRollOutDate:new FormControl(),
-            joiningDate:new FormControl(),
-            joiningStatus:new FormControl(),
-            nhrId:new FormControl(),
-            comments:new FormControl(),
-            action:new FormControl(),
-            actionPending:new FormControl(),
-            client:new FormControl(),
-            profile:new FormControl(),
-            lastUpdateDate:new FormControl()
-        })
+       
     }
 
     ngOnInit() {
+        this.CandidatureDetails=this.fb.group({
+           
+            roleOfResponsibilities:['',[Validators.required]],
+            positionLocation:[''],
+            candidateName:['',[Validators.required]],
+            contactNo:['',[Validators.required,this.validatePhoneNum.bind(this)]],
+            emailId:['',[Validators.required,this.validateEmail.bind(this)]],
+            totalExperience:[''],
+            relevantExperience:[''],
+            noticePeriod:[''],
+            ctc:[''],
+            ectc:[''],
+            currentLocation:[''],
+            preferredLocation:[''],
+            modeOfHiring:[''],
+            vendorName:[''],
+            profileSharedDate:[''],
+            screeningStatus:[''],
+            screeningDate:[''],
+            screeningDoneBy:[''],
+            firstRoundStatus:[''],
+            firstRoundDate:[''],
+            firstRoundTakenBy:[''],
+            secondRoundStatus:[''],
+            secondRoundDate:[''],
+            secondRoundTakenBy:[''],
+            finalRoundStatus:[''],
+            finalRoundDate:[''],
+            finalRoundTakenBy:[''],
+            hrOrPnStageRound:[''],
+            hrOrPnStageStatus:[''],
+            hrOrPnStageDate:[''],
+            candidatureStatus:[''],
+            finalStatus:[''],
+            status:[''],
+            description:[''],
+            offerRollOutDate:[''],
+            joiningDate:[''],
+            joiningStatus:[''],
+            nhrId:[''],
+            comments:[''],
+            action:[''],
+            actionPending:[''],
+            client:[''],
+            profile:[''],
+            lastUpdateDate:['']
+            
+        })
+
+
+
         this.loadAllCandidatureDetails();
         this.cols = [
            // { field: 'contactNo', header: 'ID' },
@@ -103,9 +114,29 @@ export class HomeComponent implements OnInit {
               
     }
 
+    validatePhoneNum(control: AbstractControl) {
+        const pattern = /^([0-9\.]+)$/;
+  
+        if (!control.value.match(pattern)) {
+          return { invalidEmail: true };
+        }
+  
+        return null;
+      }
+
+    validateEmail(control: AbstractControl) {
+        const pattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+  
+        if (!control.value.match(pattern)) {
+          return { invalidEmail: true };
+        }
+  
+        return null;
+      }
+
     onRowSelect(event) {
         let slugified_data = JSON.stringify(event.data);
-        console.log("Sandeep "+event.data);
+       // console.log("Sandeep "+event.data);
         let passable_data = "";
         if(slugified_data) {
             passable_data = btoa(slugified_data);
