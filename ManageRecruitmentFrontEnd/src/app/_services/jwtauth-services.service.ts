@@ -12,9 +12,9 @@ export const USER_ROLE="role";
 })
 export class JWTAuthServicesService {
 
-  //API_URL  =  'https://recruitmentportalapp.cfapps.io';
+  API_URL  =  'https://recruitmentportalapp.cfapps.io';
 
-   API_URL  =  'http://localhost:9000'
+   //API_URL  =  'http://localhost:9000'
   constructor(private http: HttpClient) { }
 
   executeJWTAuthenticationService(username, password) {
