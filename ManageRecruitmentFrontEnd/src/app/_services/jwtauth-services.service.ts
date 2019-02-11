@@ -6,6 +6,7 @@ import { throwError } from 'rxjs';
 
 export const TOKEN = 'token'
 export const AUTHENTICATED_USER = 'authenticaterUser'
+export const USER_ROLE="role";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class JWTAuthServicesService {
 
   API_URL  =  'https://recruitmentportalapp.cfapps.io';
 
+   //API_URL  =  'http://localhost:9000'
   constructor(private http: HttpClient) { }
 
   executeJWTAuthenticationService(username, password) {
@@ -25,8 +27,16 @@ export class JWTAuthServicesService {
       }).pipe(
         map(
           data => {
+<<<<<<< HEAD
             if (data) {
               data.authdata =  window.btoa(username + ':' + password);
+=======
+            let token =data.token;
+            let jwtData = token.split('.')[1] 
+            let decodedJsonToken=window.atob(jwtData);
+            let decodedToken = JSON.parse(decodedJsonToken);
+            sessionStorage.setItem(USER_ROLE , decodedToken.role);
+>>>>>>> 12470c9cac83a0be9e7c2ff98d6fd850f96dd369
             sessionStorage.setItem(AUTHENTICATED_USER, username);
             sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
             }

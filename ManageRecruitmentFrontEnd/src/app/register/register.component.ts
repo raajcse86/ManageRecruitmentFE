@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AlertService, UserService } from '../_services';
+
 export const PASSWORD_PATTERN='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$';
 export const PASS_PATTERN_MESSAGE ='at least one uppercase letter, one lowercase letter and one number';
 
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
             lastName: ['', [Validators.required,Validators.pattern('[a-zA-Z ]*')]],
             username: ['', [Validators.required,Validators.maxLength(10)]],
             emailId: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('[`${PASSWORD_PATTERN}`]')]]
+            password: ['', [Validators.required, Validators.minLength(6)]]
 
         });
     }
@@ -43,9 +44,9 @@ export class RegisterComponent implements OnInit {
 
         this.loading = true;
         this.userService.register(this.registerForm.value)
-            .pipe(first())
             .subscribe(
                 data => {
+                    debugger;
                     this.alertService.success('Registration successful', true);
                     this.router.navigate(['/login']);
                 },

@@ -15,6 +15,7 @@
             <th col width="20">#</th>
             <th col width="100">Name</th>
             <th col width="180">Email Id</th>
+            <th col width="180">Status</th>
             <th col width="120"> Approve/Reject</th>
             <!-- <th *ngFor="let col of columns">
               {{col}}
@@ -26,10 +27,11 @@
         <ng-template pTemplate="body" let-approvalList let-expanded="expanded" let-columns="columns" index=index+1;>
          
         
-          <tr>
+          <tr *ngIf="approvalList.status=='Pending for approval'">
             <td>{{index}}</td>
             <td>{{approvalList.firstName + space +approvalList.lastName}}</td>
             <td>{{approvalList.emailId}}</td>
+            <td>{{approvalList.status}}</td>
              <td>
                 <span>
                     <button type="button" class="btn btn-success" (click)="triggerApprovalEvent('Approve',approvalList)">Approve</button>

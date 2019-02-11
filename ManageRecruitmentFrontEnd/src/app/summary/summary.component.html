@@ -8,10 +8,8 @@
         </div>
     <div class="row my-4" *ngIf="selectedRole.name==='Client'">
       <div class="col-lg-12" >
-          
-            <p-table [columns]="firstTableCols" [value]="summarylist" [frozenColumns]="frozenTableCols" [scrollable]="true" scrollHeight="195px" frozenWidth="200px" [rows]="7">
-
-
+          <p-table [columns]="firstTableCols" [value]="summarylist"  [style]="{width:'1380px'}" scrollHeight="210px" >
+        
             <ng-template pTemplate="caption">
                       <div class="col">
                           <p>CLIENT SUMMARY</p>

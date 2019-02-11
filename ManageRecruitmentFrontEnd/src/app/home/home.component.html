@@ -43,7 +43,7 @@
                         </a>
                     </td>
             <td *ngFor="let col of columns" >
-                {{rowData[col.field] || 'NA'}}
+                {{rowData[col.field]}}
             </td>
         </tr>
     </ng-template>
@@ -55,164 +55,266 @@
 
 
 </div>
-
-<form [formGroup]="CandidatureDetails" (ngSubmit)="DisplayOnConsole()"  *ngIf="!add_candidate">
+<div class="form-wrapper">
+<form [formGroup]="CandidatureDetails" (ngSubmit)="DisplayOnConsole()"  *ngIf="!add_candidate" novalidate>
 
     <div class="row mt-4 mb-4">
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">ID</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="id" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">ROLE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="roleOfResponsibilities" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">CANDIDATE NAME</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="candidateName" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">PHONE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="contactNo" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">E-mail ID</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="emailId" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">TOTAL EXP</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="totalExperience" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">RELEVANT EXP</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="relevantExperience" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">NOTICE PERIOD</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="noticePeriod" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">CTC</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="ctc" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">EXPECTED CTC</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="ectc" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">CURRENT LOCATION</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="currentLocation" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">PREFERRED LOCATION</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="preferredLocation" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">POSITION LOCATION</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="positionLocation" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">MODE OF HIRING</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="modeOfHiring" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">SOURCE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="vendorName" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">PROFILE SHARED DATE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="profileSharedDate" >
-      </div>
 
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">SCREENING STATUS</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="screeningStatus" >
-      </div>
-
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">SCREENING DATE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="screeningDate" >
-      </div>
-      <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">SCREENING DONE BY</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="screeningDoneBy" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend ">
+              <span class="input-group-text">Name</span>
+            </div>
+          <input type="text" name="candidateName" class="form-control" [formControl]="CandidatureDetails.controls['candidateName']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['candidateName'].hasError('required') && CandidatureDetails.controls['candidateName'].touched" style="color:red">
+              <i > Name is required.</i>
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">1ST ROUND StATUS</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="firstRoundStatus" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Phone</span>
+            </div>
+            <input type="text" name="contactNo" class="form-control"  [formControl]="CandidatureDetails.controls['contactNo']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['contactNo'].invalid && CandidatureDetails.controls['contactNo'].touched" style="color:red">
+              <i > Phone number is required.</i>
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">1ST ROUND DATE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="firstRoundDate" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">E-mail ID</span>
+            </div>
+            <input type="text" name="emailId" class="form-control"  [formControl]="CandidatureDetails.controls['emailId']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['emailId'].invalid && CandidatureDetails.controls['emailId'].touched" style="color:red">
+              <i > Email Id is required.</i>
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">1ST ROUND TAKEN BY</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="firstRoundTakenBy" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Role</span>
+            </div>
+          <input type="text" name="roleOfResponsibilities" class="form-control" [formControl]="CandidatureDetails.controls['roleOfResponsibilities']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['roleOfResponsibilities'].hasError('required') && CandidatureDetails.controls['roleOfResponsibilities'].touched" style="color:red">
+              <i >Role is required.</i>
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">2ND ROUND StATUS</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="secondRoundStatus" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Total Experience</span>
+            </div>
+            <input type="number" min="0" step="0.1" placeholder="(Integer Value)" name="totalExperience"class="form-control"  [formControl]="CandidatureDetails.controls['totalExperience']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['totalExperience'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">2ND ROUND DATE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="secondRoundDate" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Relevant Experience</span>
+            </div>
+            <input type="number"  min="0" step="0.1" placeholder="(Integer Value)" name="relevantExperience" class="form-control"  [formControl]="CandidatureDetails.controls['relevantExperience']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['relevantExperience'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">2ND ROUND TAKEN BY</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="secondRoundTakenBy" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Notice Period</span>
+            </div>
+            <input type="number"  min="0" step="0.1" placeholder="(Integer Value)" name="noticePeriod" class="form-control"  [formControl]="CandidatureDetails.controls['noticePeriod']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['noticePeriod'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">FINAL ROUND StATUS</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="finalRoundStatus" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">CTC</span>
+            </div>
+            <input type="text" name="ctc" class="form-control"  [formControl]="CandidatureDetails.controls['ctc']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['ctc'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">FINAL ROUND DATE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="finalRoundDate" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Expected CTC</span>
+            </div>
+            <input type="text" name="ectc" class="form-control"  [formControl]="CandidatureDetails.controls['ectc']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['ectc'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">FINAL ROUND TAKEN BY</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="finalRoundTakenBy" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Current Location</span>
+            </div>
+            <input type="text" name="currentLocation" class="form-control"  [formControl]="CandidatureDetails.controls['currentLocation']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['currentLocation'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">HR/PN STAGE ROUND</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="hrOrPnStageRound" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Preferred Location</span>
+            </div>
+            <input type="text" name="preferredLocation"class="form-control"  [formControl]="CandidatureDetails.controls['preferredLocation']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['preferredLocation'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">HR/PN STAGE DATE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="hrOrPnStageDate" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Position Location</span>
+            </div>
+            <input type="text" name="positionLocation" class="form-control"  [formControl]="CandidatureDetails.controls['positionLocation']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['positionLocation'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">FINAL STATUS</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="finalStatus" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Mode Of Hiring</span>
+            </div>
+            <input type="text" name="modeOfHiring"class="form-control"  [formControl]="CandidatureDetails.controls['modeOfHiring']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['modeOfHiring'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">STATUS</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="status" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Source</span>
+            </div>
+            <input type="text" name="vendorName" class="form-control"  [formControl]="CandidatureDetails.controls['vendorName']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['vendorName'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">DESCRIPTION</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="description" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Profile Shared Date</span>
+            </div>
+            <input type="date" name="profileSharedDate" class="form-control"  [formControl]="CandidatureDetails.controls['profileSharedDate']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['profileSharedDate'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">ACTION PENDING</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="actionPending" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Screening Status</span>
+            </div>
+            <input type="text" name="screeningStatus"class="form-control"  [formControl]="CandidatureDetails.controls['screeningStatus']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['screeningStatus'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">CLIENT</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="client" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Screening Date</span>
+            </div>
+            <input type="date" name="screeningDate" class="form-control"  [formControl]="CandidatureDetails.controls['screeningDate']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['screeningDate'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">PROFILE STATUS</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="profile" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Screening Done By</span>
+            </div>
+            <input type="text" name="screeningDoneBy" class="form-control"  [formControl]="CandidatureDetails.controls['screeningDoneBy']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['screeningDoneBy'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">STATUS UPDATED DATE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="joiningStatus" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">1st Round status</span>
+            </div>
+            <input type="text" name="firstRoundStatus" class="form-control"  [formControl]="CandidatureDetails.controls['firstRoundStatus']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['firstRoundStatus'].hasError('required')" style="color:red">  
+            </div>
       </div>
       <div  class="col-sm-3 mb-2">
-        <label class="small text-muted text-uppercase mb-0 label--small">EXPECTED JOINING DATE</label>
-        <input type="text"  class="form-control form-control-sm" formControlName="joiningDate" >
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">1st Round Date</span>
+            </div>
+            <input type="date" name="firstRoundDate" class="form-control"  [formControl]="CandidatureDetails.controls['firstRoundDate']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['firstRoundDate'].hasError('required')" style="color:red">  
+            </div>
       </div>
+      <div  class="col-sm-3 mb-2">
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">1st Round Taken By</span>
+            </div>
+            <input type="text" name="firstRoundTakenBy" class="form-control"  [formControl]="CandidatureDetails.controls['firstRoundTakenBy']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['firstRoundTakenBy'].hasError('required')" style="color:red">  
+            </div>
+      </div>
+      <div  class="col-sm-3 mb-2">
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">2nd Round status</span>
+            </div>
+            <input type="text" name="secondRoundStatus" class="form-control"  [formControl]="CandidatureDetails.controls['secondRoundStatus']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['secondRoundStatus'].hasError('required')" style="color:red">  
+            </div>
+      </div>
+      <div  class="col-sm-3 mb-2">
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">2nd Round Date</span>
+            </div>
+            <input type="date" name="secondRoundDate" class="form-control"  [formControl]="CandidatureDetails.controls['secondRoundDate']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['secondRoundDate'].hasError('required')" style="color:red">  
+            </div>
+      </div>
+      <div  class="col-sm-3 mb-2">
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">2nd Round Taken By</span>
+            </div>
+            <input type="text" name="secondRoundTakenBy" class="form-control"  [formControl]="CandidatureDetails.controls['secondRoundTakenBy']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['secondRoundTakenBy'].hasError('required')" style="color:red">  
+            </div>
+      </div>
+      <div  class="col-sm-3 mb-2">
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">Final Round Status</span>
+            </div>
+            <input type="text"name="finalRoundStatus" class="form-control"  [formControl]="CandidatureDetails.controls['finalRoundStatus']">
+          </div>
+          <div *ngIf="CandidatureDetails.controls['finalRoundStatus'].hasError('required')" style="color:red">  
+            </div>
+      </div>
+    
     </div>
     
     <div class="text-center">
@@ -248,6 +350,7 @@
         </p-toast>
         </div> 
 </form>
+</div>
  
 </div>
 
