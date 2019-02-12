@@ -1,103 +1,187 @@
 <div class="container-fluid">
-        <div class="col-sm-12">
-        <div class="col-sm-12 text-right">
-                <p-dropdown class="text-left" #dd [options]="role" [style]="{'width':'300px'}" [(ngModel)]="selectedRole" optionLabel="name"
-              ></p-dropdown>
-            </div>
-           
+    <div class="col-sm-12" *ngIf="add_client">
+        <div class="col-sm-12 text-right" *ngIf="add_client">
+            <p-dropdown class="text-left" #dd [options]="role" [style]="{'width':'300px'}" [(ngModel)]="selectedRole"
+                optionLabel="name"></p-dropdown>
         </div>
+
+    </div>
     <div class="row my-4" *ngIf="selectedRole.name==='Client'">
-      <div class="col-lg-12" >
-          
-            <p-table [columns]="firstTableCols" [value]="summarylist" [frozenColumns]="frozenTableCols" [scrollable]="true" scrollHeight="195px" frozenWidth="200px" [rows]="7">
+        <div class="col-lg-12" *ngIf="add_client">
+
+            <p-table [columns]="firstTableCols" [value]="summarylist" [frozenColumns]="frozenTableCols" [scrollable]="true"
+                scrollHeight="195px" frozenWidth="200px" [rows]="7">
 
 
-            <ng-template pTemplate="caption">
-                      <div class="col">
-                          <p>CLIENT SUMMARY</p>
-                      </div>
-              </ng-template>
-              <ng-template pTemplate="colgroup" let-columns>
-              <colgroup>
-                <col *ngFor="let col of columns" style="width:200px">
-            
-              </colgroup>
-            </ng-template>
-              <ng-template pTemplate="header" let-columns>
-                      <tr>
+                <ng-template pTemplate="caption">
+                    <div class="col" *ngIf="add_client">
+
+                        <p>CLIENT SUMMARY</p>
+                    </div>
+                    <div class="col" *ngIf="!add_client">
+
+                        <p>ADD CLIENT</p>
+                    </div>
+                    <div class="col">
+
+                        <div class="ui-helper-clearfix text-right">
+
+                            <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" *ngIf="add_client"
+                                (click)="toggleAddState()">Add Client</a>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="colgroup" let-columns>
+                    <colgroup>
+                        <col *ngFor="let col of columns" style="width:200px">
+
+                    </colgroup>
+                </ng-template>
+                <!-- <div *ngIf="add_client"> -->
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
                         <th *ngFor="let col of columns">
                             {{col.header}}
-                          </th>
-                        
-                  </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
-                  <tr>
-                    <td *ngFor="let col of columns" [ngClass]="getColourCode(rowData[col.field],col.header)" >
-                      {{rowData[col.field]}}
-                    </td>
-                  </tr>
-              </ng-template>
-             
-                 
-          </p-table>
+                        </th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns" *ngIf="add_client">
+                    <tr>
+                        <td *ngFor="let col of columns" [ngClass]="getColourCode(rowData[col.field],col.header)">
+                            {{rowData[col.field]}}
+                        </td>
+                    </tr>
+                </ng-template>
+                <!-- </div> -->
+
+
+            </p-table>
 
         </div>
     </div>
 
-      <!-- Candidate summary  changes  -->
-      <div class="row my-4" *ngIf="selectedRole.name ==='Candidate'">
+
+    <!-- Candidate summary  changes  -->
+    <div class="row my-4" *ngIf="selectedRole.name ==='Candidate'">
         <div class="col-12">
-       <!--  Candidate summary changes ends here for table -->
-         <p-table #dt [columns]="cols" [value]="candidateSummary" [paginator]="true" [rows]="4">
-             <ng-template pTemplate="caption">
-                     <div class="col">
-                             <p>CANDIDATE SUMMARY</p>
-                     </div>
-                
-             </ng-template>
-             <ng-template pTemplate="header" let-columns>
-        
-                 <tr style="text-align:center">
+            <!--  Candidate summary changes ends here for table -->
+            <p-table #dt [columns]="cols" [value]="candidateSummary" [paginator]="true" [rows]="4">
+                <ng-template pTemplate="caption">
+                    <div class="col">
+                        <p>CANDIDATE SUMMARY</p>
+                    </div>
+
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+
+                    <tr style="text-align:center">
                         <th col width="120" text-align="center">Candidate Name</th>
                         <th col width="120" text-align="center">Client Name</th>
                         <th col width="120" text-align="center">Skills</th>
                         <th col width="120" text-align="center">Status</th>
                         <th col width="210" text-align="center">Email Id </th>
-                        <th col width="120" text-align="center">Location</th> 
-                        <th col width="120"  text-align="center">Expected to Join</th>
-                        <th col width="100"text-align="center">Final Tech Selection</th>
-                             
-                  </tr>
+                        <th col width="120" text-align="center">Location</th>
+                        <th col width="120" text-align="center">Expected to Join</th>
+                        <th col width="100" text-align="center">Final Tech Selection</th>
+
+                    </tr>
 
 
-                 <tr style="height:2px;margin: 2px">
-                     <th *ngFor="let col of columns" [ngSwitch]="col.field" [ngClass]="'filter-header'">
-                 
-                         <p-multiSelect *ngSwitchCase="'clientName'" [options]="clients" [style]="{'width':'100%'}"  defaultLabel="All" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
-                         <p-dropdown *ngSwitchCase="'status'" [options]="status" defaultLabel="All"[style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
-                         <p-dropdown *ngSwitchCase="'location'" [options]="locations" defaultLabel="All" [style]="{'width':'100%'}" (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
-                         <input *ngSwitchCase="'expectedToJoin'" pInputText type="text" size="12" placeholder=" Search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                             
-                     </th>
-                 </tr>
-                 </ng-template>
+                    <tr style="height:2px;margin: 2px">
+                        <th *ngFor="let col of columns" [ngSwitch]="col.field" [ngClass]="'filter-header'">
 
-                 <ng-template pTemplate="body" let-candidateSummary>
-                     <tr [pSelectableRow]="candidateSummary">
-                             <td>{{candidateSummary.candidateName}}</td>
-                             <td>{{candidateSummary.clientName || 'NA'}}</td>
-                             <td>{{candidateSummary.skills || 'NA'}}</td>
-                             <td [ngClass]="getColorCodeByDate(candidateSummary.status, candidateSummary)">{{candidateSummary.status || 'NA'}}</td>
-                             <td style="word-wrap: break-word;" >{{candidateSummary.emailId  || 'NA'}}</td>
-                             <td>{{candidateSummary.location || 'NA'}}</td>
-                             <td>{{candidateSummary.expectedToJoin || 'NA'}}</td>
-                             <td>{{candidateSummary.finalTechSelection || 'NA'}}</td>
-                     </tr>
-                 </ng-template>
-             </p-table>
- 
-       </div>
- 
+                            <p-multiSelect *ngSwitchCase="'clientName'" [options]="clients" [style]="{'width':'100%'}"
+                                defaultLabel="All" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
+                            <p-dropdown *ngSwitchCase="'status'" [options]="status" defaultLabel="All" [style]="{'width':'100%'}"
+                                (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                            <p-dropdown *ngSwitchCase="'location'" [options]="locations" defaultLabel="All" [style]="{'width':'100%'}"
+                                (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                            <input *ngSwitchCase="'expectedToJoin'" pInputText type="text" size="12" placeholder=" Search"
+                                (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+
+                        </th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-candidateSummary>
+                    <tr [pSelectableRow]="candidateSummary">
+                        <td>{{candidateSummary.candidateName}}</td>
+                        <td>{{candidateSummary.clientName || 'NA'}}</td>
+                        <td>{{candidateSummary.skills || 'NA'}}</td>
+                        <td [ngClass]="getColorCodeByDate(candidateSummary.status, candidateSummary)">{{candidateSummary.status
+                            || 'NA'}}</td>
+                        <td style="word-wrap: break-word;">{{candidateSummary.emailId || 'NA'}}</td>
+                        <td>{{candidateSummary.location || 'NA'}}</td>
+                        <td>{{candidateSummary.expectedToJoin || 'NA'}}</td>
+                        <td>{{candidateSummary.finalTechSelection || 'NA'}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+        </div>
+
     </div>
-  </div>
+
+
+
+
+
+    <!--add clients started-->
+
+
+
+    <div *ngIf="selectedRole.name==='Client'">
+        <div class="col-lg-12" *ngIf="!add_client">
+
+
+
+            <form [formGroup]="addClientForm" (ngSubmit)="onSubmit()" [ngClass]="'registeration-form'">
+
+                <div class="form-group">
+
+                    <label for="client">Client Name</label>
+
+                    <input type="text" formControlName="client" class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    <label for="lead">Lead</label>
+                    <input type="text" formControlName="lead" class="form-control"/>
+                   
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" formControlName="location" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="skills">Skills</label>
+                    <input type="text" formControlName="skills" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="contractMechanism">Contract Mechanism</label>
+                    <input type="text" formControlName="contractMechanism" class="form-control"/>
+            
+                </div>
+
+
+                <div class="form-group">
+                    <label for="target">Target</label>
+                    <input type="text" formControlName="target" class="form-control"/>
+
+                </div>
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary yellow ml-0">AddClient</button>
+                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    <!-- <a [routerLink]="['/login']" class="btn btn-link">Cancel</a> -->
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+</div>
