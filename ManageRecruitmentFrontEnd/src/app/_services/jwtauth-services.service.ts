@@ -13,9 +13,7 @@ export const USER_ROLE="role";
 })
 export class JWTAuthServicesService {
 
-  API_URL  =  'http://localhost:4000'; 
-
-//  API_URL  =  'https://recruitmentportalapp.cfapps.io';
+ API_URL  =  'https://recruitmentportalapp.cfapps.io';
 
    //API_URL  =  'http://localhost:9000'
   constructor(private http: HttpClient) { }
