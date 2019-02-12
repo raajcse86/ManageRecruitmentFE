@@ -39,6 +39,6 @@ export class UserService {
 
     addClient(addClient: AddClient): Observable<any> {
         console.log("addclient method in service ::: "+JSON.stringify(addClient));
-        return this.http.post<Observable<any>>(`${environment.apiUrl}/clientDetails/save`, addClient);
+        return this.http.post(`${environment.apiUrl}/clientDetails/save`, addClient);
     }
 }

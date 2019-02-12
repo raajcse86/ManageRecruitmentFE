@@ -8,15 +8,15 @@ import { JWTAuthServicesService } from 'src/app/_services/jwtauth-services.servi
 })
 export class HttpInterceptorJwtAuthService {
   constructor(
-    private jwtuthenticationService : JWTAuthServicesService
+    private jwtAuthenticationService : JWTAuthServicesService
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler){
     // let username = 'in28minutes'
     // let password = 'dummy'
     //let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
-    let basicAuthHeaderString = this.jwtuthenticationService.getAuthenticatedToken();
-    let username = this.jwtuthenticationService.getAuthenticatedUser()
+    let basicAuthHeaderString = this.jwtAuthenticationService.getAuthenticatedToken();
+    let username = this.jwtAuthenticationService.getAuthenticatedUser()
 
     if(basicAuthHeaderString && username) { 
       request = request.clone({
