@@ -1,6 +1,6 @@
 ﻿import { CandidatureDetailsService } from './../_services/candidature-details.service';
 import { MdbTablePaginationComponent,MdbTableService } from 'angular-bootstrap-md';
-import { Component, Input,OnInit,ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, Input,OnInit,ViewChild, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import {FormGroup,FormBuilder,FormControl,AbstractControl,Validators} from '@angular/forms';
@@ -16,6 +16,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls:['./home.component.css'],
+    encapsulation: ViewEncapsulation.None,
     providers: [MessageService]
 })
 export class HomeComponent implements OnInit {
@@ -31,6 +32,7 @@ export class HomeComponent implements OnInit {
     newCandidature: boolean;
     add_candidate:boolean=true;
     CandidatureDetails:FormGroup;
+    step;
     
 
 
@@ -48,6 +50,7 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.step=1;
         this.CandidatureDetails=this.fb.group({
            
             roleOfResponsibilities:['',[Validators.required]],
