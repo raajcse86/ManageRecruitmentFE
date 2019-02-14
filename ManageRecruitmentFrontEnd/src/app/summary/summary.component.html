@@ -7,7 +7,6 @@
 
     </div>
     <div class="row my-4" *ngIf="selectedRole.name==='Client'">
-<<<<<<< HEAD
         <div class="col-lg-12" *ngIf="add_client">
 
             <p-table [columns]="firstTableCols" [value]="summarylist" [frozenColumns]="frozenTableCols" [scrollable]="true"
@@ -41,24 +40,6 @@
                 <!-- <div *ngIf="add_client"> -->
                 <ng-template pTemplate="header" let-columns>
                     <tr>
-=======
-      <div class="col-lg-12" >
-          <p-table [columns]="firstTableCols" [value]="summarylist"  [style]="{width:'1380px'}" scrollHeight="210px" >
-        
-            <ng-template pTemplate="caption">
-                      <div class="col">
-                          <p>CLIENT SUMMARY</p>
-                      </div>
-              </ng-template>
-              <ng-template pTemplate="colgroup" let-columns>
-              <colgroup>
-                <col *ngFor="let col of columns" style="width:200px">
-            
-              </colgroup>
-            </ng-template>
-              <ng-template pTemplate="header" let-columns>
-                      <tr>
->>>>>>> 468221f50c3120b33916c3aa9674a1a370798ebd
                         <th *ngFor="let col of columns">
                             {{col.header}}
                         </th>

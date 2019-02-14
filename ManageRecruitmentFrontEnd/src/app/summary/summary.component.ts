@@ -171,13 +171,8 @@ export class SummaryComponent implements OnInit {
   }
 
 
-<<<<<<< HEAD
-  public getColourCode(field: any, header: any): string {
-   // console.log(" colour code for " + header)
-=======
   public getColourCode(field: any,header:any): string {
    // console.log(" colour code for "+header)
->>>>>>> 468221f50c3120b33916c3aa9674a1a370798ebd
     let colourCode: string = "default";
     switch (field) {
       case 'Joined':
