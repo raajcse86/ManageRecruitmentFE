@@ -40,7 +40,9 @@ export class ProfileComponent implements OnInit {
     this.excludable_keys_in_display_mode = ['candidateName', 'roleOfResponsibilities', 'totalExperience'];
     let snapshot = this.route.snapshot.paramMap.get('slug');
     this.profile = JSON.parse(atob(snapshot));
+    delete this.profile.id;
     this.keys = Object.keys(this.profile);
+   
     this.mapping_keys = Mappings;
 
   }
