@@ -7,7 +7,9 @@ import { chart } from '../_models/chart';
 import { Summary } from '../_models/summary';
 import { CandidateSummary } from '../_models/candidateSummary'
 import { SelectItem } from 'primeng/components/common/selectitem';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AlertService, UserService } from '../_services';
 
 @Component({
   selector: 'app-summary',
@@ -15,9 +17,17 @@ import { SelectItem } from 'primeng/components/common/selectitem';
   styleUrls: ['./summary.component.css']
 })
 export class SummaryComponent implements OnInit {
+
+  addClientForm: FormGroup;
+    loading = false;
+    submitted = false;
+
   summarylist: Summary[];
+  add_client: boolean = true;
   public pie_chartType: string = 'bar';
   chartRawData: chart;
+
+ 
 
   public pie_chartLabels: Array<String> = [];
   public pie_chartDatasets: Array<any> = [];
@@ -25,15 +35,22 @@ export class SummaryComponent implements OnInit {
   candidatures: CandidatureDetails[] = [];
   candidateSummary: CandidateSummary[] = [];
   cols: any[];
+  addClientCols: String[];
   firstTableCols: any[];
   frozenTableCols: any[];
   clients: SelectItem[];
   locations: SelectItem[];
   status: SelectItem[];
-  role : any[];
+  role: any[];
   selectedRole: any;
+  addClientMessage:String;
 
-  constructor(private candidatureDetailsService: CandidatureDetailsService) {
+  constructor(private candidatureDetailsService: CandidatureDetailsService, private formBuilder: FormBuilder,
+    private router: Router,
+    private userService: UserService,
+    private alertService: AlertService) {
+
+
   }
 
   ngOnInit() {
@@ -58,12 +75,12 @@ export class SummaryComponent implements OnInit {
       });
     //Candidature summary changes :: 
     this.loadAllCandidatureDetails();
-    this.frozenTableCols=
-    [
-      { field: 'clientName', header: 'Client Name' }
-    ]; 
-    this.firstTableCols=
-    [  { field: 'clientName', header: 'Client Name' },
+    this.frozenTableCols =
+      [
+        { field: 'clientName', header: 'Client Name' }
+      ];
+    this.firstTableCols =
+      [{ field: 'clientName', header: 'Client Name' },
       { field: 'leadName', header: 'Lead Name' },
       { field: 'location', header: 'Location' },
       { field: 'skill', header: 'Skill' },
@@ -74,7 +91,7 @@ export class SummaryComponent implements OnInit {
       { field: 'offerInProgress', header: 'Offer InProgress' },
       { field: 'screeningInProgress', header: 'Screening InProgress' },
       { field: 'offerReleased', header: 'Offer Released' }
-    ];
+      ];
 
     this.cols = [
       { field: 'candidateName', header: 'Candidate Name' },
@@ -108,11 +125,26 @@ export class SummaryComponent implements OnInit {
       // ,{ label:'Dropout', value:'Dropout'},
     ];
 
-    this.role= [{name: 'Client', code: 'Client Status'},
-    {name: 'Candidate', code: 'Candidate Status'}];
-    this.selectedRole =this.role[0];
+    this.role = [{ name: 'Client', code: 'Client Status' },
+    { name: 'Candidate', code: 'Candidate Status' }];
+    this.selectedRole = this.role[0];
 
-  }
+    // this.addClientCols = ["Client", " Lead", "Location", "Skills", "ContractMechanism", "Target"];
+
+
+
+    this.addClientForm = this.formBuilder.group({
+      client: ['',[Validators.required]],
+      lead: ['', [Validators.required]],
+      location: ['', [Validators.required]],
+      skills: ['', [Validators.required,]],
+      contractMechanism: ['', [Validators.required]],
+      target: ['', [Validators.required]],
+
+  });
+
+  console.log("Add client form :: "+this.addClientForm);
+ }
 
 
   //Method to get entire candidate details from API
@@ -176,8 +208,8 @@ export class SummaryComponent implements OnInit {
 
   }
 
-  public getColorCodeByDate(field: any, candidate:CandidateSummary): string {
-     console.log(" colour code for by date "+field)
+  public getColorCodeByDate(field: any, candidate: CandidateSummary): string {
+    console.log(" colour code for by date " + field)
     let colourCode: string = "default";
     switch (field) {
       case 'Offer in Progress':
@@ -185,23 +217,23 @@ export class SummaryComponent implements OnInit {
         break;
 
       default:
-        colourCode =this.getColourCode(field,'');
+        colourCode = this.getColourCode(field, '');
     }
-    console.log(" id returned :: "+colourCode);
+    console.log(" id returned :: " + colourCode);
 
     return colourCode;
 
   }
 
-//Function to calculate the number of days difference in given date compared to current date
-public calculateDateDifference(techSelectionDate: string): string{
- const diff = Math.abs(new Date().getTime() - new Date(techSelectionDate).getTime());
- const diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
-  if(diffDays>=7)
-    return "Yet-to-start";
-  else 
-   return "OfferRelaesed";
-}
+  //Function to calculate the number of days difference in given date compared to current date
+  public calculateDateDifference(techSelectionDate: string): string {
+    const diff = Math.abs(new Date().getTime() - new Date(techSelectionDate).getTime());
+    const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    if (diffDays >= 7)
+      return "Yet-to-start";
+    else
+      return "OfferRelaesed";
+  }
 
 
   //Changes end       
@@ -213,4 +245,35 @@ public calculateDateDifference(techSelectionDate: string): string{
 
   }
 
+  private toggleAddState() {
+    this.add_client = !this.add_client;
+  }
+
+
+
+//adding client service 
+
+
+  
+  onSubmit() {
+    console.log("soni");
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.addClientForm.invalid) {
+        return;
+    }
+
+    this.loading = true;
+    this.userService.addClient(this.addClientForm.value).subscribe(
+            data => {
+              console.log("response is  :: "+JSON.stringify(data));
+                this.alertService.success('Client Added successful', true);
+                this.router.navigate(['/home']);
+            },
+            error => {
+                this.alertService.error(error);
+                this.loading = false;
+            });
+}
 } 

@@ -17,6 +17,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
     templateUrl: './home.component.html',
     styleUrls:['./home.component.css'],
     encapsulation: ViewEncapsulation.None,
+
     providers: [MessageService]
 })
 export class HomeComponent implements OnInit {

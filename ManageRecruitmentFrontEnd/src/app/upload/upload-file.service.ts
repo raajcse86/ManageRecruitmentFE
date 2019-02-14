@@ -15,7 +15,7 @@ export class UploadFileService {
   pushFileToStorage(file: File): Observable<any> {
     const formdata: FormData = new FormData();
     formdata.append('file', file);
-    const req = new HttpRequest('POST',this.baseUrl, formdata, {
+    const req = new HttpRequest('POST',this.baseUrl+"/api/file/upload", formdata, {
       reportProgress: true,
       responseType: 'json'
     });

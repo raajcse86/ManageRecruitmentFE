@@ -10,3 +10,11 @@
     height: 30px;
     width: 60px;
 }
+.msg-approved{
+    color: green;
+    font-weight: bold;
+}
+.msg-rejected{
+    color: red;
+    font-weight: bold;
+}

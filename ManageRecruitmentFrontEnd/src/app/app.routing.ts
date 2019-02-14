@@ -17,7 +17,6 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'upload', component: FormUploadComponent },
     { path: 'home', component: HomeComponent },
-    { path: 'profile', component: HomeComponent },
     { path: 'profile/:slug', component: ProfileComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'summary', component: SummaryComponent },
