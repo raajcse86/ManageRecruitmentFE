@@ -10,6 +10,8 @@ import { SelectItem } from 'primeng/components/common/selectitem';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertService, UserService } from '../_services';
+import { USER_ROLE } from '../_services/jwtauth-services.service';
+
 
 @Component({
   selector: 'app-summary',
@@ -21,6 +23,7 @@ export class SummaryComponent implements OnInit {
   addClientForm: FormGroup;
     loading = false;
     submitted = false;
+    isAdmin=false;
 
   summarylist: Summary[];
   add_client: boolean = true;
@@ -42,6 +45,7 @@ export class SummaryComponent implements OnInit {
   locations: SelectItem[];
   status: SelectItem[];
   role: any[];
+  userAcess:String;
   selectedRole: any;
   addClientMessage:String;
 
@@ -144,6 +148,15 @@ export class SummaryComponent implements OnInit {
   });
 
   console.log("Add client form :: "+this.addClientForm);
+
+
+  this.userAcess = sessionStorage.getItem(USER_ROLE);
+    if(this.userAcess==='ROLE_ADMIN')
+        this.isAdmin=true;  
+
+        console.log("User userAcess is ::: "+this.userAcess);
+        console.log("isAdmin :: "+this.isAdmin);
+
  }
 
 
