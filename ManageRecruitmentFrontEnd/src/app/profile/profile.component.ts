@@ -166,10 +166,13 @@ onReject() {
 
 validatePhoneNum(control: AbstractControl) {
     const pattern = /^([0-9\.]+)$/;
-
-    if (!control.value.match(pattern)) {
-      return { invalidEmail: true };
-    }
+    console.log("control is :: "+JSON.stringify(control));
+if(null!=control){
+    console.log(control)
+            if (!control.value.match(pattern)) {
+            return { invalidEmail: true };
+            }
+        }
 
     return null;
   }

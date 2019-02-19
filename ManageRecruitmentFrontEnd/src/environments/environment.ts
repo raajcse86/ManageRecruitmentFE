@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
- // apiUrl: 'http://localhost:9001'
-    apiUrl:'https://registeruserservicesapp.cfapps.io/'
+    apiUrl: 'http://localhost:9001'
 };
 
 /*

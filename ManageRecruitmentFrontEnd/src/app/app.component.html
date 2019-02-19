@@ -30,13 +30,13 @@
           </li> -->        
       </ul>
       <ul class="navbar-nav" *ngIf="showHead">
-
             <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <strong>{{username | titlecase}}</strong>
                     </a>
                   
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {{getUserAccess()}}
                       <a *ngIf="isAdmin"class="dropdown-item" routerLink="/notification">Approval</a>
                       <a class="dropdown-item" routerLink="/" routerLinkActive="active-link">Logout</a>
                     </div>

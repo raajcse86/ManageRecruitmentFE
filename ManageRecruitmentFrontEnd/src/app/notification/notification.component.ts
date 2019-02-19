@@ -25,19 +25,19 @@ export class NotificationComponent implements OnInit {
     this.loadAllApprovals();
     this.index=1;
     this.space="   ";
-    console.log("message is "+this.message);
+   // console.log("message is "+this.message);
   }
 
   private loadAllApprovals(){
     this.notificationService.loadAllApprovals().subscribe(response=>{
-      console.log("Response is :: "+JSON.stringify(response));
+     // console.log("Response is :: "+JSON.stringify(response));
       this.approvalList=response;
     })
   }
 
   private updateApprovalStatus(user:any){
     this.notificationService.updateApprovalStatus(user).subscribe(response=>{
-      console.log("Response is :: "+JSON.stringify(response));
+     // console.log("Response is :: "+JSON.stringify(response));
     })
   }
 
@@ -59,7 +59,7 @@ export class NotificationComponent implements OnInit {
 
   triggerApprovalEvent(event:string, user: any) {
     this.message=null;
-    console.log("in showConfirm :: ")
+   // console.log("in showConfirm :: ")
     this.messageService.clear();
     this.eventType = event;
     this.currentUser = user;
@@ -79,8 +79,8 @@ export class NotificationComponent implements OnInit {
     }
     this.message=`Registration request is ${this.currentUser.status} for ${this.currentUser.username}`;
     this.currentUser.approver= sessionStorage.getItem('authenticaterUser');
-    console.log("Message :: "+this.message);
-    console.log(JSON.stringify(this.currentUser));
+    //console.log("Message :: "+this.message);
+    //console.log(JSON.stringify(this.currentUser));
     this.updateApprovalStatus(this.currentUser);
    
    }

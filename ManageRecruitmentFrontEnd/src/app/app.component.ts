@@ -33,14 +33,18 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.role = sessionStorage.getItem(USER_ROLE);
-    if(this.role==='ROLE_ADMIN')
-           this.isAdmin=true;  
-    console.log("User role is ::::: "+this.role+" is user is admin :::: "+this.isAdmin);
+    this.getUserAccess();
   }
   onOptionSelected(event) {
     console.log(event); //option value will be sent as event
   }
 
+  getUserAccess(): void{
+    this.isAdmin=false;
+  this.role = sessionStorage.getItem(USER_ROLE);
+  if(this.role==='ROLE_ADMIN')
+         this.isAdmin=true;  
+  console.log("User role is ::::: "+this.role+" is user is admin");
 
+  }
 }
