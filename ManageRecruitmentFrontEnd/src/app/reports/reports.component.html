@@ -23,14 +23,15 @@
       <div class="col-lg-4" *ngIf="barChartData.length>0">
         <!-- <p-dropdown #dd [options]="cities2" [(ngModel)]="selectedCity2" optionLabel="select proper option" (onChange)="callChart(dd)"></p-dropdown> -->
 
-        <div class="chart__wrapper" style="height:100%">
+        <div class="chart__wrapper" style="height:100%" >
           <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
             [colors]="backgroundColor" [chartType]="barChartType">
           </canvas>
         </div>
       </div>
-      <div class="col-lg-8" *ngIf="barChartData.length>0">
-        <div class="chart__wrapper"  style="height:100%">
+      <!-- Ram: Second graph started from here :::  -->
+      <div class="col-lg-8" *ngIf="barChartData.length>0" style="overflow-x: scroll" >
+        <div class="chart__wrapper"  style="height:100% ;width: fit-content;">
           <p-organizationChart [value]="data" selectionMode="single" (onNodeSelect)="onNodeSelect($event)" styleClass="company">
             <ng-template let-node pTemplate="person">
               <div class="node-header ui-corner-top">{{node.label}}</div>

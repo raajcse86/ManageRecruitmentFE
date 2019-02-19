@@ -15,19 +15,14 @@
 
                 <ng-template pTemplate="caption">
                     <div class="col" *ngIf="add_client">
-
                         <p>CLIENT SUMMARY</p>
                     </div>
                     <div class="col" *ngIf="!add_client">
-
                         <p>ADD CLIENT</p>
                     </div>
-                    <div class="col">
-
+                    <div class="col" *ngIf="add_client && isAdmin">
                         <div class="ui-helper-clearfix text-right">
-
-                            <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" *ngIf="add_client && isAdmin"
-                                (click)="toggleAddState()">Add Client</a>
+                            <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="toggleAddState()">Add Client</a>
                         </div>
                     </div>
                 </ng-template>
@@ -147,29 +142,29 @@
                 </div>
                 <div class="form-group">
                     <label for="lead">Lead</label>
-                    <input type="text" formControlName="lead" class="form-control"/>
-                   
+                    <input type="text" formControlName="lead" class="form-control" />
+
                 </div>
                 <div class="form-group">
                     <label for="location">Location</label>
-                    <input type="text" formControlName="location" class="form-control"/>
+                    <input type="text" formControlName="location" class="form-control" />
                 </div>
 
                 <div class="form-group">
                     <label for="skills">Skills</label>
-                    <input type="text" formControlName="skills" class="form-control"/>
+                    <input type="text" formControlName="skills" class="form-control" />
                 </div>
 
                 <div class="form-group">
                     <label for="contractMechanism">Contract Mechanism</label>
-                    <input type="text" formControlName="contractMechanism" class="form-control"/>
-            
+                    <input type="text" formControlName="contractMechanism" class="form-control" />
+
                 </div>
 
 
                 <div class="form-group">
                     <label for="target">Target</label>
-                    <input type="text" formControlName="target" class="form-control"/>
+                    <input type="text" formControlName="target" class="form-control" />
 
                 </div>
                 <div class="form-group">
