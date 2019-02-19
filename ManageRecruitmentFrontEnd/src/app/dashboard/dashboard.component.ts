@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
     yAxes: [{
          ticks: {
             max: 0,
-            stepSize:1
+            stepSize:2
         }
         
 
@@ -138,6 +138,9 @@ export class DashboardComponent implements OnInit {
        this.candidatureDetailsService.getCandidaturesChart(criteria).subscribe(candidatureFromService => { 
        this.pie_chartLabels=candidatureFromService.chartLabels;
        this.pie_chartDatasets=candidatureFromService.chartDatasets;
+       console.log('pie_chartLabels::::::::'+JSON.stringify(this.pie_chartLabels));
+       console.log('pie_chartDatasets::::::::'+JSON.stringify(this.pie_chartDatasets));
+       console.log('yaxisScale '+candidatureFromService.yaxisScale);
        this.barChartOptions.scales.yAxes[0].ticks.max=parseInt(candidatureFromService.yaxisScale);
        });
 }
