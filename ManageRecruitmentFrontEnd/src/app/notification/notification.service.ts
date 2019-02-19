@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class NotificationService {
 
-  private baseUrl= "http://localhost:9001";
+  //private baseUrl= "http://localhost:9001";
+
+  private baseUrl= "https://registeruserservicesapp.cfapps.io/";
 
   constructor(private http: HttpClient) { }
 
