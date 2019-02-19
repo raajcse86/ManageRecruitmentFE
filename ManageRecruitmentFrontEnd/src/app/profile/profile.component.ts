@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit {
         roleOfResponsibilities:[this.profile['roleOfResponsibilities'],[Validators.required]],
         positionLocation:[this.profile['positionLocation']],
         candidateName:[this.profile['candidateName'],[Validators.required]],
-        contactNo:[this.profile['contactNo'][Validators.required,this.validatePhoneNum.bind(this)]],
+        contactNo:[this.profile['contactNo'],[Validators.required,this.validatePhoneNum.bind(this)]],
         emailId:[this.profile['emailId'],[Validators.required,this.validateEmail.bind(this)]],
         totalExperience:[this.profile['totalExperience']],
         relevantExperience:[this.profile['relevantExperience']],

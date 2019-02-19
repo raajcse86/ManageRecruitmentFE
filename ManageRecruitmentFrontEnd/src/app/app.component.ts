@@ -13,6 +13,7 @@ export class AppComponent {
   options = ["Approvals", "Logout"];
   optionSelected: any;
   role: String;
+  isAdmin:boolean=false;
   constructor(
     private router: Router,
     public aroute: ActivatedRoute
@@ -33,7 +34,9 @@ export class AppComponent {
 
   ngOnInit() {
     this.role = sessionStorage.getItem(USER_ROLE);
-    console.log("User role is ::::: "+this.role);
+    if(this.role==='ROLE_ADMIN')
+           this.isAdmin=true;  
+    console.log("User role is ::::: "+this.role+" is user is admin :::: "+this.isAdmin);
   }
   onOptionSelected(event) {
     console.log(event); //option value will be sent as event
