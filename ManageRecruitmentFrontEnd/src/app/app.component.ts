@@ -33,7 +33,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.role = sessionStorage.getItem(USER_ROLE);
-    console.log("User role is ::: "+this.role);
+    console.log("User role is ::::: "+this.role);
   }
   onOptionSelected(event) {
     console.log(event); //option value will be sent as event

@@ -155,7 +155,7 @@ export class SummaryComponent implements OnInit {
         this.isAdmin=true;  
 
         console.log("User userAcess is ::: "+this.userAcess);
-        console.log("isAdmin :: "+this.isAdmin);
+        console.log("isAdmin ::: "+this.isAdmin);
 
  }
 
