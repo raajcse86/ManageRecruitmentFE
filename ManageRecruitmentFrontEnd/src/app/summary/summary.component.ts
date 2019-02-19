@@ -280,7 +280,7 @@ export class SummaryComponent implements OnInit {
     this.loading = true;
     this.userService.addClient(this.addClientForm.value).subscribe(
             data => {
-              console.log("response is  :: "+JSON.stringify(data));
+            //  console.log("response is  :: "+JSON.stringify(data));
                 this.alertService.success('Client Added successful', true);
                 this.router.navigate(['/home']);
             },
