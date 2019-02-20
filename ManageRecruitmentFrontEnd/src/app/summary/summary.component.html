@@ -152,7 +152,7 @@
                                 (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
                             <p-dropdown *ngSwitchCase="'location'" [options]="locations" defaultLabel="All" [style]="{'width':'100%'}"
                                 (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
-                            <input *ngSwitchCase="'expectedToJoin'" pInputText type="text" size="12" placeholder=" Search"
+                            <input *ngSwitchCase="'expectedToJoin'" pInputText type="text" size="9" placeholder=" Search"
                                 (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
 
                         </th>
