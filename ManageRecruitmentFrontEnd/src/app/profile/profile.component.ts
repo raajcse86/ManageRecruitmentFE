@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
   fromButtonValue:string;
   selectedCandidature: CandidatureDetails;
   CandidatureDetails:FormGroup;
+  candidateID:string;
   step;
 
   constructor(
@@ -43,6 +44,7 @@ export class ProfileComponent implements OnInit {
     this.excludable_keys_in_display_mode = ['candidateName', 'roleOfResponsibilities', 'totalExperience'];
     let snapshot = this.route.snapshot.paramMap.get('slug');
     this.profile = JSON.parse(atob(snapshot));
+    this.candidateID = this.profile.id;
     delete this.profile.id;
     this.keys = Object.keys(this.profile);
    
@@ -137,12 +139,15 @@ delete() {
          this.messageService.add({severity:'error', summary: 'Error Message', detail:'Something went wrong. Operation failed.'});
 
      });
+
+    //   this.router.navigate(['/home']);
      
 }
 showConfirm(frombutton:any,rowData:any) {
  this.messageService.clear();
  this.fromButtonValue = frombutton;
- this.selectedCandidature = rowData;
+ this.selectedCandidature = this.CandidatureDetails.value;
+ this.selectedCandidature.id=this.candidateID;
 this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
  
 }

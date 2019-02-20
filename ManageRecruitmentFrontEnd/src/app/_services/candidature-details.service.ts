@@ -11,7 +11,8 @@ import {Summary} from '../_models/summary'
 })
 export class CandidatureDetailsService {
 
-  API_URL  =  'https://recruitmentportalapp.cfapps.io';
+   API_URL  =  'https://recruitmentportalapp.cfapps.io';
+// API_URL  =  'http://localhost:9000';
 
     constructor(private http: HttpClient) { }
 

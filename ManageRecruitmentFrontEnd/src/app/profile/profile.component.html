@@ -1,6 +1,6 @@
 <div class="container__wrapper my-5">
   <div class="clearfix mb-3">
-    <a routerLink="/profile"> &lt; Back to all profiles</a>
+    <a routerLink="/home"> &lt; Back to all profiles</a>
   </div>
   <div class="card card-body mb-2">
     <div class="row">
@@ -141,8 +141,7 @@
                           
                           <br>
         
-                          <button [disabled]="
-                                              "
+                          <button [disabled]=""
                                   class="btn btn-primary"
                                   (click)="step=1;">Prev</button>
         
@@ -182,12 +181,17 @@
                                 [formControl]="CandidatureDetails.controls['positionLocation']"
                                type="text">                    
         
+                               <button [disabled]=""
+                               class="btn btn-primary"
+                               (click)="step=2;">Prev</button>
+
                                  
                         <button [disabled]=""
                                 class="btn btn-primary"
                                 (click)="step = 4;">Next</button>
                       </fieldset>
-        
+
+
                       <fieldset [hidden]="!(step == 4)" class="step-4">
                         <legend>Candidate Hiring Details</legend>
         
@@ -230,6 +234,10 @@
                                     type="text"> 
                                     
                                     <button [disabled]=""
+                                  class="btn btn-primary"
+                                  (click)="step=3;">Prev</button>
+
+                                    <button [disabled]=""
                                     class="btn btn-primary"
                                     (click)="step = 5;">Next</button>
                           </fieldset> 
@@ -270,6 +278,11 @@
                                           type="text">   
                                           
                                 <br> 
+                                
+                      <button [disabled]=""
+                      class="btn btn-primary"
+                      (click)="step=4;">Prev</button>
+
                                         <button [disabled]=""
                                         class="btn btn-primary"
                                         (click)="step = 6;">Next</button>
@@ -305,7 +318,9 @@
                                type="text">   
                                
                                <br>
-        
+                               <button [disabled]=""
+                               class="btn btn-primary"
+                               (click)="step=5;">Prev</button>
                                  
                         <button [disabled]=""
                                 class="btn btn-primary"
@@ -344,7 +359,10 @@
                                
                                <br>
         
-                                 
+                               <button [disabled]=""
+                               class="btn btn-primary"
+                               (click)="step=6;">Prev</button>
+
                         <button [disabled]=""
                                 class="btn btn-primary"
                                 (click)="step = 8;">Next</button>
@@ -382,7 +400,10 @@
                                
                                <br>
                           
-        
+                               <button [disabled]=""
+                               class="btn btn-primary"
+                               (click)="step=7;">Prev</button>
+
                                  
                         <button [disabled]=""
                                 class="btn btn-primary"
@@ -419,7 +440,10 @@
                                type="date">   
                                
                                <br>
-        
+                               <button [disabled]=""
+                               class="btn btn-primary"
+                               (click)="step=8;">Prev</button>
+
                                  
                         <button [disabled]=""
                                 class="btn btn-primary"
@@ -464,21 +488,60 @@
                                     [formControl]="CandidatureDetails.controls['joiningStatus']"
                                    type="text">   
                                    <br>   
-                                   
+                                   <button [disabled]=""
+                                   class="btn btn-primary"
+                                   (click)="step=9;">Prev</button>
+
                                    <br>          
                       
-                        <button [disabled]="!CandidatureDetails.valid" class="btn btn-primary" (click)="onAddProfileData()">Save</button>
+                        <!-- <button [disabled]="!CandidatureDetails.valid" class="btn btn-primary" (click)="onAddProfileData()">Save</button> -->
+
+                        <button [disabled]="!CandidatureDetails.valid" type="button" class="btn btn-custom" (click)="showConfirm('fromsave',CandidatureDetails)">Save</button>
+                        <button [disabled]="!CandidatureDetails.valid" type="button" class="btn btn-secondary-custom" (click)="showConfirm('fromdelete',CandidatureDetails)">Delete</button>
+                        <button [disabled]="!CandidatureDetails.valid" type="button" class="btn btn-outline-secondary-custom" (click)="toggleEditState()">Cancel</button>
                       </fieldset>
                       <fieldset [hidden]="!(step == 10)" class="step-9 fieldsetcenter">
                         <legend>Edit candidate Profile</legend>
                         <p>Determining your portfolio sugestions.</p>
                       </fieldset>
+
+
+
+                      <div class="content-section implementation">
+                        <p-toast [style]="{marginTop: '80px'}"></p-toast>
+                  
+                        <p-toast [style]="{marginTop: '80px'}" position="top-left" key="tl"></p-toast>
+                  
+                        <p-toast [style]="{marginTop: '80px'}" position="top-center" key="tc"></p-toast>
+                  
+                        <p-toast [style]="{marginTop: '80px'}" styleClass="custom-toast" key="custom" position="bottom-center"></p-toast>
+                  
+                        <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+                          <ng-template let-message pTemplate="message">
+                            <div class="text-center p-4">
+                              <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                              <h3>{{message.summary}}</h3>
+                              <p>{{message.detail}}</p>
+                            </div>
+                            <div class="ui-g ui-fluid">
+                              <div class="ui-g-6">
+                                <button type="button" pButton (click)="onConfirm()" class="btn btn-custom">Confirm</button>
+                              </div>
+                              <div class="ui-g-6">
+                                <button type="button" pButton (click)="onReject()" class="btn btn-secondary-custom">Cancel</button>
+                              </div>
+                            </div>
+                          </ng-template>
+                        </p-toast>
+                      </div>
+
+
                   </form>
               </div>
           </div>
           <div class="row" style="text-align: center;">
             
-            <a href ='' (click)="onAddProfileData()"  >Back to Home</a><br>
+            <a  routerLink="/home" >Back to Home</a><br>
           </div>
   </div>
 
