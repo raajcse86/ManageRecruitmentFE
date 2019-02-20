@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
     yAxes: [{
          ticks: {
             max: 0,
-            stepSize:1
+            stepSize:2
         }
         
 
