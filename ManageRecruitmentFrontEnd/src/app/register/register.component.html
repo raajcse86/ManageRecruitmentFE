@@ -72,11 +72,16 @@
 
                           <i>Last Name is required </i>                   
                     </div>
-                    <!-- <div class="alert alert-danger" *ngIf="addClientForm.controls['lead'].invalid &&
-                             addClientForm.controls['lead'].touched">
-                          <i>This lead is already taken. </i>                  
-                    </div> -->
                     <br>
+                    
+                    <label for="emailId" class="input">EmailId</label>
+                    <input name="emailId" class="form-control" type="emailId" placeholder=""
+                        [formControl]="registerForm.controls['emailId']">
+                    <div class="alert alert-danger" *ngIf="registerForm.controls['emailId'].invalid &&
+                    registerForm.controls['emailId'].touched">
+                          <i>EmailId must be entered</i>    
+                    </div><br>
+                    
                     <label for="username" class="input">Username</label>
                     <input name="username" class="form-control" type="text"  placeholder="" [formControl]="registerForm.controls['username']">
                     <div class="alert alert-danger" *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched">
@@ -89,14 +94,6 @@
                           <i>Password must be entered</i>
                                            
                     </div><br>
-                    <label for="emailId" class="input">EmailId</label>
-                    <input name="emailId" class="form-control" type="emailId" placeholder=""
-                        [formControl]="registerForm.controls['emailId']">
-                    <div class="alert alert-danger" *ngIf="registerForm.controls['emailId'].invalid &&
-                    registerForm.controls['emailId'].touched">
-                          <i>EmailId must be entered</i>    
-                    </div><br>
-                    
 
                     <div class="form-group">
                             <button [disabled]="loading" class="btn btn-primary yellow ml-0" (click)="onSubmit()">Register</button>
