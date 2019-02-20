@@ -8,7 +8,13 @@ import { AlertService, UserService } from '../_services';
 export const PASSWORD_PATTERN='^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$';
 export const PASS_PATTERN_MESSAGE ='at least one uppercase letter, one lowercase letter and one number';
 
-@Component({templateUrl: 'register.component.html'})
+// @Component({templateUrl: 'register.component.html',styleUrls: ['./register.component.css']}),
+@Component({
+    // selector: 'app-notification',
+    templateUrl:'./register.component.html',
+    styleUrls: ['./register.component.css']
+    // providers: [MessageService]
+  })
 export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;

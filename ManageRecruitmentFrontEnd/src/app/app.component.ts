@@ -21,7 +21,7 @@ export class AppComponent {
     router.events.forEach((event) => {
       console.log(event);
       if (event instanceof NavigationStart) {
-        if (event['url'] == '/login' || event['url'] == '/login?returnUrl=%2F') {
+        if (event['url'] == '/login' || event['url'] == '/login?returnUrl=%2F' ||event['url'] == '/register' ) {
           this.showHead = false;
         } else {
           // console.log("NU")
