@@ -52,59 +52,65 @@
     </div>
 </form> -->
 
-<div class="container" >
-    
-        <div class="row">
-            <div class="form-wrapper  col-md-6 col-md-offset-3">
-                <form [formGroup]="registerForm" class="form-group">
+<div class="container">
 
-                    <legend>Register</legend>
+    <div class="row">
+        <div class="form-wrapper  col-md-6 col-md-offset-3">
+            <form [formGroup]="registerForm" class="form-group">
 
-                    <label for="firstName" class="input">First Name</label>
-                    <input name="firstName" class="form-control" type="text" placeholder="" [formControl]="registerForm.controls['firstName']">
-                    <div class="alert alert-danger" *ngIf="registerForm.controls['firstName'].invalid && registerForm.controls['firstName'].touched">
-                          <i>First Name is required</i>                   
-                    </div><br>
-                    <label for="lastName" class="input">Last Name</label>
-                    <input name="lastName" class="form-control" type="text" placeholder="" [formControl]="registerForm.controls['lastName']">
-                    <div class="alert alert-danger" *ngIf="registerForm.controls['lastName'].invalid &&
-                    registerForm.controls['lastName'].touched">
-
-                          <i>Last Name is required </i>                   
-                    </div>
-                    <br>
-                    
-                    <label for="emailId" class="input">EmailId</label>
-                    <input name="emailId" class="form-control" type="emailId" placeholder=""
-                        [formControl]="registerForm.controls['emailId']">
-                    <div class="alert alert-danger" *ngIf="registerForm.controls['emailId'].invalid &&
-                    registerForm.controls['emailId'].touched">
-                          <i>EmailId must be entered</i>    
-                    </div><br>
-                    
-                    <label for="username" class="input">Username</label>
-                    <input name="username" class="form-control" type="text"  placeholder="" [formControl]="registerForm.controls['username']">
-                    <div class="alert alert-danger" *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched">
-                          <i>Username is mandatory </i>                   
-                    </div><br>
-                    <label for="password" class="input">Password</label>
-                    <input name="password" class="form-control" type="password" placeholder="" [formControl]="registerForm.controls['password']">
-                    <div class="alert alert-danger" *ngIf="registerForm.controls['password'].invalid &&
-                    registerForm.controls['password'].touched">
-                          <i>Password must be entered</i>
-                                           
-                    </div><br>
-
-                    <div class="form-group">
-                            <button [disabled]="loading" class="btn btn-primary yellow ml-0" (click)="onSubmit()">Register</button>
-                            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
-                        </div>
-
-                    <div class="row" style="text-align: center;">
-
-                    </div>
-                </form>
+                <legend>Register</legend>
+                <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': (f.firstName.dirty||f.firstName.touched) && f.firstName.errors }" />
+                <div *ngIf="f.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                    <div *ngIf="f.firstName.errors.pattern">Should contains only Alphabets</div>
+                </div>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': (f.lastName.dirty||f.lastName.touched) && f.lastName.errors }" />
+                <div *ngIf="f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                    <div *ngIf="f.lastName.errors.pattern">Should contains only Alphabets</div>
+                </div>
+                </div>
+                <div class="form-group">
+                <label for="emailId">EmailId</label>
+                <input type="text" formControlName="emailId" class="form-control" [ngClass]="{ 'is-invalid': (f.emailId.dirty||f.emailId.touched) && f.emailId.errors }" />
+                <div *ngIf="f.emailId.errors" class="invalid-feedback">
+                    <div *ngIf="f.emailId.errors.required">EmailId is required</div>
+                    <div *ngIf="f.emailId.errors.email">Should be in Email format</div>
+                </div>
+                </div>
+                <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': (f.username.dirty||f.username.touched) && f.username.errors }" />
+                <div *ngIf="f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Username is required</div>
+                    <div *ngIf="f.username.errors.maxlength">Username should be maximum 12 characters</div>
 
+                </div>
+                </div>
+                <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': (f.password.dirty||f.password.touched) && f.password.errors }" />
+                <div *ngIf="f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
+                    <div *ngIf="f.password.errors.pattern">Password length must be atleast 8 chars, contains at least one uppercase letter, one
+                        lowercase letter and one number and 1 special character</div>
+                </div>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary yellow ml-0" (click)="onSubmit()">Register</button>
+                    <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+                </div>
+
+                <div class="row" style="text-align: center;">
+
+                </div>
+            </form>
+        </div>
+    </div>

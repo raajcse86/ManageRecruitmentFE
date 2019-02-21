@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     add_candidate:boolean=true;
     CandidatureDetails:FormGroup;
     step;
-    
+    showFormError:boolean=false;
 
 
     constructor(

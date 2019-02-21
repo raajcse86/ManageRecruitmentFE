@@ -74,7 +74,7 @@
                   <input name="candidateName" class="form-control" type="text" placeholder=""
                          [formControl]="CandidatureDetails.controls['candidateName']">
                   <div class="alert alert-danger"
-                       *ngIf="CandidatureDetails.controls['candidateName'].invalid && CandidatureDetails.controls['candidateName'].touched">
+                       *ngIf="CandidatureDetails.validCandidatureDetails.controls['candidateName'].invalid && CandidatureDetails.controls['candidateName'].touched">
                         <i>You must enter candidate name.</i>                   
                   </div><br>
                 <label for="emailId" class="input">Email</label>
@@ -110,10 +110,7 @@
                         <i>Roles must be entered</i>                   
                   </div><br>
 
-                  <button [disabled]="
-                                      "
-                          class="btn btn-primary"
-                          (click)="step=2;">Next</button>
+                  <button [disabled]="" class="btn btn-primary"(click)="step=2;">Next</button>
               </fieldset>
               <fieldset [hidden]="!(step==2)" class="step-2">
                 <legend>Add Experience Details data</legend>
@@ -212,6 +209,9 @@
                        type="text">                    
 
                          
+            <button [disabled]="" class="btn btn-primary"(click)="step=2;">Prev</button>
+
+        
                 <button [disabled]=""
                         class="btn btn-primary"
                         (click)="step = 4;">Next</button>
@@ -258,6 +258,8 @@
                          [formControl]="CandidatureDetails.controls['client']"
                             type="text"> 
                             
+                            <button [disabled]="" class="btn btn-primary"(click)="step=3;">Prev</button>
+
                             <button [disabled]=""
                             class="btn btn-primary"
                             (click)="step = 5;">Next</button>
@@ -299,6 +301,8 @@
                                   type="text">   
                                   
                         <br> 
+                        <button [disabled]="" class="btn btn-primary"(click)="step=4;">Prev</button>
+
                                 <button [disabled]=""
                                 class="btn btn-primary"
                                 (click)="step = 6;">Next</button>
@@ -335,6 +339,7 @@
                        
                        <br>
 
+                       <button [disabled]="" class="btn btn-primary"(click)="step=5;">Prev</button>
                          
                 <button [disabled]=""
                         class="btn btn-primary"
@@ -372,7 +377,7 @@
                        type="text">   
                        
                        <br>
-
+<button [disabled]="" class="btn btn-primary"(click)="step=6;">Prev</button>
                          
                 <button [disabled]=""
                         class="btn btn-primary"
@@ -411,7 +416,7 @@
                        
                        <br>
                   
-
+                       <button [disabled]="" class="btn btn-primary"(click)="step=7;">Prev</button>
                          
                 <button [disabled]=""
                         class="btn btn-primary"
@@ -448,7 +453,7 @@
                        type="date">   
                        
                        <br>
-
+                       <button [disabled]="" class="btn btn-primary"(click)="step=8;">Prev</button>
                          
                 <button [disabled]=""
                         class="btn btn-primary"
@@ -493,10 +498,10 @@
                             [formControl]="CandidatureDetails.controls['joiningStatus']"
                            type="text">   
                            <br>   
-                           
-                           <br>          
-              
-                <button [disabled]="!CandidatureDetails.valid" class="btn btn-primary" (click)="onAddProfileData()">Save</button>
+                           <br>  
+                           <button [disabled]="" class="btn btn-primary"(click)="step=9;">Prev</button>
+
+                <button class="btn btn-primary" (click)="onAddProfileData()">Save</button>
               </fieldset>
               <fieldset [hidden]="!(step == 10)" class="step-9 fieldsetcenter">
                 <legend>Creating your Profile</legend>
@@ -507,7 +512,7 @@
   </div>
   <div class="row" style="text-align: center;">
     
-    <a href ='' (click)="onAddProfileData()"  >Back to Home</a><br>
+    <a  routerLink="/home" (click)="add_candidate=!add_candidate;">Back to Home</a><br>
   </div>
 </div>
  

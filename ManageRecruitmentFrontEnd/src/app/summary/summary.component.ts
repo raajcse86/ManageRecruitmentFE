@@ -282,7 +282,9 @@ export class SummaryComponent implements OnInit {
             data => {
             //  console.log("response is  :: "+JSON.stringify(data));
                 this.alertService.success('Client Added successful', true);
-                this.router.navigate(['/home']);
+                this.add_client=!this.add_client;
+                this.router.navigate(['/summary']);
+
             },
             error => {
                 this.alertService.error(error);
