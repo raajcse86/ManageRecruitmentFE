@@ -1,14 +1,14 @@
-
 .form-wrapper form {
-    padding: 40px 80px;
-    background: #fff;
-    border: 0px solid #ccc;
-    color: grey;
-    box-shadow: 0 7px 14px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-    animation-name: fadein;
-    animation-duration: 2s;
+  padding: 40px 80px;
+  background: #fff;
+  border: 0px solid #ccc;
+  color: grey;
+  box-shadow: 0 7px 14px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+  animation-name: fadein;
+  animation-duration: 2s;
 
 }
+
 .form-wrapper button:hover {
   background-color: #EF7745;
 }
@@ -18,7 +18,7 @@
 }
 
 .fieldsetcenter {
-  text-align:center;
+  text-align: center;
 }
 
 
@@ -26,4 +26,20 @@
   color: blue;
   text-decoration: underline;
   cursor: pointer;
+}
+
+label {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+}
+
+fieldset {
+  background: #f1f1f1;
+  border-bottom: 1px solid #ddd;
+}
+
+fieldset:last-child {
+  border-bottom: 0;
 }
