@@ -36,10 +36,17 @@ label {
 }
 
 fieldset {
-  background: #f1f1f1;
-  border-bottom: 1px solid #ddd;
+  background: #fff;
+  border: 1px solid #eee;
+  margin-bottom: -1px;
 }
 
 fieldset:last-child {
   border-bottom: 0;
+}
+
+fieldset>h6 {
+  text-transform: capitalize;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }
