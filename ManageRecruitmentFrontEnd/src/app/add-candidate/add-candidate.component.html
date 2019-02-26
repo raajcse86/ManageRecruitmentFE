@@ -328,6 +328,31 @@
         <div class="row" style="text-align: center;">
             <a routerLink="/home">Back to Home</a><br>
           </div>
+
+          <div class="content-section implementation">
+              <p-toast [style]="{marginTop: '80px'}"></p-toast>
+              <p-toast [style]="{marginTop: '80px'}" position="top-left" key="tl"></p-toast>
+              <p-toast [style]="{marginTop: '80px'}" position="top-center" key="tc"></p-toast>
+              <p-toast [style]="{marginTop: '80px'}" styleClass="custom-toast" key="custom" position="bottom-center"></p-toast>
+              <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
+                <ng-template let-message pTemplate="message">
+                  <div class="text-center p-4">
+                    <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
+                    <h3>{{message.summary}}</h3>
+                    <p>{{message.detail}}</p>
+                  </div>
+                  <div class="ui-g ui-fluid">
+                    <div class="ui-g-6">
+                      <button type="button" pButton (click)="onConfirm()" class="btn btn-custom">Confirm</button>
+                    </div>
+                    <div class="ui-g-6">
+                      <button type="button" pButton (click)="onReject()" class="btn btn-secondary-custom">Cancel</button>
+                    </div>
+                  </div>
+                </ng-template>
+              </p-toast>
+            </div>
+        
       </form>
     </div>
   </div>

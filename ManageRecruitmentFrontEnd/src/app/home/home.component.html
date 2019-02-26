@@ -23,7 +23,8 @@
                     <button class="btn btn-link btn-sm" (click)="exportAsXLSX()">
                         Export <i class="fa fa-file-excel-o"></i>
                     </button>
-                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" *ngIf="add_candidate" (click)="toggleAddState()">Add Candidate</a>
+                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" *ngIf="add_candidate" (click)="toggleAddState()">Add   </a>
+                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="editCandidate()" [disable]="selectedCandidatures.length == 1 || selectedCandidatures.length == 0">Edit  </a>
                     <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="deleteCandidate()">Delete</a>
                 </div>
             </div>

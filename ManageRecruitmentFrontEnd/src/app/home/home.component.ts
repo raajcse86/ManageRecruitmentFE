@@ -146,7 +146,6 @@ export class HomeComponent implements OnInit {
 
     onRowSelect(event) {
         let slugified_data = JSON.stringify(event.data);
-        // console.log("Sandeep "+event.data);
         let passable_data = "";
         if (slugified_data) {
             passable_data = btoa(slugified_data);
@@ -154,7 +153,16 @@ export class HomeComponent implements OnInit {
         }
 
     }
-
+editCandidate(){
+    if (this.selectedCandidatures.length >= 1) {
+        let slugified_data = JSON.stringify(this.selectedCandidatures[0]);
+        let passable_data = "";
+        if (slugified_data) {
+            passable_data = btoa(slugified_data);
+            this.router.navigate(['/profile/' + passable_data]);
+        }
+    }
+}
 
     private loadAllCandidatureDetails() {
 
@@ -178,27 +186,14 @@ export class HomeComponent implements OnInit {
     }
 
     DisplayOnConsole(): void {
-
-        //console.log(this.CandidatureDetails);
-        console.log("Candidate Details Start");
-
         let addCandidate: String = JSON.parse(JSON.stringify(this.CandidatureDetails.value));
-        console.log(addCandidate);
-        console.log("Candidate Details End");
-        this.candidatureDetailsService.saveCandidature(addCandidate).subscribe(res => {
-            console.log("In subscribe method");
-            console.table(res);
+        this.candidatureDetailsService.saveCandidature(addCandidate).subscribe(res => { 
         }
         )
-
-
-
     }
 
 
     deleteCandidate() {
-        console.log("Selected candidate for delete :: " + JSON.stringify(this.selectedCandidatures));
-        console.log("Length :: " + this.selectedCandidatures.length)
         //for multiple recorrd
         if (this.selectedCandidatures.length > 1) {
             this.candidatureDetailsService.deleteCandidate(this.selectedCandidatures).subscribe(candidateFromService => {
@@ -212,7 +207,6 @@ export class HomeComponent implements OnInit {
                  this.candidatures=res;
                 this.selectedCandidatures = [];
                 this.alertService.success('Record deleted successful', false);
-                console.log("response is " + JSON.stringify(res));
             });
         }
 

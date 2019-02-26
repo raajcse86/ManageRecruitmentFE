@@ -66,7 +66,6 @@
             </ul>
           </div>
 
-
           <fieldset class="step-1" [hidden]="!(activeIndex == 1)">
 
             <label for="candidateName" class="input">Candidate Name</label>
@@ -190,11 +189,10 @@
           <fieldset [hidden]="!(activeIndex==2)" class="step-2">
 
             <label for="profileSharedDate" class="input">Profile Shared Date</label>
-            <input name="profileSharedDate" class="form-control" [formControl]="f.profileSharedDate" type="date"
-              [ngClass]="{ 'is-invalid':(f.profileSharedDate.touched || showFormErrors) && f.profileSharedDate.errors }" />
-            <div class="invalid-feedback" *ngIf="(f.profileSharedDate.touched || showFormErrors ) && f.profileSharedDate.errors "> 
+            <input name="profileSharedDate" class="form-control" [formControl]="f.profileSharedDate" type="date"/>
+            <!-- <div class="invalid-feedback" *ngIf="(f.profileSharedDate.touched || showFormErrors ) && f.profileSharedDate.errors "> 
               <div *ngIf="f.profileSharedDate.errors.required">Profile shared date is mandatory field</div>
-            </div>
+            </div> -->
             <br>
 
             <label for="screeningDate" class="input">Screening Date</label>

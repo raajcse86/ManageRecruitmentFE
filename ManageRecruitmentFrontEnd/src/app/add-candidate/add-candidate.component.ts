@@ -5,8 +5,6 @@ import { FormGroup, FormBuilder, FormControl, AbstractControl, Validators ,Valid
 import { CandidatureDetails } from '../_models';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { AlertService } from '../_services';
-import {DropdownModule} from 'primeng/dropdown';
-
 
 @Component({
   selector: 'add-candidate',
@@ -95,10 +93,10 @@ export class AddCandidateComponent implements OnInit {
       action: [''],
       actionPending: [''],
       client: [''],
-      profile: [''],
-      lastUpdateDate: [''], 
+     // profile: [''],
+     // lastUpdateDate: [''], 
       profileStatus:[''],
-      statusUpdatedDate:[''],
+     // statusUpdatedDate:[''],
       expectedJoiningDate:[''],
       finalTechSelectionDate:['']
     })
@@ -132,14 +130,13 @@ this.clientList=["Dell","Unilever","EMC","Other"];
   }
 
   addCandidate() {
-    console.log(" form values :: "+JSON.stringify(this.CandidatureDetails.value));
-    // this.candidatureDetailsService.saveCandidature(this.CandidatureDetails.value).subscribe(
-    //   data => {
-    //     this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Data updated successfully.' });
-    //   },
-    //   error => {
-    //     this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Something went wrong. Operation failed.' });
-    //   });
+    this.candidatureDetailsService.saveCandidature(this.CandidatureDetails.value).subscribe(
+      data => {
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Data updated successfully.' });
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Something went wrong. Operation failed.' });
+      });
     this.alertService.success('Candidate Added successfully', true);
     this.router.navigate(['/home']);
   }
@@ -149,16 +146,16 @@ this.clientList=["Dell","Unilever","EMC","Other"];
 
   isFormValid(form:FormGroup): boolean{
     if (form.invalid) {
-      console.log("Form is Invalid");
-      Object.keys(form.controls).forEach(key => {
+      // console.log("Form is Invalid");
+      // Object.keys(form.controls).forEach(key => {
 
-        const controlErrors: ValidationErrors = form.get(key).errors;
-        if (controlErrors != null) {
-              Object.keys(controlErrors).forEach(keyError => {
-                console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
-              });
-            }
-          });
+      //   const controlErrors: ValidationErrors = form.get(key).errors;
+      //   if (controlErrors != null) {
+      //         Object.keys(controlErrors).forEach(keyError => {
+      //           console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+      //         });
+      //       }
+      //     });
 
       return false;
   }
@@ -171,9 +168,8 @@ this.clientList=["Dell","Unilever","EMC","Other"];
       this.showFormErrors=false;
     }else{
       this.showFormErrors=true;
-     // return;
+     return;
     }     
-    console.log("Is form has errors :: "+this.showFormErrors)
     this.step1Css=this.nextStepUI;
     this.step2Css=this.nextStepUI;
     this.step3Css=this.nextStepUI;

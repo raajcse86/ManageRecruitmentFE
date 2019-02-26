@@ -9,8 +9,6 @@ import { CandidatureDetails } from './../_models/candidatureDetails';
 import { CandidatureDetailsService } from './../_services/candidature-details.service';
 import {FormGroup,FormBuilder,AbstractControl,Validators} from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -51,7 +49,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private candidatureDetailsService : CandidatureDetailsService,
     private messageService:MessageService,
-    private fb:FormBuilder,
+    private fb:FormBuilder
   ) { }
 
   ngOnInit() {
@@ -84,28 +82,28 @@ export class ProfileComponent implements OnInit {
         preferredLocation:[this.profile['preferredLocation']],
         modeOfHiring:[this.profile['modeOfHiring']],
         vendorName:[this.profile['source']],
-        profileSharedDate:[this.profile['profileSharedDate']],
+        profileSharedDate:[this.d(this.profile['profileSharedDate'])],
         screeningStatus:[this.profile['screeningStatus']],
-        screeningDate:[this.profile['screeningDate']],
+        screeningDate:[this.d(this.profile['screeningDate'])],
         screeningDoneBy:[this.profile['screeningDoneBy']],
         firstRoundStatus:[this.profile['firstRoundStatus']],
-        firstRoundDate:[this.profile['firstRoundDate']],
+        firstRoundDate:[this.d(this.profile['firstRoundDate'])],
         firstRoundTakenBy:[this.profile['firstRoundTakenBy']],
         secondRoundStatus:[this.profile['secondRoundStatus']],
-        secondRoundDate:[this.profile['secondRoundDate']],
+        secondRoundDate:[this.d(this.profile['secondRoundDate'])],
         secondRoundTakenBy:[this.profile['secondRoundTakenBy']],
         finalRoundStatus:[this.profile['finalRoundStatus']],
-        finalRoundDate:[this.profile['finalRoundDate']],
+        finalRoundDate:[this.d(this.profile['finalRoundDate'])],
         finalRoundTakenBy:[this.profile['finalRoundTakenBy']],
         hrOrPnStageRound:[this.profile['hrOrPnStageRound']],
         hrOrPnStageStatus:[this.profile['hrOrPnStageStatus']],
-        hrOrPnStageDate:[this.profile['hrOrPnStageDate']],
+        hrOrPnStageDate:[this.d(this.profile['hrOrPnStageDate'])],
         candidatureStatus:[this.profile['roleOfResponsibilities']],
         finalStatus:[this.profile['finalStatus']],
         status:[this.profile['status']],
         description:[this.profile['description']],
         offerRollOutDate:[this.profile['roleOfResponsibilities']],
-        joiningDate:[this.profile['expectedJoiningDate']],
+        joiningDate:[this.d(this.profile['expectedJoiningDate'])],
         joiningStatus:[this.profile['roleOfResponsibilities']],
         nhrId:[this.profile['roleOfResponsibilities']],
         comments:[this.profile['roleOfResponsibilities']],
@@ -113,14 +111,17 @@ export class ProfileComponent implements OnInit {
         actionPending:[this.profile['actionPending']],
         client:[this.profile['client']],
         profileStatus:[this.profile['profileStatus']],
-        finalTechSelectionDate:[this.profile['finalTechSelectionDate']]
+        finalTechSelectionDate:[this.d(this.profile['finalTechSelectionDate'])]
     })
 
     this.locationList=["Bangalore","Chennai","Gurgaon","Noida","Pune","Other"];
-    this.clientList=["Dell","Unilever","EMC","Other"];
-    
+    this.clientList=["Dell","Unilever","EMC","Other"];   
   }
 
+  d(date: string):string{
+    const currentDate = new Date(date);
+    return currentDate.toISOString().substring(0,10);
+  }
   get f() { return this.CandidatureDetails.controls; }
 
   isFormValid(form:FormGroup): boolean{
@@ -148,7 +149,7 @@ export class ProfileComponent implements OnInit {
       this.showFormErrors=true;
      // return;
     }     
-    console.log("Is form has errors :: "+this.showFormErrors)
+    //console.log("Is form has errors :: "+this.showFormErrors)
     this.step1Css=this.nextStepUI;
     this.step2Css=this.nextStepUI;
     this.step3Css=this.nextStepUI;
@@ -172,17 +173,12 @@ export class ProfileComponent implements OnInit {
 
   save() {
     this.candidatureDetailsService.updateCandidature(this.selectedCandidature)
-         .pipe(first())
-         
-         .subscribe(
+         .pipe(first()).subscribe(
              data => {
-                    
                       this.messageService.add({severity:'success', summary: 'Success Message', detail:'Data updated successfully.'});
-
-             },
+                     },
          error => {
              this.messageService.add({severity:'error', summary: 'Error Message', detail:'Something went wrong. Operation failed.'});
-
          });
          
         // this.router.navigate(['/home']);
@@ -250,7 +246,5 @@ validateEmail(control: AbstractControl) {
 
     return null;
   }
-
-
 
 }
