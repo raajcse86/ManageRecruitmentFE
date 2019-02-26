@@ -168,6 +168,7 @@ export class HomeComponent implements OnInit {
 
      toggleAddState(){
         this.add_candidate=!this.add_candidate;
+        this.router.navigate(['/addCandidate']);
     }
 
     DisplayOnConsole():void{
