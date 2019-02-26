@@ -10,7 +10,6 @@ import {Summary} from '../_models/summary'
   providedIn: 'root'
 })
 export class CandidatureDetailsService {
-
    API_URL  =  'https://recruitmentportalapp.cfapps.io';
 // API_URL  =  'http://localhost:9000';
 
@@ -60,8 +59,14 @@ export class CandidatureDetailsService {
     
 
     deleteCandidature(id: string) {
-        return this.http.delete(`${this.API_URL}/api/candidatureDetails/` + id);
+        console.log("id is :: "+id);
+        return this.http.delete(`${this.API_URL}/api/candidatureDetails/`+ id);
     }
+
+    deleteCandidate(candidate:CandidatureDetails[]): Observable<any>{
+        return this.http.post(`${this.API_URL}/api/candidatureDetails`,candidate);
+      }
+    
 
 
     getClientSummary(){

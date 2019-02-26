@@ -11,6 +11,7 @@ import { UserService } from '../_services';
 
 import {ExcelService} from '../_services/excel.service';
 import { MessageService } from 'primeng/components/common/messageservice';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @Component({
     selector: 'app-home',
@@ -21,20 +22,23 @@ import { MessageService } from 'primeng/components/common/messageservice';
     providers: [MessageService]
 })
 export class HomeComponent implements OnInit {
-    
+    selectedValues: string[] = [];
+
     cols: any[];
     currentUser: User;
     users: User[] = [];
     employees: EmployeeDetails[] = [];
     candidatures: CandidatureDetails[] = [];
     candidature: CandidatureDetails ;
-    selectedCandidature: CandidatureDetails;
+    selectedCandidatures:CandidatureDetails[] = [];
+    a: CandidatureDetails;
     fromButtonValue:string;
     newCandidature: boolean;
     add_candidate:boolean=true;
     CandidatureDetails:FormGroup;
     step;
     showFormError:boolean=false;
+    
 
 
     constructor(
@@ -184,10 +188,31 @@ export class HomeComponent implements OnInit {
              console.table(res); 
         }
         )
+
+
+        
     }
      
 
+    deleteCandidate(){
+        console.log("Selected candidate for delete :: "+JSON.stringify(this.selectedCandidatures));
+        console.log("Length :: "+this.selectedCandidatures.length)
+        //for multiple recorrd
+        if(this.selectedCandidatures.length>1){
+         // debugger;
+            this.candidatureDetailsService.deleteCandidate(this.selectedCandidatures).subscribe(candidateFromService =>{
+         //   this.CandidatureDetails=candidateFromService;
+         })
+        }
+        else if(this.selectedCandidatures.length==1){
+          //debugger;
+          this.candidatureDetailsService.deleteCandidature(this.selectedCandidatures[0].id).subscribe(res=>{
+            // this.candidatures=candidateFromService;
+            console.log("response is "+ JSON.stringify(res));
+          });
+        }
     
+      } 
 
     
 }
