@@ -1,4 +1,5 @@
-﻿import { CandidatureDetailsService } from './_services/candidature-details.service';
+﻿import { ClientComponent } from './client/client.component';
+import { CandidatureDetailsService } from './_services/candidature-details.service';
 import { NgModule,NO_ERRORS_SCHEMA  }      from '@angular/core';
 import { MDBBootstrapModule, MdbTableService,MdbTablePaginationComponent } from 'angular-bootstrap-md';
 import { BrowserModule } from '@angular/platform-browser';
@@ -77,7 +78,8 @@ import { NotificationComponent } from './notification/notification.component'
         SummaryComponent ,
         ReportsComponent ,
         AddCandidateComponent ,
-        NotificationComponent     
+        NotificationComponent,
+        ClientComponent     
         
     ],
     providers: [
