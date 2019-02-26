@@ -148,7 +148,7 @@
 
                             <p-multiSelect *ngSwitchCase="'clientName'" [options]="clients" [style]="{'width':'100%'}"
                                 defaultLabel="All" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
-                            <p-dropdown *ngSwitchCase="'status'" [options]="status" defaultLabel="All" [style]="{'width':'100%'}"
+                            <p-dropdown *ngSwitchCase="'finalStatus'" [options]="status" defaultLabel="All" [style]="{'width':'100%'}"
                                 (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
                             <p-dropdown *ngSwitchCase="'location'" [options]="locations" defaultLabel="All" [style]="{'width':'100%'}"
                                 (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
@@ -164,8 +164,7 @@
                         <td>{{candidateSummary.candidateName}}</td>
                         <td>{{candidateSummary.clientName || 'NA'}}</td>
                         <td>{{candidateSummary.skills || 'NA'}}</td>
-                        <td [ngClass]="getColorCodeByDate(candidateSummary.status, candidateSummary)">{{candidateSummary.status
-                            || 'NA'}}</td>
+                        <td [ngClass]="getColorCodeByDate(candidateSummary.finalStatus, candidateSummary)">{{candidateSummary.finalStatus || 'NA'}}</td>
                         <td style="word-wrap: break-word;">{{candidateSummary.emailId || 'NA'}}</td>
                         <td>{{candidateSummary.location || 'NA'}}</td>
                         <td>{{candidateSummary.expectedToJoin || 'NA'}}</td>

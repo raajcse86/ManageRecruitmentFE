@@ -8,6 +8,7 @@ import { first } from 'rxjs/operators';
 import { CandidatureDetails } from './../_models/candidatureDetails';
 import { CandidatureDetailsService } from './../_services/candidature-details.service';
 import {FormGroup,FormBuilder,AbstractControl,Validators} from '@angular/forms';
+import { USER_ROLE } from '../_services/jwtauth-services.service';
 
 @Component({
   selector: 'app-profile',
@@ -43,6 +44,7 @@ export class ProfileComponent implements OnInit {
   statusList:string[] =["Shortlisted","Not shortlisted"];
   mohList: string[]=["Permanent","Contract"];
   profileStatusList: string[] =["Active","Inactive"];
+  isAdmin=false;
 
   constructor(
     private route: ActivatedRoute,
@@ -116,6 +118,9 @@ export class ProfileComponent implements OnInit {
 
     this.locationList=["Bangalore","Chennai","Gurgaon","Noida","Pune","Other"];
     this.clientList=["Dell","Unilever","EMC","Other"];   
+
+    if('ROLE_ADMIN'===sessionStorage.getItem(USER_ROLE))
+            this.isAdmin=true;
   }
 
   d(date: string):string{

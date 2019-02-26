@@ -11,8 +11,8 @@ import { UserService } from '../_services';
 
 import { ExcelService } from '../_services/excel.service';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { CheckboxModule } from 'primeng/checkbox';
 import { AlertService } from '../_services';
+import { USER_ROLE } from '../_services/jwtauth-services.service';
 
 @Component({
     selector: 'app-home',
@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
     CandidatureDetails: FormGroup;
     step;
     showFormError: boolean = false;
+    isAdmin=false;
 
 
 
@@ -119,8 +120,8 @@ export class HomeComponent implements OnInit {
             { field: 'status', header: 'STATUS' }
 
         ];
-
-
+        if('ROLE_ADMIN'===sessionStorage.getItem(USER_ROLE))
+            this.isAdmin=true; 
 
     }
 
@@ -153,16 +154,30 @@ export class HomeComponent implements OnInit {
         }
 
     }
-editCandidate(){
+    
+    editCandidate(){
     if (this.selectedCandidatures.length >= 1) {
         let slugified_data = JSON.stringify(this.selectedCandidatures[0]);
         let passable_data = "";
         if (slugified_data) {
-            passable_data = btoa(slugified_data);
-            this.router.navigate(['/profile/' + passable_data]);
-        }
+                 passable_data = btoa(slugified_data);
+                 this.router.navigate(['/profile/' + passable_data]);
+            }
+         }
     }
-}
+
+
+    viewCandidate(data:any){
+        
+        console.log(JSON.stringify(data));
+            let slugified_data = JSON.stringify(data);
+            let passable_data = "";
+            if (slugified_data) {
+                     passable_data = btoa(slugified_data);
+                     this.router.navigate(['/profile/' + passable_data]);
+                }
+        }
+    
 
     private loadAllCandidatureDetails() {
 

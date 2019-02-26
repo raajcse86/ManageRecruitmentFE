@@ -23,9 +23,10 @@
                     <button class="btn btn-link btn-sm" (click)="exportAsXLSX()">
                         Export <i class="fa fa-file-excel-o"></i>
                     </button>
-                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" *ngIf="add_candidate" (click)="toggleAddState()">Add   </a>
-                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="editCandidate()" [disable]="selectedCandidatures.length == 1 || selectedCandidatures.length == 0">Edit  </a>
-                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="deleteCandidate()">Delete</a>
+
+                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" *ngIf="isAdmin && add_candidate" (click)="toggleAddState()">Add   </a>
+                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="editCandidate()" *ngIf="isAdmin && (selectedCandidatures.length == 0 || selectedCandidatures.length == 1)")>Edit  </a>
+                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="deleteCandidate()" *ngIf="isAdmin" >Delete</a>
                 </div>
             </div>
         </div>
@@ -49,20 +50,10 @@ code for delete -->
                     <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
                 </td>
                     <td *ngFor="let col of columns">
-                        {{rowData[col.field]}}
+                       <a (click)="viewCandidate(rowData)" >{{rowData[col.field]}}</a>
                     </td>
         </tr>
     </ng-template>
-
-
-    <!-- <ng-template pTemplate="summary">
-      <ul>
-        <!-- <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="deleteCandidate()">Delete</a> -->
-      <!-- </ul>
-  </ng-template> --> 
-
-   
-       
 </p-table>
 </div>
  
