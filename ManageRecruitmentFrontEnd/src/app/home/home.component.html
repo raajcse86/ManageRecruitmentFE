@@ -25,7 +25,7 @@
                     </button>
 
                     <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" *ngIf="isAdmin && add_candidate" (click)="toggleAddState()">Add   </a>
-                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="editCandidate()" *ngIf="isAdmin && (selectedCandidatures.length == 0 || selectedCandidatures.length == 1)")>Edit  </a>
+                    <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="editCandidate()" *ngIf="isAdmin && (selectedCandidatures.length == 0 || selectedCandidatures.length == 1)">Edit  </a>
                     <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="deleteCandidate()" *ngIf="isAdmin" >Delete</a>
                 </div>
             </div>
