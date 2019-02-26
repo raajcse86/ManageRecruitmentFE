@@ -29,7 +29,22 @@ export class ProfileComponent implements OnInit {
   selectedCandidature: CandidatureDetails;
   CandidatureDetails:FormGroup;
   candidateID:string;
-  step;
+
+  currentStepUI: string   ="ui-steps-item ui-state-highlight ui-steps-current";
+  nextStepUI:    string   ="ui-steps-item ui-state-default";
+  activeIndex: number = 0;
+  showFormErrors:boolean=false;
+  step1Css: string=this.nextStepUI;
+  step2Css: string=this.nextStepUI;
+  step3Css: string=this.nextStepUI;
+  step4Css: string=this.nextStepUI;
+  interviewStatusList: string[] =["Scheduled","In progress", "Selected","Not selected"];
+  finalStatusList: string[] =["Yet to screen", "Screening in Progress", "Interviews in Progress","Offer in Progress","Offer Released","Joined"];
+  locationList: string[]=[];
+  clientList: string[]=[];
+  statusList:string[] =["Shortlisted","Not shortlisted"];
+  mohList: string[]=["Permanent","Contract"];
+  profileStatusList: string[] =["Active","Inactive"];
 
   constructor(
     private route: ActivatedRoute,
@@ -50,7 +65,8 @@ export class ProfileComponent implements OnInit {
    
     this.mapping_keys = Mappings;
 
-    this.step=1;
+    this.activeIndex = 2;
+    this.step2Css=this.currentStepUI;
 
     this.CandidatureDetails=this.fb.group({
            
@@ -96,12 +112,58 @@ export class ProfileComponent implements OnInit {
         action:[this.profile['roleOfResponsibilities']],
         actionPending:[this.profile['actionPending']],
         client:[this.profile['client']],
-        profile:[this.profile['profileStatus']],
-        lastUpdateDate:[this.profile['roleOfResponsibilities']]
-        
+        profileStatus:[this.profile['profileStatus']],
+        finalTechSelectionDate:[this.profile['finalTechSelectionDate']]
     })
 
+    this.locationList=["Bangalore","Chennai","Gurgaon","Noida","Pune","Other"];
+    this.clientList=["Dell","Unilever","EMC","Other"];
+    
+  }
 
+  get f() { return this.CandidatureDetails.controls; }
+
+  isFormValid(form:FormGroup): boolean{
+    if (form.invalid) {
+      // console.log("Form is Invalid");
+      // Object.keys(form.controls).forEach(key => {
+
+      //   const controlErrors: ValidationErrors = form.get(key).errors;
+      //   if (controlErrors != null) {
+      //         Object.keys(controlErrors).forEach(keyError => {
+      //           console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+      //         });
+      //       }
+      //     });
+
+      return false;
+  }
+    return true;
+  }
+  changeStep(step:number){
+    window.scroll(0,0);
+    if(this.isFormValid(this.CandidatureDetails)){
+      this.showFormErrors=false;
+    }else{
+      this.showFormErrors=true;
+     // return;
+    }     
+    console.log("Is form has errors :: "+this.showFormErrors)
+    this.step1Css=this.nextStepUI;
+    this.step2Css=this.nextStepUI;
+    this.step3Css=this.nextStepUI;
+    this.step4Css=this.nextStepUI;
+    this.activeIndex=step;
+    switch(step){
+      case 1: this.step1Css=this.currentStepUI;
+           break;
+      case 2: this.step2Css=this.currentStepUI;
+           break;
+      case 3: this.step3Css=this.currentStepUI;
+           break;
+      case 4: this.step4Css=this.currentStepUI;
+           break;
+    }
   }
 
   toggleEditState() {
