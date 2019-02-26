@@ -105,6 +105,7 @@ export class ClientComponent implements OnInit {
           this.router.navigate(['/client']);
         },
         error => {
+          this.add_client = false;
           this.alertService.error(error);
           this.loading = false;
           this.router.navigate(['/client']);
@@ -126,6 +127,7 @@ export class ClientComponent implements OnInit {
         },
         error => {
           this.alertService.error(error);
+          this.add_client = false;
           this.loading = false;
           this.router.navigate(['/client']);
         });
@@ -133,6 +135,7 @@ export class ClientComponent implements OnInit {
   }
 
   toggleAddClient() {
+    this.alertService.clearAlert();
     this.isEditale = false;
     this.addClientForm.reset();
     this.add_client = true;
@@ -152,6 +155,7 @@ export class ClientComponent implements OnInit {
   }
 
   CancelAddClient() {
+    this.alertService.clearAlert();
     this.add_client = false;
   }
 
@@ -161,6 +165,7 @@ export class ClientComponent implements OnInit {
       this.router.navigate(['/client']);
     }
     else {
+      this.alertService.clearAlert();
       this.clientOpts = "Update Client";
 
       this.isEditale = true;
