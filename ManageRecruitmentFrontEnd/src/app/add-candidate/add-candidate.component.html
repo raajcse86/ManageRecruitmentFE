@@ -61,7 +61,7 @@
           <input name="emailId" class="form-control" type="email" [formControl]="f.emailId" [ngClass]="{ 'is-invalid':(f.emailId.touched || showFormErrors) && f.emailId.errors }" />
           <div class="invalid-feedback" *ngIf="(f.emailId.touched || showFormErrors ) && f.emailId.errors "> 
             <div *ngIf="f.emailId.errors.required">Email id is required</div>
-            <div *ngIf="f.emailId.errors.pattern">Souuld contain @</div>
+            <div *ngIf="f.emailId.errors.pattern">Email should be in proper format like abs@xyz.xy</div>
           </div>
           <br>
 
@@ -145,7 +145,7 @@
           </div>
 
           <br>
-          <button class="btn btn-primary" (click)="changeStep(2)">Next</button>
+          <button class="btn btn-primary" (click)="changeStep(2)" style="width:-webkit-fill-available">Next</button>
         </fieldset>
 
         <!-- Step 2-->
@@ -250,8 +250,14 @@
           <!-- <input name="finalRoundStatus" class="form-control" [formControl]="f.finalRoundStatus" type="text"> -->
           <br>
 
-          <button class="btn btn-primary" (click)="changeStep(1)">Prev</button>
-          <button class="btn btn-primary" (click)="changeStep(3)">Next</button>
+          <div class="row">
+              <div class="col-sm-6 text-left">
+                  <button class="btn btn-primary" (click)="changeStep(1)" style="margin-right:30px">Prev</button>
+              </div>
+              <div class="col-sm-6 text-right">
+                  <button class="btn btn-primary" (click)="changeStep(3)" style="margin-right:30px">Next</button>
+              </div>
+            </div>
         </fieldset>
 
         <!--Step 3-->
@@ -292,8 +298,14 @@
           <label for="joiningStatus" class="input">Joining Status</label>
           <input name="joiningStatus" class="form-control" [formControl]="f.joiningStatus" type="text">
           <br>
-          <button class="btn btn-primary" (click)="changeStep(2)">Prev</button>
-          <button class="btn btn-primary" (click)="changeStep(4)">Next</button>
+          <div class="row">
+              <div class="col-sm-6 text-left">
+                  <button class="btn btn-primary" (click)="changeStep(2)" style="margin-right:30px">Prev</button>
+              </div>
+              <div class="col-sm-6 text-right">
+                  <button class="btn btn-primary" (click)="changeStep(4)" style="margin-right:30px">Next</button>
+              </div>
+            </div>
         </fieldset>
 
 <!--Step 4-->
@@ -321,10 +333,14 @@
           <input name="finalTechSelectionDate" class="form-control" [formControl]="f.finalTechSelectionDate" type="date">
           <br>
 
-          <button class="btn btn-primary" (click)="changeStep(3)">Prev</button>
-          <button class="btn btn-primary" (click)="addCandidate()">Save</button>
-        </fieldset>
+          <!-- <button class="btn btn-primary" (click)="changeStep(3)">Prev</button>
+          <button class="btn btn-primary" (click)="addCandidate()">Save</button> -->
 
+          <button class="btn btn-primary" (click)="changeStep(3)">Prev</button>
+          <button [disabled]="!CandidatureDetails.valid" type="button" class="btn btn-custom" (click)="addCandidate()">Save</button>
+          <button type="button" class="btn btn-outline-secondary-custom" routerLink="/home">Cancel</button>
+        </fieldset>
+<br>
         <div class="row" style="text-align: center;">
             <a routerLink="/home">Back to Home</a><br>
           </div>

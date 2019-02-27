@@ -6,6 +6,7 @@ import { CandidatureDetails } from '../_models';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { AlertService } from '../_services';
 
+export const EMAIL_PATTERN = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 @Component({
   selector: 'add-candidate',
   templateUrl: './add-candidate.component.html',
@@ -50,7 +51,7 @@ export class AddCandidateComponent implements OnInit {
       //Personal details
       candidateName: ['', [Validators.required]],
       contactNo: ['', [Validators.required, Validators.minLength(10),Validators.pattern('[1-9]{1}[0-9]{9}')]],
-      emailId: ['', [Validators.required, this.validateEmail.bind(this)]],
+      emailId: ['', [Validators.required,Validators.pattern(EMAIL_PATTERN)]],
 	    currentLocation: [''],
 	    positionLocation: [''],
 	    preferredLocation: [''],
@@ -126,7 +127,7 @@ this.clientList=["Dell","Unilever","EMC","Other"];
       return { invalidEmail: true };
     }
 
-    return null;
+    return pattern;
   }
 
   addCandidate() {

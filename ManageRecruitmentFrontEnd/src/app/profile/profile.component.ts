@@ -9,7 +9,7 @@ import { CandidatureDetails } from './../_models/candidatureDetails';
 import { CandidatureDetailsService } from './../_services/candidature-details.service';
 import {FormGroup,FormBuilder,AbstractControl,Validators} from '@angular/forms';
 import { USER_ROLE } from '../_services/jwtauth-services.service';
-
+import {EMAIL_PATTERN} from '../add-candidate/add-candidate.component'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
         positionLocation:[this.profile['positionLocation']],
         candidateName:[this.profile['candidateName'],[Validators.required]],
         contactNo:[this.profile['contactNo'],[Validators.required,this.validatePhoneNum.bind(this)]],
-        emailId:[this.profile['emailId'],[Validators.required,this.validateEmail.bind(this)]],
+        emailId:[this.profile['emailId'],[Validators.required,Validators.pattern(EMAIL_PATTERN)]],
         totalExperience:[this.profile['totalExperience']],
         relevantExperience:[this.profile['relevantExperience']],
         noticePeriod:[this.profile['noticePeriod']],
