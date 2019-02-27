@@ -152,7 +152,7 @@ export class ProfileComponent implements OnInit {
       this.showFormErrors=false;
     }else{
       this.showFormErrors=true;
-      return;
+    return;
     }     
     //console.log("Is form has errors :: "+this.showFormErrors)
     this.step1Css=this.nextStepUI;

@@ -113,11 +113,13 @@ export class DashboardComponent implements OnInit {
   }
   onRadioSelect(e,valuePassed) {
     if(e.target.checked){
+        this.showSubTable=false;
         this.value=valuePassed;
         this.loadAllChartDetails(valuePassed);
         this.showChart = true;
         this.showSummaryTable=true;
         this.checkboxselect=valuePassed;
+        
     }
  }
 

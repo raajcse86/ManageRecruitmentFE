@@ -132,8 +132,6 @@ this.clientList=["Dell","Unilever","EMC","Other"];
   }
 
   addCandidate() {
-
-
     this.messageService.clear();
     this.selectedCandidate = this.CandidatureDetails.value;
     this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
