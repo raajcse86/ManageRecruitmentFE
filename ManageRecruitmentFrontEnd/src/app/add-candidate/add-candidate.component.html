@@ -145,7 +145,7 @@
           </div>
 
           <br>
-          <button class="btn btn-primary" (click)="changeStep(2)" style="width:-webkit-fill-available">Next</button>
+          <button class="btn btn-primary btn-sm" (click)="changeStep(2)" style="width:-webkit-fill-available">Next</button>
         </fieldset>
 
         <!-- Step 2-->
@@ -252,10 +252,10 @@
 
           <div class="row">
               <div class="col-sm-6 text-left">
-                  <button class="btn btn-primary" (click)="changeStep(1)" style="margin-right:30px">Prev</button>
+                  <button class="btn btn-primary btn-sm" (click)="changeStep(1)" style="margin-right:30px">Prev</button>
               </div>
               <div class="col-sm-6 text-right">
-                  <button class="btn btn-primary" (click)="changeStep(3)" style="margin-right:30px">Next</button>
+                  <button class="btn btn-primary btn-sm" (click)="changeStep(3)" style="margin-right:30px">Next</button>
               </div>
             </div>
         </fieldset>
@@ -300,10 +300,10 @@
           <br>
           <div class="row">
               <div class="col-sm-6 text-left">
-                  <button class="btn btn-primary" (click)="changeStep(2)" style="margin-right:30px">Prev</button>
+                  <button class="btn btn-primary btn-sm" (click)="changeStep(2)" style="margin-right:30px">Prev</button>
               </div>
               <div class="col-sm-6 text-right">
-                  <button class="btn btn-primary" (click)="changeStep(4)" style="margin-right:30px">Next</button>
+                  <button class="btn btn-primary btn-sm" (click)="changeStep(4)" style="margin-right:30px">Next</button>
               </div>
             </div>
         </fieldset>
@@ -336,21 +336,30 @@
           <!-- <button class="btn btn-primary" (click)="changeStep(3)">Prev</button>
           <button class="btn btn-primary" (click)="addCandidate()">Save</button> -->
 
-          <button class="btn btn-primary" (click)="changeStep(3)">Prev</button>
-          <button [disabled]="!CandidatureDetails.valid" type="button" class="btn btn-custom" (click)="addCandidate()">Save</button>
-          <button type="button" class="btn btn-outline-secondary-custom" routerLink="/home">Cancel</button>
-        </fieldset>
+          <div class="row">
+              <div class="col-sm-4 text-left">
+                  <button class="btn btn-primary btn-sm" (click)="changeStep(3)" style="margin-right:30px">Prev</button>
+              </div>
+              <div class="col-sm-4 text-right">
+               <button [disabled]="!CandidatureDetails.valid" type="button" class="btn btn-custom btn-sm" (click)="addCandidate()">Save</button>
+              </div>
+              <div class="col-sm-4 text-right">
+                  <button type="button" class="btn btn-primary btn-sm" routerLink="/home">Cancel</button> 
+                </div>
+            </div>
+
+      </fieldset>
 <br>
         <div class="row" style="text-align: center;">
             <a routerLink="/home">Back to Home</a><br>
           </div>
 
-          <!-- <div class="content-section implementation">
+          <div class="content-section implementation">
               <p-toast [style]="{marginTop: '80px'}"></p-toast>
               <p-toast [style]="{marginTop: '80px'}" position="top-left" key="tl"></p-toast>
               <p-toast [style]="{marginTop: '80px'}" position="top-center" key="tc"></p-toast>
               <p-toast [style]="{marginTop: '80px'}" styleClass="custom-toast" key="custom" position="bottom-center"></p-toast>
-              <p-toast position="center" key="c" (onClose)="onConfirm()" [modal]="true" [baseZIndex]="5000">
+              <p-toast position="center" key="c" (onClose)="onReject()" [modal]="true" [baseZIndex]="5000">
                 <ng-template let-message pTemplate="message">
                   <div class="text-center p-4">
                     <i class="pi pi-exclamation-triangle" style="font-size: 3em"></i>
@@ -359,16 +368,16 @@
                   </div>
                   <div class="ui-g ui-fluid">
                     <div class="ui-g-6">
-                      <button type="button" pButton (click)="onConfirm()" class="btn btn-custom">Confirm</button>
+                      <button type="button" pButton (click)="onConfirm()" class="btn btn-custom btn-sm">Confirm</button>
                     </div>
                     <div class="ui-g-6">
-                      <button type="button" pButton (click)="onReject()" class="btn btn-secondary-custom">Cancel</button>
+                      <button type="button" pButton (click)="onReject()" class="btn btn-primary btn-sm">Cancel</button>
                     </div>
                   </div>
                 </ng-template>
               </p-toast>
-            </div> -->
-        
+            </div>
+  
       </form>
     </div>
   </div>
