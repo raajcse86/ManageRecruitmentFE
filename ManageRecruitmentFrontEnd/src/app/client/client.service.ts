@@ -8,8 +8,8 @@ import { Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ClientService {
-  private baseUrl = "http://localhost:9000";
-  //private baseUrl  =  'https://recruitmentportalapp.cfapps.io';
+  //private baseUrl = "http://localhost:9000";
+  private baseUrl  =  'https://recruitmentportalapp.cfapps.io';
 
   constructor(private http: HttpClient) { }
 
