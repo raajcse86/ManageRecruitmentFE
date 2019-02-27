@@ -117,7 +117,7 @@ export class HomeComponent implements OnInit {
             { field: 'candidateName', header: 'CANDIDATE NAME' },
             { field: 'contactNo', header: 'CONTACT NO' },
             { field: 'emailId', header: 'EMAIL-ID' },
-            { field: 'status', header: 'STATUS' }
+            { field: 'finalStatus', header: 'STATUS'}
 
         ];
         if('ROLE_ADMIN'===sessionStorage.getItem(USER_ROLE))
@@ -168,8 +168,7 @@ export class HomeComponent implements OnInit {
 
 
     viewCandidate(data:any){
-        
-        console.log(JSON.stringify(data));
+    
             let slugified_data = JSON.stringify(data);
             let passable_data = "";
             if (slugified_data) {

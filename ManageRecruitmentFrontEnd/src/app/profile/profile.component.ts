@@ -124,6 +124,7 @@ export class ProfileComponent implements OnInit {
   }
 
   d(date: string):string{
+    if(date=="") return
     const currentDate = new Date(date);
     return currentDate.toISOString().substring(0,10);
   }
