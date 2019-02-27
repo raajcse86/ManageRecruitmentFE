@@ -2,6 +2,13 @@
   margin-left: 30% !important;
 }
 
+.container-fluid .ui-table .ui-table-tbody > tr.ui-state-highlight {
+  color: #333 !important;
+}
+
+
+/* body .ui-table .ui-table-tbody > tr:nth-child(even).ui-state-highlight */
+
 .logo-wrapper .logo {
   width: 14%;
   margin: 0 auto;
