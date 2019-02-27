@@ -33,6 +33,7 @@ export class AddCandidateComponent implements OnInit {
   statusList:string[] =["Shortlisted","Not shortlisted"];
   mohList: string[]=["Permanent","Contract"];
   profileStatusList: string[] =["Active","Inactive"];
+  selectedCandidate:CandidatureDetails;
 
   constructor(
     private fb: FormBuilder,
@@ -131,17 +132,29 @@ this.clientList=["Dell","Unilever","EMC","Other"];
   }
 
   addCandidate() {
+
+
+    this.messageService.clear();
+    this.selectedCandidate = this.CandidatureDetails.value;
+    this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
+  }
+  onConfirm() {
+    this.messageService.clear('c');
     this.candidatureDetailsService.saveCandidature(this.CandidatureDetails.value).subscribe(
       data => {
-        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Data updated successfully.' });
+        this.messageService.add({ severity: 'success', summary: 'Success Message', detail: 'Candidate added successfully.' });
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error Message', detail: 'Something went wrong. Operation failed.' });
       });
-    this.alertService.success('Candidate Added successfully', true);
-    this.router.navigate(['/home']);
-  }
-
+   // this.alertService.success('Candidate Added successfully', true);
+   // this.router.navigate(['/home']);   
+   }
+   
+   onReject() {
+    this.messageService.clear('c');
+    this.selectedCandidate = null;
+   }
    // convenience getter for easy access to form fields
    get f() { return this.CandidatureDetails.controls; }
 

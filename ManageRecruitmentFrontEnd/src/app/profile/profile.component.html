@@ -182,7 +182,7 @@
             </div>
 
             <br>
-            <button class="btn btn-primary" (click)="changeStep(2)" style="width:-webkit-fill-available">Next</button>
+            <button class="btn btn-primary btn-sm" (click)="changeStep(2)" style="width:-webkit-fill-available">Next</button>
           </fieldset>
 
           <!-- Step 2-->
@@ -288,10 +288,10 @@
 
             <div class="row">
                 <div class="col-sm-6 text-left">
-                    <button class="btn btn-primary" (click)="changeStep(1)" style="margin-right:30px">Prev</button>
+                    <button class="btn btn-primary btn-sm" (click)="changeStep(1)" style="margin-right:30px">Prev</button>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <button class="btn btn-primary" (click)="changeStep(3)" style="margin-right:30px">Next</button>
+                    <button class="btn btn-primary btn-sm" (click)="changeStep(3)" style="margin-right:30px">Next</button>
                 </div>
               </div>
       
@@ -337,10 +337,10 @@
             <br>
             <div class="row">
                 <div class="col-sm-6 text-left">
-                    <button class="btn btn-primary" (click)="changeStep(2)" style="margin-right:30px">Prev</button>
+                    <button class="btn btn-primary btn-sm" (click)="changeStep(2)" style="margin-right:30px">Prev</button>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <button class="btn btn-primary" (click)="changeStep(4)" style="margin-right:30px">Next</button>
+                    <button class="btn btn-primary btn-sm" (click)="changeStep(4)" style="margin-right:30px">Next</button>
                 </div>
               </div>
           </fieldset>
@@ -370,11 +370,17 @@
             <input name="finalTechSelectionDate" class="form-control" [formControl]="f.finalTechSelectionDate" type="date">
             <br>
 
-            <button class="btn btn-primary" (click)="changeStep(3)">Prev</button>
-            <button [disabled]="!CandidatureDetails.valid" type="button" class="btn btn-custom" (click)="showConfirm('fromsave',CandidatureDetails)">Update</button>
-            <!-- <button [disabled]="!CandidatureDetails.valid" type="button" class="btn btn-secondary-custom" (click)="showConfirm('fromdelete',CandidatureDetails)">Delete</button> -->
-            <button [disabled]="!CandidatureDetails.valid" type="button" class="btn btn-outline-secondary-custom"
-              (click)="toggleEditState()">Cancel</button>
+            <div class="row">
+                <div class="col-sm-4 text-left">
+                    <button class="btn btn-primary btn-sm" (click)="changeStep(3)" style="margin-right:30px">Prev</button>
+                </div>
+                <div class="col-sm-4 text-right">
+                <button [disabled]="!CandidatureDetails.valid" type="button" class="btn btn-custom btn-sm" (click)="showConfirm('fromsave',CandidatureDetails)">Update</button>
+                </div>
+                <div class="col-sm-4 text-right">
+                    <button type="button" class="btn btn-primary btn-sm" (click)="toggleEditState()">Cancel</button> </div>
+              </div>
+
           </fieldset>
           <br>
           <div class="row" style="text-align: center;">
@@ -395,10 +401,10 @@
                 </div>
                 <div class="ui-g ui-fluid">
                   <div class="ui-g-6">
-                    <button type="button" pButton (click)="onConfirm()" class="btn btn-custom">Confirm</button>
+                    <button type="button" pButton (click)="onConfirm()" class="btn btn-custom btn-sm">Confirm</button>
                   </div>
                   <div class="ui-g-6">
-                    <button type="button" pButton (click)="onReject()" class="btn btn-secondary-custom">Cancel</button>
+                    <button type="button" pButton (click)="onReject()" class="btn btn-primary btn-sm">Cancel</button>
                   </div>
                 </div>
               </ng-template>
