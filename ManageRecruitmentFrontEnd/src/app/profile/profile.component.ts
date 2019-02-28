@@ -79,7 +79,7 @@ export class ProfileComponent implements OnInit {
         emailId:[this.profile['emailId'],[Validators.required,Validators.pattern(EMAIL_PATTERN)]],
         totalExperience:[this.profile['totalExperience']],
         relevantExperience:[this.profile['relevantExperience']],
-        noticePeriod:[this.profile['noticePeriod']],
+        noticePeriod:[this.profile['noticePeriod'], [Validators.required,Validators.max(90)]],
         ctc:[this.profile['ctc']],
         ectc:[this.profile['expectedCTC']],
         currentLocation:[this.profile['currentLocation']],

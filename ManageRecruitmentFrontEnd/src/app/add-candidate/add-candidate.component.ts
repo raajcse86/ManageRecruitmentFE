@@ -60,7 +60,7 @@ export class AddCandidateComponent implements OnInit {
 	    preferredLocation: [''],
       totalExperience: [''],
       relevantExperience: [''],
-      noticePeriod: ['',[Validators.required]],
+      noticePeriod: ['',[Validators.required, Validators.max(90)]],
       ctc: ['',[Validators.required]],
       ectc: [''],
 	    roleOfResponsibilities: ['', [Validators.required]],
