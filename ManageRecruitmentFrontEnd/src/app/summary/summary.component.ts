@@ -238,6 +238,9 @@ export class SummaryComponent implements OnInit {
 
   //Function to calculate the number of days difference in given date compared to current date
   public calculateDateDifference(techSelectionDate: string): string {
+    if(techSelectionDate==null){
+      return "OfferRelaesed";
+    }
     const diff = Math.abs(new Date().getTime() - new Date(techSelectionDate).getTime());
     const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
     if (diffDays >= 7)
