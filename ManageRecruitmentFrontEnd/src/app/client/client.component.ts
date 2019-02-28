@@ -1,3 +1,4 @@
+import { USER_ROLE } from './../_services/jwtauth-services.service';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AlertService } from './../_services/alert.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
@@ -6,6 +7,8 @@ import { ClientService } from './client.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-client',
@@ -22,9 +25,13 @@ export class ClientComponent implements OnInit {
   isAdmin = false;
   add_client: boolean = false;
   isButtonDisabled: boolean = true;
-
+  userAcess:String;
   isEditale: boolean = false;
   clientOpts: string = "Add Client";
+  locationList: string[] = [];
+  contractMechanismList:string[] = ["Permanent","Contract"];
+  // filteredClients: Observable<string[]>;
+  // clientNames: string[] = new Array;
 
 
   constructor(
@@ -37,8 +44,17 @@ export class ClientComponent implements OnInit {
 
   ngOnInit() {
 
+
+
     this.clientService.getAllCients().subscribe(data => {
       this.clients = data;
+
+      // var L = this.clients.length;
+      // for (var i = 0; i < L; i++) {
+      //   var obj = this.clients[i];
+      //   this.clientNames.push(obj.clientName);
+      // }
+    //console.log(this.clientNames);
     })
 
     this.cols = [
@@ -61,7 +77,27 @@ export class ClientComponent implements OnInit {
       target: ['', [Validators.required]],
 
     });
+
+    // this.filteredClients = this.addClientForm.controls['clientName'].valueChanges.pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value))
+    // );
+    //console.log('filter after >> '+JSON.stringify(this.filteredClients));
+    this.locationList = ["Bangalore", "Chennai", "Gurgaon", "Noida", "Pune", "Hyderabad", "Other"];
+
+    this.userAcess = sessionStorage.getItem(USER_ROLE);
+    if(this.userAcess==='ROLE_ADMIN')
+        this.isAdmin=true;  
+
   }
+
+
+
+  // private _filter(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
+
+  //   return this.clientNames.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  // }
 
   deleteClients() {
     if (this.selectedClients == undefined || this.selectedClients.length <= 0) {
@@ -156,6 +192,7 @@ export class ClientComponent implements OnInit {
 
   CancelAddClient() {
     this.alertService.clearAlert();
+    this.selectedClients = [];
     this.add_client = false;
   }
 
