@@ -7,6 +7,7 @@ import { UserService } from '../_services';
 import { first } from 'rxjs/operators';
 import { CandidatureDetails } from './../_models/candidatureDetails';
 import { CandidatureDetailsService } from './../_services/candidature-details.service';
+import {ClientService} from '../client/client.service'
 import {FormGroup,FormBuilder,AbstractControl,Validators} from '@angular/forms';
 import { USER_ROLE } from '../_services/jwtauth-services.service';
 import {EMAIL_PATTERN} from '../add-candidate/add-candidate.component'
@@ -51,7 +52,8 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private candidatureDetailsService : CandidatureDetailsService,
     private messageService:MessageService,
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private clientService: ClientService
   ) { }
 
   ngOnInit() {
@@ -115,12 +117,22 @@ export class ProfileComponent implements OnInit {
         profileStatus:[this.profile['profileStatus']],
         finalTechSelectionDate:[this.d(this.profile['finalTechSelectionDate'])]
     })
-
-    this.locationList=["Bangalore","Chennai","Gurgaon","Noida","Pune","Other"];
-    this.clientList=["Dell","Unilever","EMC","Other"];   
+    this.locationList = ["Bangalore", "Chennai", "Gurgaon", "Hyderabad","Noida", "Pune", "Other"];
+    this.getAllClients();
+    //this.clientList=["Dell","Unilever","EMC","Other"];   
 
     if('ROLE_ADMIN'===sessionStorage.getItem(USER_ROLE))
             this.isAdmin=true;
+  }
+
+  getAllClients(){
+    this.clientService.getAllCients().subscribe(data => {
+     data.forEach(client=>{
+      this.clientList.push(client.clientName);
+      if(!this.locationList.includes(client.location))
+         this.locationList.push(client.location);
+     })
+    })
   }
 
   d(date: string):string{
