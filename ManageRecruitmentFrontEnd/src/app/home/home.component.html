@@ -14,7 +14,7 @@
                 <!--Code for Search.-->   
                 <div class="text-left" style="position: realtive;">
                     <i class="fa fa-search icon-showcase"></i>
-                    <input type="text" class="form-control form-control-sm" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                    <input type="text" class="form-control form-control-sm" pInputText size="50" placeholder="Global search" (input)="dt.filterGlobal($event.target.value, 'contains')"[(ngModel)]="filetrValue"style="width:auto">
                 </div>
             </div>
             <div class="col">

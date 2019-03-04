@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
     step;
     showFormError: boolean = false;
     isAdmin=false;
+    filetrValue:string=null;
 
 
 
@@ -191,7 +192,7 @@ export class HomeComponent implements OnInit {
     }
 
     exportAsXLSX(): void {
-        this.excelService.exportAsExcelFile(this.candidatures, 'Supply');
+        this.excelService.exportAsExcelFile(this.candidatures, this.filetrValue,'Supply');
     }
 
     toggleAddState() {

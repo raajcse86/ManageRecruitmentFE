@@ -1,10 +1,11 @@
 <div class="container-fluid">
   <!-- Approvals list changes  -->
   <div class="row my-4">
-    <div class="col-12">
-      <p style="text-align: center;font-weight: bold">APPROVALS LIST</p>
+    <div class="col-12" style="padding-left: 80px">
+     
       <p-table #dt [columns]="approvalColumns" [value]="approvalList" [paginator]="true" [rows]="5">
         <ng-template pTemplate="caption" *ngIf="message!='undefined'">
+            <p style="text-align: center;font-weight: bold">APPROVALS LIST</p>
           <div class="col">
             <h6 [ngClass]="msg"> {{message}}</h6>
           </div>
@@ -15,13 +16,11 @@
             <th col width="100">Name</th>
             <th col width="150">Email Id</th>
             <th col width="100">Status</th>
+            <th col width="130">Role</th>
             <th col width="120">Comments</th>
             <th col width="150"> Approve/Reject</th>
-            <th col width="150">Approve/Reject By</th>
-            <!-- <th *ngFor="let col of columns">
-              {{col}}
-            </th> -->
-
+            <th col width="130">Approve/Reject By</th>
+            
           </tr>
         </ng-template>
 
@@ -32,6 +31,15 @@
             <td>{{approvalList.firstName + space +approvalList.lastName}}</td>
             <td>{{approvalList.emailId}}</td>
             <td>{{approvalList.status}}</td>
+            <td><span class="dropdown-toggle"id="navbarDropdown" data-toggle="dropdown" style="font-size: 100%;">
+              {{approvalList.role}}
+            </span>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a *ngIf="approvalList.role!='ROLE_ADMIN'" class="dropdown-item" (click)="chaneRole(approvalList,'ROLE_ADMIN')">ROLE_ADMIN</a>
+                    <a *ngIf="approvalList.role!='ROLE_USER'"class="dropdown-item" (click)="chaneRole(approvalList,'ROLE_USER')">ROLE_USER</a>
+                  </div>
+            </td>
             <td>
               <input type="text" class="form-control form-control-sm"id="comments" style="width: 90%"    pInputText  [(ngModel)]="approvalList.comments"  *ngIf="approvalList.status=='Pending for approval'; else displayComment">
           
