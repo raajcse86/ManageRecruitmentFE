@@ -12,9 +12,9 @@ let valuesArray: any[]=[];
 export class ExcelService {
 constructor() { }
 
-public exportAsExcelFile(json: any[], excelFileName: string): void {
+public exportAsExcelFile(json: any[],filterValue:string, excelFileName: string): void {
 //Comment below 2 lines for formatted excel export 
-  let updatedSheet:any[] =this.formatData(json);
+  let updatedSheet:any[] =this.formatData(json,filterValue.toLocaleLowerCase());
   this.exportToExcel(updatedSheet,excelFileName);
 
   //Uncomment below to normal excel export 
@@ -28,17 +28,20 @@ private saveAsExcelFile(buffer: any, fileName: string): void {
    FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + EXCEL_EXTENSION);
 }
 
-private formatData(json:any[]): any[]{
+private formatData(json:any[], filterValue:string): any[]{
   let id : number=1;
   let updatedSheet:any[] =[];
   let currentCandidate:string=null;
         for (let candidate of json) {
-            candidate.id=String(id++);
-            currentCandidate = JSON.stringify(candidate);
-            currentCandidate =currentCandidate.replace("id", "SI No");
-            currentCandidate =currentCandidate.replace("roleOfResponsibilities", "Role");
-            valuesArray.push(Object.values(currentCandidate));
-            updatedSheet.push(JSON.parse(currentCandidate));
+            let value : string = JSON.stringify(candidate).toLowerCase();
+            if(value.includes(filterValue)){
+                  candidate.id=String(id++);
+                  currentCandidate = JSON.stringify(candidate);
+                  currentCandidate =currentCandidate.replace("id", "SI No");
+                  currentCandidate =currentCandidate.replace("roleOfResponsibilities", "Role");
+                  valuesArray.push(Object.values(currentCandidate));
+                  updatedSheet.push(JSON.parse(currentCandidate));
+            }
          }
 
          return updatedSheet;

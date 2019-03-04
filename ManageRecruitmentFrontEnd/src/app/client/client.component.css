@@ -1,4 +1,8 @@
 .alert-danger {
-    color:blue !important;
+    color:red !important;
     background-color: white !important;
 }
+
+.ng-invalid.ng-touched {
+    border-color: red;
+  }

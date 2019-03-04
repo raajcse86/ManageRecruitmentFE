@@ -92,7 +92,12 @@ export class NotificationComponent implements OnInit {
    }
    
 
-
+   chaneRole(user:any,role:string):void{
+     console.log(JSON.stringify(user));
+     console.log(role);
+    user.role=role;
+    console.log(JSON.stringify(user));
+   }
 
 
 }

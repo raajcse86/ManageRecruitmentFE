@@ -84,6 +84,7 @@
           <input name="noticePeriod" class="form-control" [formControl]="f.noticePeriod" type="number" [ngClass]="{ 'is-invalid':(f.noticePeriod.touched || showFormErrors) && f.noticePeriod.errors }" />
           <div class="invalid-feedback" *ngIf="(f.noticePeriod.touched || showFormErrors ) && f.noticePeriod.errors "> 
             <div *ngIf="f.noticePeriod.errors.required">Notice period is required</div>
+            <div *ngIf="f.noticePeriod.errors.max">Notice period shoud not be more than 90 days</div>
           </div>
           <br>
           

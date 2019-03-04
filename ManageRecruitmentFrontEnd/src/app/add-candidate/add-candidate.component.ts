@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, FormControl, AbstractControl, Validators ,Valid
 import { CandidatureDetails } from '../_models';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { AlertService } from '../_services';
+import {ClientService} from '../client/client.service'
 
 export const EMAIL_PATTERN = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 @Component({
@@ -40,7 +41,8 @@ export class AddCandidateComponent implements OnInit {
     private candidatureDetailsService: CandidatureDetailsService,
     private messageService: MessageService,
     private router: Router,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private clientService: ClientService) {
     // this.objectKeys = Object.keys;
 
   }
@@ -58,7 +60,7 @@ export class AddCandidateComponent implements OnInit {
 	    preferredLocation: [''],
       totalExperience: [''],
       relevantExperience: [''],
-      noticePeriod: ['',[Validators.required]],
+      noticePeriod: ['',[Validators.required, Validators.max(90)]],
       ctc: ['',[Validators.required]],
       ectc: [''],
 	    roleOfResponsibilities: ['', [Validators.required]],
@@ -102,11 +104,22 @@ export class AddCandidateComponent implements OnInit {
       expectedJoiningDate:[''],
       finalTechSelectionDate:['']
     })
-this.locationList=["Bangalore","Chennai","Gurgaon","Noida","Pune","Other"];
-this.clientList=["Dell","Unilever","EMC","Other"];
+this.locationList = ["Bangalore", "Chennai", "Gurgaon", "Hyderabad", "Noida", "Pune", "Other"];
+//this.clientList=["Dell","Unilever","EMC","Other"];
+this.getAllClients();
+
 
 }
 
+getAllClients(){
+  this.clientService.getAllCients().subscribe(data => {
+   data.forEach(client=>{
+    this.clientList.push(client.clientName);
+    if(!this.locationList.includes(client.location))
+        this.locationList.push(client.location);
+   })
+  })
+}
   onSubmit() {
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.model))
   }
