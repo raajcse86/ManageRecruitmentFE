@@ -137,3 +137,8 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+.ui-button-text {
+  color: #666 !important;
+  background: #ffeb3b !important;
+}

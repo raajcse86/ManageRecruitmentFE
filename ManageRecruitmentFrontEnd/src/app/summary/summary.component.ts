@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { AlertService, UserService } from '../_services';
 import { USER_ROLE } from '../_services/jwtauth-services.service';
 
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 @Component({
   selector: 'app-summary',
@@ -24,6 +25,12 @@ export class SummaryComponent implements OnInit {
     loading = false;
     submitted = false;
     isAdmin=false;
+    
+    candidateSummary1: String = "Click here to view by client";
+
+  clientSummary1: String = "Click here to view by client";
+
+
 
   summarylist: Summary[];
   add_client: boolean = true;
