@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NotificationService} from './notification.service'
 import { MessageService } from 'primeng/components/common/messageservice';
-import { Session } from 'protractor';
+import { NotificationService } from './notification.service';
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
