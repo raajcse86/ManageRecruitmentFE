@@ -25,7 +25,7 @@ export class SummaryComponent implements OnInit {
     loading = false;
     submitted = false;
     isAdmin=false;
-    
+    checked1:boolean=false;
     candidateSummary1: String = "Click here to view by client";
 
   clientSummary1: String = "Click here to view by client";

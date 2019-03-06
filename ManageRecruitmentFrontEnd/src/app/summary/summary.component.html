@@ -31,17 +31,7 @@
                     <div class="col" *ngIf="add_client">
                         <p>CLIENT SUMMARY</p>
                     </div>
-                    <!-- added client -->
-                    <!-- old code -->
-                    <div class="col" *ngIf="!add_client">
-                        <p>ADD CLIENT</p>
-                    </div>
-                    <div class="col" *ngIf="add_client && isAdmin">
-                        <div class="ui-helper-clearfix text-right">
-                            <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="toggleAddState()">Add
-                                Client</a>
-                        </div>
-                    </div>
+
                 </ng-template>
                 <ng-template pTemplate="colgroup" let-columns>
                     <colgroup>
