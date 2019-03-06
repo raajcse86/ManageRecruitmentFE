@@ -11,7 +11,7 @@ export class NotificationService {
   //private baseUrl= "http://localhost:9001";
 
   private baseUrl= "https://registeruserservicesapp.cfapps.io/";
-  private API_URL= "https://recruitmentportalapp.cfapps.io"q;
+  private API_URL= "https://recruitmentportalapp.cfapps.io";
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +25,6 @@ export class NotificationService {
   
   public approveUser(user: any):Observable<any>{
     return this.http.post(`${this.API_URL}/userDetails`, user);
-  }
-  
-  
+  } 
+
 }
