@@ -1,7 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +8,7 @@ import { environment } from 'src/environments/environment';
 export class NotificationService {
 
   //private baseUrl= "http://localhost:9001";
+  //private API_URL= "http://localhost:9000";
 
   private baseUrl= "https://registeruserservicesapp.cfapps.io/";
   private API_URL= "https://recruitmentportalapp.cfapps.io";
@@ -24,7 +24,7 @@ export class NotificationService {
   }
   
   public approveUser(user: any):Observable<any>{
-    return this.http.post(`${this.API_URL}/userDetails`, user);
+    return this.http.post(`${this.API_URL}/usersapi/userDetails`, user);
   } 
 
 }
