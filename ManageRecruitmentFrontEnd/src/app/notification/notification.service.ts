@@ -10,7 +10,7 @@ export class NotificationService {
   //private baseUrl= "http://localhost:9001";
   //private API_URL= "http://localhost:9000";
 
-  private baseUrl= "https://registeruserservicesapp.cfapps.io/";
+  private baseUrl= "https://registeruserservicesapp.cfapps.io";
   private API_URL= "https://recruitmentportalapp.cfapps.io";
 
   constructor(private http: HttpClient) { }
