@@ -1,8 +1,9 @@
 export class AddClient {
     clientName: string;
-    lead: string;
+    leadName: string;
     location: string;
-    skills: string;
+    skill: string;
     contractMechanism: string;
-    target: string;    
+    target: string;
+    id:string;    
 }

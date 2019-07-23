@@ -1,12 +1,28 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="col-sm-12" *ngIf="add_client">
         <div class="col-sm-12 text-right" *ngIf="add_client">
             <p-dropdown class="text-left" #dd [options]="role" [style]="{'width':'300px'}" [(ngModel)]="selectedRole"
                 optionLabel="name"></p-dropdown>
-        </div>
+        </div> -->
+<!-- 
+    </div> -->
 
-    </div>
-    <div class="row my-4" *ngIf="selectedRole.name==='Client'">
+
+    <div class="container-fluid">
+            <div class="col-sm-12">
+                <div class="col-sm-12 text-right">
+
+    <!-- <h3 class="first">Basic - ({{checked1}})</h3> -->
+<p-toggleButton onLabel="click here to view by Client" offLabel="click here to view by  Candidate" [(ngModel)]="checked1" [style]="{'width':'150px','BACKGROUND-COLOR': '#ffeb3b'}"></p-toggleButton>
+</div>
+</div>
+
+<!-- <h3>Customized - ({{checked2}})</h3>
+<p-toggleButton [(ngModel)]="checked2" onLabel="I confirm" offLabel="I reject" onIcon="pi pi-check" offIcon="pi pi-times" [style]="{'width':'150px'}"></p-toggleButton> -->
+
+    <!-- changes for toggle button -->
+    <!-- {{checked1}} -->
+<div class="row my-4" *ngIf="!checked1" >
         <div class="col-lg-12" *ngIf="add_client">
             <p-table [columns]="firstTableCols" [value]="summarylist" [frozenColumns]="frozenTableCols" [scrollable]="true"
                 scrollHeight="195px" frozenWidth="200px" [rows]="7">
@@ -15,17 +31,7 @@
                     <div class="col" *ngIf="add_client">
                         <p>CLIENT SUMMARY</p>
                     </div>
-                    <!-- added client -->
-                    <!-- old code -->
-                    <div class="col" *ngIf="!add_client">
-                        <p>ADD CLIENT</p>
-                    </div>
-                    <div class="col" *ngIf="add_client && isAdmin">
-                        <div class="ui-helper-clearfix text-right">
-                            <a href="javascript:void(0)" class="btn btn-custom btn-sm btn--depressed" (click)="toggleAddState()">Add
-                                Client</a>
-                        </div>
-                    </div>
+
                 </ng-template>
                 <ng-template pTemplate="colgroup" let-columns>
                     <colgroup>
@@ -118,7 +124,8 @@
 
 
     <!-- Candidate summary  changes  -->
-    <div class="row my-4" *ngIf="selectedRole.name ==='Candidate'">
+    <!-- {{checked1}} -->
+    <div class="row my-4" *ngIf="checked1">
         <div class="col-12">
             <!--  Candidate summary changes ends here for table -->
             <p-table #dt [columns]="cols" [value]="candidateSummary" [paginator]="true" [rows]="4">
@@ -148,7 +155,7 @@
 
                             <p-multiSelect *ngSwitchCase="'clientName'" [options]="clients" [style]="{'width':'100%'}"
                                 defaultLabel="All" (onChange)="dt.filter($event.value, col.field, 'in')"></p-multiSelect>
-                            <p-dropdown *ngSwitchCase="'status'" [options]="status" defaultLabel="All" [style]="{'width':'100%'}"
+                            <p-dropdown *ngSwitchCase="'finalStatus'" [options]="status" defaultLabel="All" [style]="{'width':'100%'}"
                                 (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
                             <p-dropdown *ngSwitchCase="'location'" [options]="locations" defaultLabel="All" [style]="{'width':'100%'}"
                                 (onChange)="dt.filter($event.value, col.field, 'equals')"></p-dropdown>
@@ -164,8 +171,7 @@
                         <td>{{candidateSummary.candidateName}}</td>
                         <td>{{candidateSummary.clientName || 'NA'}}</td>
                         <td>{{candidateSummary.skills || 'NA'}}</td>
-                        <td [ngClass]="getColorCodeByDate(candidateSummary.status, candidateSummary)">{{candidateSummary.status
-                            || 'NA'}}</td>
+                        <td [ngClass]="getColorCodeByDate(candidateSummary.finalStatus, candidateSummary)">{{candidateSummary.finalStatus || 'NA'}}</td>
                         <td style="word-wrap: break-word;">{{candidateSummary.emailId || 'NA'}}</td>
                         <td>{{candidateSummary.location || 'NA'}}</td>
                         <td>{{candidateSummary.expectedToJoin || 'NA'}}</td>

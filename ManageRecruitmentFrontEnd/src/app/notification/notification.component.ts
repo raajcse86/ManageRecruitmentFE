@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NotificationService} from './notification.service'
 import { MessageService } from 'primeng/components/common/messageservice';
-import { Session } from 'protractor';
+import { NotificationService } from './notification.service';
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -18,6 +17,7 @@ export class NotificationComponent implements OnInit {
  msg:String;
  eventType:string;
  currentUser:any;
+ userDetail:any;
 
   constructor(private notificationService: NotificationService, private messageService:MessageService) { }
 
@@ -25,6 +25,11 @@ export class NotificationComponent implements OnInit {
     this.loadAllApprovals();
     this.index=1;
     this.space="   ";
+    this.userDetail={
+      username:"",
+      password:"",
+      role:""
+    }
    // console.log("message is "+this.message);
   }
 
@@ -37,26 +42,20 @@ export class NotificationComponent implements OnInit {
 
   private updateApprovalStatus(user:any){
     this.notificationService.updateApprovalStatus(user).subscribe(response=>{
-     // console.log("Response is :: "+JSON.stringify(response));
+        //console.log("Response is :: "+JSON.stringify(response));
     })
+
+    if(user.status="Approved"){
+        this.userDetail.username= user.username;
+        this.userDetail.password= atob(user.password);
+        this.userDetail.role= user.role;
+
+      //console.log("Approved:: "+JSON.stringify(this.userDetail));
+       this.notificationService.approveUser(this.userDetail).subscribe(response=>{
+        
+        })
+    }
   }
-
-  // private triggerApprovalEvent(event:String, user: any){
-
-  //   if(event=="Approve"){
-  //     user.status="Approved";
-  //     this.msg="msg-approved";
-    
-  //   }else{
-  //    user.status="Rejected";
-  //    this.msg="msg-rejected";
-  //   }
-  //   this.message=`Registration request is ${user.status} for ${user.username}`;
-  //   console.log("Message :: "+this.message);
-  //   console.log(JSON.stringify(user));
-  //   this.updateApprovalStatus(user);
-  // }
-
   triggerApprovalEvent(event:string, user: any) {
     this.message=null;
    // console.log("in showConfirm :: ")
@@ -92,7 +91,9 @@ export class NotificationComponent implements OnInit {
    }
    
 
-
+   chaneRole(user:any,role:string):void{
+    user.role=role;
+   }
 
 
 }

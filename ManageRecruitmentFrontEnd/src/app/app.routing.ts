@@ -1,4 +1,5 @@
-﻿import { Routes, RouterModule } from '@angular/router';
+﻿import { ClientComponent } from './client/client.component';
+import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
@@ -23,7 +24,7 @@ const appRoutes: Routes = [
     { path: 'reports', component: ReportsComponent },
     { path: 'addCandidate', component: AddCandidateComponent },
     { path: 'notification', component: NotificationComponent},
-
+    { path: 'client', component: ClientComponent },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

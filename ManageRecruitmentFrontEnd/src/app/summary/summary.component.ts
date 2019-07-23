@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { AlertService, UserService } from '../_services';
 import { USER_ROLE } from '../_services/jwtauth-services.service';
 
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 @Component({
   selector: 'app-summary',
@@ -24,6 +25,12 @@ export class SummaryComponent implements OnInit {
     loading = false;
     submitted = false;
     isAdmin=false;
+    checked1:boolean=false;
+    candidateSummary1: String = "Click here to view by client";
+
+  clientSummary1: String = "Click here to view by client";
+
+
 
   summarylist: Summary[];
   add_client: boolean = true;
@@ -48,6 +55,7 @@ export class SummaryComponent implements OnInit {
   userAcess:String;
   selectedRole: any;
   addClientMessage:String;
+  statusFilter:string[] =["Offer in Progress","Offer Released","Joined"];
 
   constructor(private candidatureDetailsService: CandidatureDetailsService, private formBuilder: FormBuilder,
     private router: Router,
@@ -70,12 +78,12 @@ export class SummaryComponent implements OnInit {
 
     this.candidatureDetailsService.getClientSummary().subscribe(
       data => {
-        console.log(data);
+       // console.log(data);
         this.summarylist = data;
 
       },
       error => {
-        console.log("Error", error);
+       // console.log("Error", error);
       });
     //Candidature summary changes :: 
     this.loadAllCandidatureDetails();
@@ -101,7 +109,7 @@ export class SummaryComponent implements OnInit {
       { field: 'candidateName', header: 'Candidate Name' },
       { field: 'clientName', header: 'Client Name' },
       { field: 'skills', header: 'Skills' },
-      { field: 'status', header: 'Status' },
+      { field: 'finalStatus', header: 'Status' },
       { field: 'emailId', header: 'Email id' },
       { field: 'location', header: 'Location' },
       { field: 'expectedToJoin', header: 'Expected to Join' },
@@ -147,16 +155,12 @@ export class SummaryComponent implements OnInit {
 
   });
 
-  console.log("Add client form :: "+this.addClientForm);
+ // console.log("Add client form :: "+this.addClientForm);
 
 
   this.userAcess = sessionStorage.getItem(USER_ROLE);
     if(this.userAcess==='ROLE_ADMIN')
         this.isAdmin=true;  
-
-        console.log("User userAcess is ::: "+this.userAcess);
-        console.log("isAdmin ::: "+this.isAdmin);
-
  }
 
 
@@ -165,12 +169,13 @@ export class SummaryComponent implements OnInit {
     this.candidatureDetailsService.getCandidatures().pipe(first()).subscribe(candidatureFromService => {
       this.candidatures = candidatureFromService;
       this.candidatures.forEach(candidate => {
-        if (candidate.status != '1st round scheduled') {
+       // console.log(candidate.finalStatus+" matched "+(this.statusFilter.includes(candidate.finalStatus)));
+        if (this.statusFilter.includes(candidate.finalStatus)) {
           let currentCandidate: CandidateSummary = {
             candidateName: candidate.candidateName,
             clientName: candidate.client,
             skills: candidate.roleOfResponsibilities,
-            status: candidate.status,
+            finalStatus: candidate.finalStatus,
             emailId: candidate.emailId,
             expectedToJoin: candidate.expectedJoiningDate,
             location: candidate.positionLocation,
@@ -222,7 +227,7 @@ export class SummaryComponent implements OnInit {
   }
 
   public getColorCodeByDate(field: any, candidate: CandidateSummary): string {
-    console.log(" colour code for by date " + field)
+   // console.log(" colour code for by date " + field)
     let colourCode: string = "default";
     switch (field) {
       case 'Offer in Progress':
@@ -232,7 +237,7 @@ export class SummaryComponent implements OnInit {
       default:
         colourCode = this.getColourCode(field, '');
     }
-    console.log(" id returned :: " + colourCode);
+   // console.log(" id returned :: " + colourCode);
 
     return colourCode;
 
@@ -240,6 +245,9 @@ export class SummaryComponent implements OnInit {
 
   //Function to calculate the number of days difference in given date compared to current date
   public calculateDateDifference(techSelectionDate: string): string {
+    if(techSelectionDate==null){
+      return "OfferRelaesed";
+    }
     const diff = Math.abs(new Date().getTime() - new Date(techSelectionDate).getTime());
     const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
     if (diffDays >= 7)
@@ -251,10 +259,10 @@ export class SummaryComponent implements OnInit {
 
   //Changes end       
   public pie_chartClicked(e: any): void {
-    console.log(e);
+   // console.log(e);
   }
   public pie_chartHovered(e: any): void {
-    console.log("on hover " + e);
+   // console.log("on hover " + e);
 
   }
 

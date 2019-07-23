@@ -10,9 +10,8 @@ import {Summary} from '../_models/summary'
   providedIn: 'root'
 })
 export class CandidatureDetailsService {
-
-   API_URL  =  'https://recruitmentportalapp.cfapps.io';
-// API_URL  =  'http://localhost:9000';
+     API_URL  =  'https://recruitmentportalapp.cfapps.io';
+     //API_URL  =  'http://localhost:9000';
 
     constructor(private http: HttpClient) { }
 
@@ -45,23 +44,28 @@ export class CandidatureDetailsService {
 }
     
     updateCandidature(candidature: CandidatureDetails) {
-        console.log("candidate id >> "+candidature.id);
+       // console.log("candidate id >> "+candidature.id);
         return this.http.put(`${this.API_URL}/api/candidatureDetails/` + candidature.id,candidature);
         
     }
 
     saveCandidature(candidatureDetails: any): Observable<any> {
         let addURL=this.API_URL+"/api/candidatureDetails";
-        console.log(addURL);
-        console.log(candidatureDetails)
+       // console.log(addURL);
+        //console.log(candidatureDetails)
       // this.http.post(addURL,CandidatureDetails)
         return this.http.post(addURL, candidatureDetails);
     }
     
 
-    deleteCandidature(id: string) {
-        return this.http.delete(`${this.API_URL}/api/candidatureDetails/` + id);
+    deleteCandidature(id: string): Observable<any> {
+        return this.http.delete(`${this.API_URL}/api/candidatureDetails/`+ id);
     }
+
+    deleteCandidate(candidate:CandidatureDetails[]): Observable<any>{
+        return this.http.post(`${this.API_URL}/api/candidatureDetails/delete`,candidate);
+      }
+    
 
 
     getClientSummary(){
