@@ -1,3 +1,332 @@
+
+<div class="container my-4">
+  <div class="clearfix">
+    <div class="">
+      <h5 class="mb-3 text-capitalize"><strong>Add a Candidate</strong></h5>
+      <form [formGroup]="CandidatureDetails" class="form-group">
+        <fieldset class="pt-4 px-4 pb-2 step-1">
+          <h6>Basic Information</h6>
+          <div class="form-group form-row">
+            <div class="col-sm-6 mb-1">
+
+              <label for="candidateName" class="input">Candidate Name</label>
+              <input name="candidateName" class="form-control form-control-sm" type="text" placeholder="" [formControl]="CandidatureDetails.controls['candidateName']">
+              <div class="text-danger small" *ngIf="CandidatureDetails.controls['candidateName'].invalid && CandidatureDetails.controls['candidateName'].touched">
+                  <i>You must enter candidate name.</i>                   
+              </div>
+            </div>
+            <div class="col-sm-6 mb-1">
+
+              <label for="emailId" class="input">Email</label>
+              <input name="emailId" class="form-control form-control-sm" type="email" placeholder="" [formControl]="CandidatureDetails.controls['emailId']">
+              <div class="text-danger small" *ngIf="CandidatureDetails.controls['emailId'].invalid &&
+                         CandidatureDetails.controls['emailId'].touched &&
+                         !CandidatureDetails.controls['emailId'].hasError('emailTaken')">
+                  <i>That doesn't look right. </i>                   
+              </div>
+              <div class="text-danger small" *ngIf="CandidatureDetails.controls['emailId'].invalid &&
+                         CandidatureDetails.controls['emailId'].touched &&
+                         CandidatureDetails.controls['emailId'].hasError('emailTaken')
+                    ">
+                  <i>This email is already taken. </i>                   
+              </div>
+            </div>
+            <div class="col-sm-6 mb-1">
+
+              <label for="contactNo" class="input">Contact Number</label>
+              <input name="contactNo" class="form-control form-control-sm contact" type="text" pattern="[1-9]{1}[0-9]{9}"
+                maxlength="10" placeholder="" [formControl]="CandidatureDetails.controls['contactNo']">
+              <div class="text-danger small" *ngIf="CandidatureDetails.controls['contactNo'].invalid && CandidatureDetails.controls['contactNo'].touched">
+                  <i>Contact Number is mandatory and its should be numberic </i>                   
+              </div>
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="roleOfResponsibilities" class="input">Roles</label>
+              <input name="roleOfResponsibilities" class="form-control form-control-sm" type="roleOfResponsibilities"
+                placeholder="" [formControl]="CandidatureDetails.controls['roleOfResponsibilities']">
+              <div class="text-danger small" *ngIf="CandidatureDetails.controls['roleOfResponsibilities'].invalid &&
+                           CandidatureDetails.controls['roleOfResponsibilities'].touched">
+                  <i>Roles must be entered</i>                   
+              </div>
+            </div>
+          </div>
+
+        </fieldset>
+
+        <fieldset class="pt-4 px-4 pb-2 step-2">
+          <h6>Experience Details data</h6>
+          <div class="form-group form-row">
+            <div class="col-sm-6 mb-1">
+
+              <label for="totalExperience" class="input">Total Experience(In Years)</label>
+              <input name="totalExperience" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['totalExperience']"
+                type="number" step="0.1" placeholder="(Integer value)">
+              <div class="text-danger small" *ngIf="CandidatureDetails.controls['totalExperience'].invalid &&
+                         CandidatureDetails.controls['totalExperience'].touched">
+                  <i>Must enter year of Experience. </i>                   
+              </div>
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="relevantExperience" class="input">Relevant Experience(In Years)</label>
+
+              <input name="relevantExperience" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['relevantExperience']"
+                type="number" placeholder="(Integer Value)" step="0.1">
+              <div class="text-danger small" *ngIf="CandidatureDetails.controls['relevantExperience'].invalid &&
+                  CandidatureDetails.controls['relevantExperience'].touched">
+                  <i>Must enter year of Experience. </i>                   
+              </div>
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="noticePeriod" class="input">Notice Period(In Days)</label>
+              <input name="noticePeriod" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['noticePeriod']"
+                type="number" placeholder="(Integer Value)">
+
+            </div>
+
+            <div class="col-sm-6 mb-1">
+              <label for="ctc" class="input">CTC(In Lakh)</label>
+              <input name="ctc" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['ctc']"
+                type="number" step="0.1" placeholder="(Integer value)">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="expectedCTC" class="input">Expected CTC(In Lakh)</label>
+              <input name="ectc" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['ectc']"
+                type="number" step="0.1" placeholder="(Integer value)">
+
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="pt-4 px-4 pb-2 step-3">
+          <h6>Location details</h6>
+          <div class="form-group form-row">
+            <div class="col-sm-6 mb-1">
+              <label for="currentLocation" class="input">Current Location</label>
+              <input name="currentLocation" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['currentLocation']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="preferredLocation" class="input">Preferred Location</label>
+              <input name="preferredLocation" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['preferredLocation']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="positionLocation" class="input">Position Location</label>
+              <input name="positionLocation" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['positionLocation']"
+                type="text">
+            </div>
+
+          </div>
+        </fieldset>
+
+        <fieldset class="pt-4 px-4 pb-2 step-4">
+          <h6>Candidate Hiring Details</h6>
+          <div class="form-group form-row">
+
+            <div class="col-sm-6 mb-1">
+              <label for="modeOfHiring" class="input">Mode Of Hiring</label>
+              <input name="modeOfHiring" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['modeOfHiring']"
+                type="text">
+
+            </div>
+
+            <div class="col-sm-6 mb-1">
+              <label for="vendorName" class="input">Source</label>
+              <input name="vendorName" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['vendorName']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="description" class="input">Description</label>
+              <input name="description" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['description']"
+                type="text">
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="actionPending" class="input">Action Pending</label>
+              <input name="actionPending" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['actionPending']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="client" class="input">Client</label>
+              <input name="client" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['client']"
+                type="text">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="pt-4 px-4 pb-2 step-5">
+          <h6>Screening Details</h6>
+          <div class="form-group form-row">
+
+            <div class="col-sm-6 mb-1">
+              <label for="profileSharedDate" class="input">Profile Shared Date</label>
+              <input name="profileSharedDate" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['profileSharedDate']"
+                type="date">
+
+            </div>
+
+            <div class="col-sm-6 mb-1">
+              <label for="screeningStatus" class="input">Screening Status</label>
+              <input name="screeningStatus" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['screeningStatus']"
+                type="date">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="screeningDate" class="input">Screening Date</label>
+              <input name="screeningDate" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['screeningDate']"
+                type="date">
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="screeningDoneBy" class="input">Screening Done By</label>
+              <input name="screeningDoneBy" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['screeningDoneBy']"
+                type="text">
+
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="pt-4 px-4 pb-2 step-6">
+          <h6>First Round Details</h6>
+          <div class="form-group form-row">
+
+            <div class="col-sm-6 mb-1">
+              <label for="firstRoundStatus" class="input">First Round Status</label>
+              <input name="firstRoundStatus" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['firstRoundStatus']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="firstRoundDate" class="input">First Round Date</label>
+              <input name="firstRoundDate" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['firstRoundDate']"
+                type="date">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="firstRoundTakenBy" class="input">First Round TakenBy</label>
+              <input name="firstRoundTakenBy" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['firstRoundTakenBy']"
+                type="text">
+
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="pt-4 px-4 pb-2 step-7">
+          <h6>Second Round Details</h6>
+          <div class="form-group form-row">
+            <div class="col-sm-6 mb-1">
+              <label for="secondRoundStatus" class="input">Second Round Status</label>
+              <input name="secondRoundStatus" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['secondRoundStatus']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="secondRoundDate" class="input">Second Round Date</label>
+              <input name="secondRoundDate" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['secondRoundDate']"
+                type="date">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="secondRoundTakenBy" class="input">Second Round TakenBy</label>
+              <input name="secondRoundTakenBy" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['secondRoundTakenBy']"
+                type="text">
+
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="pt-4 px-4 pb-2 step-8">
+          <h6>Second Round Details</h6>
+          <div class="form-group form-row">
+
+            <div class="col-sm-6 mb-1">
+              <label for="finalRoundStatus" class="input">Final Round Status</label>
+              <input name="finalRoundStatus" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['finalRoundStatus']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="finalRoundDate" class="input">Final Round Date</label>
+              <input name="finalRoundDate" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['finalRoundDate']"
+                type="date">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="finalRoundTakenBy" class="input">Final Round TakenBy</label>
+              <input name="finalRoundTakenBy" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['finalRoundTakenBy']"
+                type="text">
+
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="pt-4 px-4 pb-2 step-9">
+          <h6>HR Round Details</h6>
+          <div class="form-group form-row">
+
+            <div class="col-sm-6 mb-1">
+              <label for="hrOrPnStageRound" class="input">HR Round </label>
+              <input name="hrOrPnStageRound" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['hrOrPnStageRound']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="hrOrPnStageStatus" class="input">HR Round Status</label>
+              <input name="hrOrPnStageStatus" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['hrOrPnStageStatus']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="hrOrPnStageDate" class="input">HR Round Date</label>
+              <input name="hrOrPnStageDate" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['hrOrPnStageDate']"
+                type="date">
+
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="pt-4 px-4 pb-2 step-10">
+
+          <h6>Final Status</h6>
+          <div class="form-group form-row">
+
+            <div class="col-sm-6 mb-1">
+              <label for="finalStatus" class="input">Final Status</label>
+              <input name="finalStatus" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['finalStatus']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="status" class="input">Status</label>
+              <input name="status" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['status']"
+                type="text">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="joiningDate" class="input">Joining Date</label>
+              <input name="joiningDate" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['joiningDate']"
+                type="date">
+
+            </div>
+            <div class="col-sm-6 mb-1">
+              <label for="joiningStatus" class="input">Joining Status</label>
+              <input name="joiningStatus" class="form-control form-control-sm" [formControl]="CandidatureDetails.controls['joiningStatus']"
+                type="text">
+            </div>
+          </div>
+          <div class="mb-2">
+            <a class="btn btn-light btn--depressed" routerLink="/home">Cancel</a>
+            <button class="btn btn-custom btn--depressed" (click)="addCandidate()">Save</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="pt-4 px-4 pb-2 step-9 fieldsetcenter" [hidden]="true">
+          <h6>Creating your Profile</h6>
+          <p>Determining your portfolio sugestions.</p>
+          </field>
 <div class="container">
   <div class="row">
 
@@ -379,8 +708,49 @@
               </p-toast>
             </div>
   
+
       </form>
     </div>
   </div>
+</div>
+
+<!-- main app container
+<div class="jumbotron">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-8 offset-md-2">
+              <h3>Candidate Profile</h3>
+              <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                  <div class="form-group">
+                      <div class="form-group">
+                        <label for="Name">Name of the Candidate</label>
+                      <input type="text" class="form-control form-control-sm" name="Name" [(ngModel)]="model.candidateName" #Name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Name.invalid }" required />
+                      <div *ngIf="f.submitted && Name.invalid" class="invalid-feedback">
+                          <div *ngIf="Name.errors.required">Name is required</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                      <input type="text" class="form-control form-control-sm" name="email" [(ngModel)]="model.emailId" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+                      <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                          <div *ngIf="email.errors.required">Email is required</div>
+                          <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="form-group">
+                        <label for="contactNo">Contact Number of the Candidate</label>
+                      <input type="text" class="form-control form-control-sm" name="contactNo" [(ngModel)]="model.contactNo" #contactNo="ngModel" />
+                  </div>
+                  <div class="form-group">
+                      <button class="btn btn-primary">Register</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div> -->
 
 </div>
+
